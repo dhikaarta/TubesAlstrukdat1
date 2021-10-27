@@ -19,27 +19,27 @@ void TulisPOINT(POINT P){
   printf("(%.2f,%.2f)", Absis(P), Ordinat(P));
 }
 
-boolean EQ (POINT P1, POINT P2){
+boolean EQPOINT (POINT P1, POINT P2){
   return ((Absis(P1) == Absis(P2)) && (Ordinat(P1) == Ordinat(P2)));
 }
 
-boolean NEQ (POINT P1, POINT P2){
+boolean NEQPOINT (POINT P1, POINT P2){
   return (!EQ(P1, P2));
 }
 
-boolean IsOrigin(POINT P){
+boolean IsOriginPOINT(POINT P){
   return (Absis(P) == 0 && Ordinat(P) == 0);
 }
 
-boolean IsOnSbX(POINT P){
+boolean IsOnSbXPOINT(POINT P){
   return (Ordinat(P) == 0);
 }
 
-boolean IsOnSbY(POINT P){
+boolean IsOnSbYPOINT(POINT P){
   return (Absis(P) == 0);
 }
 
-int Kuadran(POINT P){
+int KuadranPOINT(POINT P){
   float x, y;
   x = Absis(P);
   y = Ordinat(P);
@@ -54,28 +54,28 @@ int Kuadran(POINT P){
   }
 }
 
-POINT NextX(POINT P){
+POINT NextXPOINT(POINT P){
   POINT P2;
   Absis(P2) = Absis(P) + 1;
   Ordinat(P2) = Ordinat(P);
   return P2;
 }
 
-POINT NextY(POINT P){
+POINT NextYPOINT(POINT P){
   POINT P2;
   Absis(P2) = Absis(P);
   Ordinat(P2) = Ordinat(P) + 1;
   return P2;
 }
 
-POINT PlusDelta(POINT P, float deltaX, float deltaY){
+POINT PlusDeltaPOINT(POINT P, float deltaX, float deltaY){
   POINT P2;
   Absis(P2) = Absis(P) + deltaX;
   Ordinat(P2) = Ordinat(P) + deltaY;
   return P2;
 }
 
-POINT MirrorOf(POINT P, boolean Sbx){
+POINT MirrorOfPOINT(POINT P, boolean Sbx){
   POINT P2;
   float x, y;
   x = Absis(P);
@@ -88,28 +88,28 @@ POINT MirrorOf(POINT P, boolean Sbx){
   return P2;
 }
 
-float Jarak0(POINT P){
+float Jarak0POINT(POINT P){
   return sqrt(pow((Absis(P)), 2) + pow((Ordinat(P)), 2));
 }
 
-float Panjang(POINT P1, POINT P2){
+float PanjangPOINT(POINT P1, POINT P2){
   return sqrt(pow((Absis(P1) - Absis(P2)), 2) + pow((Ordinat(P1) - Ordinat(P2)), 2));
 }
 
-void Geser(POINT *P, float deltaX, float deltaY){
+void GeserPOINT(POINT *P, float deltaX, float deltaY){
   Absis(*P) += deltaX;
   Ordinat(*P) += deltaY;
 }
 
-void GeserKeSbX(POINT *P){
+void GeserKeSbXPOINT(POINT *P){
   Ordinat(*P) = 0;
 }
 
-void GeserKeSbY(POINT *P){
+void GeserKeSbYPOINT(POINT *P){
   Absis(*P) = 0;
 }
 
-void Mirror(POINT* P, boolean SbX){
+void MirrorPOINT(POINT* P, boolean SbX){
   if(SbX){
     Ordinat(*P) = -Ordinat(*P);
   }else{
@@ -117,7 +117,7 @@ void Mirror(POINT* P, boolean SbX){
   }
 }
 
-void Putar (POINT *P, float sudut){
+void PutarPOINT (POINT *P, float sudut){
   float x, y;
   const float PI = 3.1415926535;
   float deg = sudut * (PI/180);
