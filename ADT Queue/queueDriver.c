@@ -6,21 +6,21 @@ int main()
 {
     Queue q;
     ElType val;
-    CreateQueue(&q);
-    printf("Queue kosong: %d\n", QueueIsEmpty(q));
-    printf("Queue penuh: %d\n", QueueIsFull(q));
+    CreateQUEUE(&q);
+    printf("Queue kosong: %d\n", IsEmptyQUEUE(q));
+    printf("Queue penuh: %d\n", IsFullQUEUE(q));
 
-    QueueEnqueue(&q, 5);
-    QueueEnqueue(&q, 3);
-    QueueEnqueue(&q, 4);
-    QueueEnqueue(&q, 1);
-    QueueEnqueue(&q, 2);
-    printf("Queue sebelum di dequeue (length = %d) ", QueueLength(q));
-    displayQueue(q);
+    EnqueueQUEUE(&q, 5);
+    EnqueueQUEUE(&q, 3);
+    EnqueueQUEUE(&q, 4);
+    EnqueueQUEUE(&q, 1);
+    EnqueueQUEUE(&q, 2);
+    printf("Queue sebelum di dequeue (length = %d) ", LengthQUEUE(q));
+    displayQUEUE(q);
 
-    QueueDequeue(&q, &val);
-    QueueDequeue(&q, &val);
-    printf("\nQueue setelah di dequeue (length = %d) ", QueueLength(q));
-    displayQueue(q);
+    DequeueQUEUE(&q, &val);
+    DequeueQUEUE(&q, &val);
+    printf("\nQueue setelah di dequeue (length = %d) ", LengthQUEUE(q));
+    displayQUEUE(q);
     return 0;
 }

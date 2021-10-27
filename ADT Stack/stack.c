@@ -3,48 +3,48 @@
 #include <stdlib.h>
 
 /* *** Konstruktor/Kreator *** */
-void CreateStack(Stack *s)
+void CreateSTACK(Stack *s)
 {
-    STACK_IDX_TOP(*s) = IDX_UNDEF;
+    IDX_TOP_STACK(*s) = IDX_UNDEF;
 }
 
 /* ************ Prototype ************ */
-boolean StackIsEmpty(Stack s)
+boolean IsEmptySTACK(Stack s)
 {
-    return STACK_IDX_TOP(s) == IDX_UNDEF;
+    return IDX_TOP_STACK(s) == IDX_UNDEF;
 }
 
-boolean StackIsFull(Stack s)
+boolean IsFullSTACK(Stack s)
 {
-    return STACK_IDX_TOP(s) == STACK_CAPACITY - 1;
+    return IDX_TOP_STACK(s) == CAPACITY_STACK - 1;
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void StackPush(Stack *s, ElType val)
+void PushSTACK(Stack *s, ElType val)
 {
-    if (StackIsEmpty(*s))
+    if (IsEmptySTACK(*s))
     {
-        STACK_IDX_TOP(*s) = 0;
+        IDX_TOP_STACK(*s) = 0;
     }
     else
     {
-        STACK_IDX_TOP(*s)
+        IDX_TOP_STACK(*s)
         ++;
     }
-    STACK_TOP(*s) = val;
+    TOP_STACK(*s) = val;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void StackPop(Stack *s, ElType *val)
+void PopSTACK(Stack *s, ElType *val)
 {
-    *val = STACK_TOP(*s);
-    if (STACK_IDX_TOP(*s) == 0)
+    *val = TOP_STACK(*s);
+    if (IDX_TOP_STACK(*s) == 0)
     {
-        STACK_IDX_TOP(*s) = IDX_UNDEF;
+        IDX_TOP_STACK(*s) = IDX_UNDEF;
     }
     else
     {
-        STACK_IDX_TOP(*s)
+        IDX_TOP_STACK(*s)
         --;
     }
 }
