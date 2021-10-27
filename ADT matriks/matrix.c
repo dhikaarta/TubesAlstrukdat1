@@ -3,10 +3,10 @@
 #include "matrix.h"
 
 
-void CreateMatrix(int nRow, int nCol, Matrix *m)
+void CreateMATRIX(int nRow, int nCol, Matrix *m)
 {
-    ROWS(*m) = nRow;
-    COLS(*m) = nCol;
+    ROWSMATRIX(*m) = nRow;
+    COLSMATRIX(*m) = nCol;
 
 }
 /* Membentuk sebuah Matrix "kosong" yang siap diisi berukuran nRow x nCol di "ujung kiri" memori */
@@ -14,85 +14,85 @@ void CreateMatrix(int nRow, int nCol, Matrix *m)
 /* F.S. Matriks m sesuai dengan definisi di atas terbentuk */
 
 /* *** Selektor "DUNIA Matrix" *** */
-boolean isIdxValid(int i, int j)
+boolean isIdxValidMATRIX(int i, int j)
 /* Mengirimkan true jika i, j adalah Index yang valid untuk matriks apa pun */
     {
-        return (i >= 0 && i < ROW_CAP && j >= 0 && j < COL_CAP);
+        return (i >= 0 && i < ROW_CAP_MATRIX && j >= 0 && j < COL_CAP_MATRIX);
     }
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-Index getLastIdxRow(Matrix m)
+Index getLastIdxRowMATRIX(Matrix m)
 /* Mengirimkan Index baris terbesar m */
 {
-    return(ROWS(m)-1);
+    return(ROWSMATRIX(m)-1);
 }
-Index getLastIdxCol(Matrix m)
+Index getLastIdxColMATRIX(Matrix m)
 {
-    return(COLS(m)-1);
+    return(COLSMATRIX(m)-1);
 }
 /* Mengirimkan Index kolom terbesar m */
-boolean isIdxEff(Matrix m, Index i, Index j)
+boolean isIdxEffMATRIX(Matrix m, Index i, Index j)
 {
-    return i < ROWS(m)  && j < COLS(m) && i>=0 && j >= 0;
+    return i < ROWSMATRIX(m)  && j < COLSMATRIX(m) && i>=0 && j >= 0;
 }
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
-ElType getElmtDiagonal(Matrix m, Index i)
+ElType getElmtDiagonalMATRIX(Matrix m, Index i)
 
 {
-    return ELMT(m,i,i);
+    return ELMTMATRIX(m,i,i);
 }
 /* Mengirimkan elemen m(i,i) */
 
 
 
 /* ********** Assignment  Matrix ********** */
-void copyMatrix(Matrix mIn, Matrix *mRes)
+void copyMATRIX(Matrix mIn, Matrix *mRes)
 /* Melakukan assignment MRes = MIn */
 {
     int i,j;
-    CreateMatrix(ROWS(mIn), COLS(mIn), mRes);
-    for(i= 0; i <ROWS(mIn); i++){
-        for (j = 0; j<COLS(mIn); j++){
-            ELMT(*mRes,i,j) = ELMT(mIn,i,j);
+    CreateMATRIX(ROWSMATRIX(mIn), COLSMATRIX(mIn), mRes);
+    for(i= 0; i <ROWSMATRIX(mIn); i++){
+        for (j = 0; j<COLSMATRIX(mIn); j++){
+            ELMTMATRIX(*mRes,i,j) = ELMTMATRIX(mIn,i,j);
         }
     } 
 }
 
 /* ********** KELOMPOK BACA/TULIS ********** */
-void readMatrix(Matrix *m, int nRow, int nCol)
+void readMATRIX(Matrix *m, int nRow, int nCol)
 {
-    if (isIdxValid(nRow,nCol)){
+    if (isIdxValidMATRIX(nRow,nCol)){
         int i,j;
-        CreateMatrix(nRow,nCol,m);
-        for (i=0; i < ROWS(*m); i++){
-            for(j=0;j<COLS(*m);j++){
-                scanf("%d", &ELMT(*m,i,j));
+        CreateMATRIX(nRow,nCol,m);
+        for (i=0; i < ROWSMATRIX(*m); i++){
+            for(j=0;j<COLSMATRIX(*m);j++){
+                scanf("%d", &ELMTMATRIX(*m,i,j));
         }
 
         }
     }
 }
-/* I.S. isIdxValid(nRow,nCol) */
+/* I.S. isIdxValidMATRIX(nRow,nCol) */
 /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol */
-/* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */
+/* Proses: Melakukan CreateMATRIX(m,nRow,nCol) dan mengisi nilai efektifnya */
 /* Selanjutnya membaca nilai elemen per baris dan kolom */
 /* Contoh: Jika nRow = 3 dan nCol = 3, maka contoh cara membaca isi matriks :
 1 2 3
 4 5 6
 8 9 10 
 */
-void displayMatrix(Matrix m)
+void displayMATRIX(Matrix m)
 {
     int i,j;
-    for(i= 0; i <ROWS(m); i++){
-        for (j = 0; j<COLS(m); j++){
-            if (j == getLastIdxRow(m)){
-                printf("%d", ELMT(m,i,j));
+    for(i= 0; i <ROWSMATRIX(m); i++){
+        for (j = 0; j<COLSMATRIX(m); j++){
+            if (j == getLastIdxRowMATRIX(m)){
+                printf("%d", ELMTMATRIX(m,i,j));
             }else {
-                printf("%d ", ELMT(m,i,j));
+                printf("%d ", ELMTMATRIX(m,i,j));
             }
         }
 
-         if (i < getLastIdxRow(m)){
+         if (i < getLastIdxRowMATRIX(m)){
             printf("\n");
     } 
 }
@@ -108,7 +108,7 @@ void displayMatrix(Matrix m)
 */
 
 /* ********** KELOMPOK OPERASI ARITMATIKA TERHADAP TYPE ********** */
-Matrix addMatrix(Matrix m1, Matrix m2)
+Matrix addMATRIX(Matrix m1, Matrix m2)
 /* Prekondisi : m1 berukuran sama dengan m2 */
 /* Mengirim hasil penjumlahan matriks: m1 + m2 */
 {
@@ -117,17 +117,17 @@ Matrix addMatrix(Matrix m1, Matrix m2)
     Matrix m;
 
     /* ALGORITMA */
-    CreateMatrix(ROWS(m1), COLS(m1), &m);
+    CreateMATRIX(ROWSMATRIX(m1), COLSMATRIX(m1), &m);
 
-    for (i = 0; i < ROWS(m); i++) {
-        for (j = 0; j < COLS(m); j++) {
-            ELMT(m, i, j) = ELMT(m1, i, j) + ELMT(m2, i, j);
+    for (i = 0; i < ROWSMATRIX(m); i++) {
+        for (j = 0; j < COLSMATRIX(m); j++) {
+            ELMTMATRIX(m, i, j) = ELMTMATRIX(m1, i, j) + ELMTMATRIX(m2, i, j);
         }
     }
     
     return m;
 }
-Matrix subtractMatrix(Matrix m1, Matrix m2)
+Matrix subtractMATRIX(Matrix m1, Matrix m2)
 /* Prekondisi : m1 berukuran sama dengan m2 */
 /* Mengirim hasil pengurangan matriks: salinan m1 – m2 */
 {
@@ -136,17 +136,17 @@ Matrix subtractMatrix(Matrix m1, Matrix m2)
     Matrix m;
 
     /* ALGORITMA */
-    CreateMatrix(ROWS(m1), COLS(m1), &m);
+    CreateMATRIX(ROWSMATRIX(m1), COLSMATRIX(m1), &m);
 
-    for (i = 0; i < ROWS(m); i++) {
-        for (j = 0; j < COLS(m); j++) {
-            ELMT(m, i, j) = ELMT(m1, i, j) - ELMT(m2, i, j);
+    for (i = 0; i < ROWSMATRIX(m); i++) {
+        for (j = 0; j < COLSMATRIX(m); j++) {
+            ELMTMATRIX(m, i, j) = ELMTMATRIX(m1, i, j) - ELMTMATRIX(m2, i, j);
         }
     }
     
     return m;
 }
-Matrix multiplyMatrix(Matrix m1, Matrix m2)
+Matrix multiplyMATRIX(Matrix m1, Matrix m2)
 /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
 /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
 {
@@ -155,51 +155,51 @@ Matrix multiplyMatrix(Matrix m1, Matrix m2)
     Matrix m;
 
     /* ALGORITMA */
-    CreateMatrix(ROWS(m1), COLS(m2), &m);
+    CreateMATRIX(ROWSMATRIX(m1), COLSMATRIX(m2), &m);
 
-    for (i = 0; i < ROWS(m1); i++) {
-        for (j = 0; j < COLS(m1); j++) {
-            ELMT(m,i,j) = 0;
-            for(k=0; k< COLS(m1); k++){
-                ELMT(m,i,j) += ELMT(m1,i,k) * ELMT(m2,k,j);
+    for (i = 0; i < ROWSMATRIX(m1); i++) {
+        for (j = 0; j < COLSMATRIX(m1); j++) {
+            ELMTMATRIX(m,i,j) = 0;
+            for(k=0; k< COLSMATRIX(m1); k++){
+                ELMTMATRIX(m,i,j) += ELMTMATRIX(m1,i,k) * ELMTMATRIX(m2,k,j);
             }
         }
     }
     
     return m;
 }
-Matrix multiplyConst(Matrix m, ElType x)
+Matrix multiplyConstMATRIX(Matrix m, ElType x)
 {
     int i,j;
-    for (i = 0; i < ROWS(m); i++) {
-        for (j = 0; j < COLS(m); j++) {
-            ELMT(m, i, j) = x * ELMT(m,i,j);
+    for (i = 0; i < ROWSMATRIX(m); i++) {
+        for (j = 0; j < COLSMATRIX(m); j++) {
+            ELMTMATRIX(m, i, j) = x * ELMTMATRIX(m,i,j);
         }
     }
     
     return m;
 }
 /* Mengirim hasil perkalian setiap elemen m dengan x */
-void pMultiplyConst(Matrix *m, ElType k)
+void pMultiplyConstMATRIX(Matrix *m, ElType k)
 {
-    copyMatrix(multiplyConst(*m,k), m);
+    copyMATRIX(multiplyConstMATRIX(*m,k), m);
 }
 /* I.S. m terdefinisi, k terdefinisi */
 /* F.S. Mengalikan setiap elemen m dengan k */
 
 /* ********** KELOMPOK OPERASI RELASIONAL TERHADAP Matrix ********** */
-boolean isEqual(Matrix m1, Matrix m2)
+boolean isEqualMATRIX(Matrix m1, Matrix m2)
 {
     int i,j;
     i = 0;
     boolean flag = true;
-    if (!isSizeEqual(m1,m2)){
+    if (!isSizeEqualMATRIX(m1,m2)){
         flag = false;
     }else{
-        while ((i<ROWS(m1)) && flag){
+        while ((i<ROWSMATRIX(m1)) && flag){
             j = 0;
-            while((j<COLS(m1))&&flag){
-                if (ELMT(m1, i, j) != ELMT(m2, i, j)){
+            while((j<COLSMATRIX(m1))&&flag){
+                if (ELMTMATRIX(m1, i, j) != ELMTMATRIX(m2, i, j)){
                     flag = false;
                 }
                 j++;
@@ -209,43 +209,43 @@ boolean isEqual(Matrix m1, Matrix m2)
     }
     return flag;
 }
-/* Mengirimkan true jika m1 = m2, yaitu count(m1) = count(m2) dan */
+/* Mengirimkan true jika m1 = m2, yaitu countMATRIX(m1) = countMATRIX(m2) dan */
 /* untuk setiap i,j yang merupakan Index baris dan kolom m1(i,j) = m2(i,j) */
-/* Juga merupakan strong eq karena getLastIdxCol(m1) = getLastIdxCol(m2) */
-boolean isNotEqual(Matrix m1, Matrix m2)
+/* Juga merupakan strong eq karena getLastIdxColMATRIX(m1) = getLastIdxColMATRIX(m2) */
+boolean isNotEqualMATRIX(Matrix m1, Matrix m2)
 {
-    return !isEqual(m1,m2);
+    return !isEqualMATRIX(m1,m2);
 }
 /* Mengirimkan true jika m1 tidak sama dengan m2 */
 
-boolean isSizeEqual(Matrix m1, Matrix m2)
+boolean isSizeEqualMATRIX(Matrix m1, Matrix m2)
 {
-    return COLS(m1) == COLS(m2) && ROWS(m1) == ROWS(m2);
+    return COLSMATRIX(m1) == COLSMATRIX(m2) && ROWSMATRIX(m1) == ROWSMATRIX(m2);
 }
 /* Mengirimkan true jika ukuran efektif matriks m1 sama dengan ukuran efektif m2 */
 
 /* ********** Operasi lain ********** */
-int count(Matrix m)
+int countMATRIX(Matrix m)
 {
-    return COLS(m)*ROWS(m);
+    return COLSMATRIX(m)*ROWSMATRIX(m);
 }
 /* Mengirimkan banyaknya elemen m */
 
 /* ********** KELOMPOK TEST TERHADAP Matrix ********** */
-boolean isSquare(Matrix m)
+boolean isSquareMATRIX(Matrix m)
 {
-    return ROWS(m) == COLS(m);
+    return ROWSMATRIX(m) == COLSMATRIX(m);
 }
 /* Mengirimkan true jika m adalah matriks dg ukuran baris dan kolom sama */
-boolean isSymmetric(Matrix m)
+boolean isSymmetricMATRIX(Matrix m)
 {
     boolean flag = true;
     int i,j;
     i = 0; 
-    while ((i<ROWS(m)) && flag){
+    while ((i<ROWSMATRIX(m)) && flag){
         j= 0;
-        while((j<COLS(m))&&flag){
-            if (ELMT(m, i, j) != ELMT(m, j, i))
+        while((j<COLSMATRIX(m))&&flag){
+            if (ELMTMATRIX(m, i, j) != ELMTMATRIX(m, j, i))
             {
                 flag = false;
             }
@@ -253,30 +253,30 @@ boolean isSymmetric(Matrix m)
             }
             i++;
         }
-    return flag && isSquare(m);
+    return flag && isSquareMATRIX(m);
 }
-/* Mengirimkan true jika m adalah matriks simetri : isSquare(m) 
+/* Mengirimkan true jika m adalah matriks simetri : isSquareMATRIX(m) 
    dan untuk setiap elemen m, m(i,j)=m(j,i) */
-boolean isIdentity(Matrix m)
+boolean isIdentityMATRIX(Matrix m)
 {
     boolean flag = true;
     int i,j;
   
-    if(!isSquare(m)){
+    if(!isSquareMATRIX(m)){
         flag = false;
     }
     else {
         i = 0;
-        while ((i<ROWS(m)) && flag){
+        while ((i<ROWSMATRIX(m)) && flag){
             j = 0;
-            while((j<COLS(m))&&flag){
+            while((j<COLSMATRIX(m))&&flag){
                 if (i == j){
-                    if (ELMT(m,i,j)!=1){
+                    if (ELMTMATRIX(m,i,j)!=1){
                         flag = false;
                     }
                 }
                 else{
-                    if(ELMT(m,i,j) != 0){
+                    if(ELMTMATRIX(m,i,j) != 0){
                         flag = false;
                         }
                     }
@@ -293,67 +293,67 @@ boolean isIdentity(Matrix m)
  }
     
 
-/* Mengirimkan true jika m adalah matriks satuan: isSquare(m) dan 
+/* Mengirimkan true jika m adalah matriks satuan: isSquareMATRIX(m) dan 
    setiap elemen diagonal m bernilai 1 dan elemen yang bukan diagonal bernilai 0 */
-boolean isSparse(Matrix m)
+boolean isSparseMATRIX(Matrix m)
 {
     double num = 0;
     int i,j;
-    double max = count(m) * 0.05;
-    for (i = 0; i < ROWS(m); i++) {
-        for (j = 0; j < COLS(m); j++) {
-            if (ELMT(m,i,j) != 0){
+    double max = countMATRIX(m) * 0.05;
+    for (i = 0; i < ROWSMATRIX(m); i++) {
+        for (j = 0; j < COLSMATRIX(m); j++) {
+            if (ELMTMATRIX(m,i,j) != 0){
                 num += 1;
             }
         }
     }
-        return (num <= max);
+    return (num <= max);
 }
 
 /* Mengirimkan true jika m adalah matriks sparse: matriks “jarang” dengan definisi: 
    hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */
-Matrix inverse1(Matrix m){
+Matrix inverse1MATRIX(Matrix m){
 
-    return multiplyConst(m, -1);
+    return multiplyConstMATRIX(m, -1);
 }
 /* Menghasilkan salinan m dengan setiap elemen "di-invers", yaitu dinegasikan (dikalikan -1) */
-void pInverse1(Matrix *m){
+void pInverse1MATRIX(Matrix *m){
 
-    pMultiplyConst(m, -1);
+    pMultiplyConstMATRIX(m, -1);
 }
 /* I.S. m terdefinisi */
 /* F.S. m di-invers, yaitu setiap elemennya dinegasikan (dikalikan -1) */
-float determinant(Matrix m)
+float determinantMATRIX(Matrix m)
 {
     int i,j,k;
     float det =1;
     float per;
-    float a[ROWS(m)][COLS(m)];
-    for(i=0;i< COLS(m);i++)
+    float a[ROWSMATRIX(m)][COLSMATRIX(m)];
+    for(i=0;i< COLSMATRIX(m);i++)
 	 {
-		  for(j=0;j< COLS(m);j++)
+		  for(j=0;j< COLSMATRIX(m);j++)
 		  {
 			   
-			   a[i][j] =  (float)ELMT(m,i,j);
+			   a[i][j] =  (float)ELMTMATRIX(m,i,j);
 		  }
 	 }
     
-    for(i=0;i< COLS(m);i++)
+    for(i=0;i< COLSMATRIX(m);i++)
 	 {	 
          if (a[i][i] == 0.0){
              return 0;
          }
-		  for(j=i+1;j< COLS(m);j++)
+		  for(j=i+1;j< COLSMATRIX(m);j++)
 		  {
 			   per = a[j][i]/a[i][i];
 
-			   for(k=0;k< COLS(m);k++)
+			   for(k=0;k< COLSMATRIX(m);k++)
 			   {
 			  		a[j][k] = a[j][k]  - (per * a[i][k]);
 			   }
 		  }
 	 }
-    for(i=0;i< COLS(m);i++)
+    for(i=0;i< COLSMATRIX(m);i++)
      {
          det = det * a[i][i];
      }
@@ -361,9 +361,9 @@ float determinant(Matrix m)
 }
 
 
-/* Prekondisi: isSquare(m) */
+/* Prekondisi: isSquareMATRIX(m) */
 /* Menghitung nilai determinan m */
-void transpose(Matrix *m)
+void transposeMATRIX(Matrix *m)
 {
     /* KAMUS */
     int i, j, temp;
@@ -371,13 +371,13 @@ void transpose(Matrix *m)
 
     /* ALGORITMA */
 
-    for (i = 0; i < ROWS(*m); i++) { 
-        for (j = i; j <= COLS(*m); j++) {
-            temp = ELMT(*m, i, j);
-            ELMT(*m, i, j) = ELMT(*m, j, i);
-            ELMT(*m, j, i) = temp;
+    for (i = 0; i < ROWSMATRIX(*m); i++) { 
+        for (j = i; j <= COLSMATRIX(*m); j++) {
+            temp = ELMTMATRIX(*m, i, j);
+            ELMTMATRIX(*m, i, j) = ELMTMATRIX(*m, j, i);
+            ELMTMATRIX(*m, j, i) = temp;
         }
     }
 }
-/* I.S. m terdefinisi dan isSquare(m) */
-/* F.S. m "di-transpose", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
+/* I.S. m terdefinisi dan isSquareMATRIX(m) */
+/* F.S. m "di-transposeMATRIX", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
