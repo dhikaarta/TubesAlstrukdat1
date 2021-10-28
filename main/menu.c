@@ -4,7 +4,6 @@
 
 int main()
 {
-    char[CAPACITYWORD];
-    startWord();
-
+    // char[CAPACITYWORD];
+    // startWord();
 }

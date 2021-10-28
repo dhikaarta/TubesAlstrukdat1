@@ -4,13 +4,13 @@
 /* Penempatan elemen selalu rapat kiri */
 /* Banyaknya elemen didefinisikan secara implisit, memori array statik */
 
-#ifndef LISTPOS_H
-#define LISTPOS_H
+#ifndef LISTGADGET_H
+#define LISTGADGET_H
 
 #include "../boolean.h"
 
 /*  Kamus Umum */
-#define CAPACITY_LISTPOS 100
+#define CAPACITY_LISTGAGDET 5
 /* Kapasitas penyimpanan */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
@@ -18,14 +18,20 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElType; /* type elemen List */
 typedef struct
 {
-   ElType contents[CAPACITY_LISTPOS]; /* memori tempat penyimpan elemen (container) */
-} ListPos;
+    int idGADGET;
+    long priceGADGET;
+} ElType; /* type elemen List */
+
+typedef struct
+{
+    ElType contents[CAPACITY_LISTGAGDET]; /* memori tempat penyimpan elemen (container) */
+    int Neff;
+} ListGADGET;
 /* Indeks yang digunakan [0..CAPACITY-1] */
-/* Jika l adalah ListPos, cara deklarasi dan akses: */
-/* Deklarasi : l : ListPos */
+/* Jika l adalah ListGADGET, cara deklarasi dan akses: */
+/* Deklarasi : l : ListGADGET */
 /* Maka cara akses: 
    ELMT(l,i) untuk mengakses elemen ke-i */
 /* Definisi : 
@@ -33,50 +39,41 @@ typedef struct
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMT_LISTPOS(l, i) (l).contents[(i)]
+#define ELMT_LISTGADGET(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
-void CreateLISTPOS(ListPos *l);
+void CreateLISTGADGET(ListGADGET *l);
 /* I.S. l sembarang */
 /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
 /* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int lengthLISTPOS(ListPos l);
+int lengthLISTGADGET(ListGADGET l);
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValidLISTPOS(ListPos l, int i);
+boolean isIdxValidLISTGADGET(ListGADGET l, int i);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEffLISTPOS(ListPos l, int i);
+boolean isIdxEffLISTGADGET(ListGADGET l, int i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk List l */
 /* yaitu antara 0..length(l)-1 */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
-boolean isEmptyLISTPOS(ListPos l);
+boolean isEmptyLISTGADGET(ListGADGET l);
 /* Mengirimkan true jika List l kosong, mengirimkan false jika tidak */
 /* *** Test List penuh *** */
-boolean isFullLISTPOS(ListPos l);
+boolean isFullLISTGADGET(ListGADGET l);
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi List dari pembacaan *** */
-void readListLISTPOS(ListPos *l);
-/* I.S. l sembarang */
-/* F.S. List l terdefinisi */
-/* Proses: membaca banyaknya elemen l dan mengisi nilainya */
-/* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= CAPACITY */
-/*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
-          Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
-/*    Jika n = 0; hanya terbentuk List kosong */
-void displayListLISTPOS(ListPos l);
+void displayLISTINVENTORY(ListGADGET l);
+void displayLISTGADGETSTORE(ListGADGET l);
 /* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
    siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
@@ -85,41 +82,26 @@ void displayListLISTPOS(ListPos l);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika List kosong : menulis [] */
 
-/* ********** OPERATOR ARITMATIKA ********** */
-/* *** Aritmatika List : Penjumlahan, pengurangan, perkalian, ... *** */
-ListPos plusMinusTabLISTPOS(ListPos l1, ListPos l2, boolean plus);
-/* Prekondisi : l1 dan l2 berukuran sama dan tidak kosong */
-/* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada 
-       indeks yang sama dijumlahkan */
-/* Jika plus = false, mengirimkan l1-l2, yaitu setiap elemen l1 dikurangi 
-       elemen l2 pada indeks yang sama */
-
-/* ********** OPERATOR RELASIONAL ********** */
-/* *** Operasi pembandingan List: *** */
-boolean isListEqualLISTPOS(ListPos l1, ListPos l2);
-/* Mengirimkan true jika l1 sama dengan l2 yaitu jika ukuran l1 = l2 dan semua 
-   elemennya sama */
-
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
-int indexOfLISTPOS(ListPos l, ElType val);
+int indexOfLISTGADGET(ListGADGET l, ElType val);
 /* Search apakah ada elemen List l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
 /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 /* Skema Searching yang digunakan bebas */
 
-/* ********** NILAI EKSTREM ********** */
-void extremesLISTPOS(ListPos l, ElType *max, ElType *min);
-/* I.S. List l tidak kosong */
-/* F.S. Max berisi nilai terbesar dalam l;
-        Min berisi nilai terkecil dalam l */
+// /* ********** NILAI EKSTREM ********** */
+// void extremesLISTGADGET(ListGADGET l, ElType *max, ElType *min);
+// /* I.S. List l tidak kosong */
+// /* F.S. Max berisi nilai terbesar dalam l;
+//         Min berisi nilai terkecil dalam l */
 
-/* ********** OPERASI LAIN ********** */
-boolean isAllEvenLISTPOS(ListPos l);
-/* Menghailkan true jika semua elemen l genap */
+// /* ********** OPERASI LAIN ********** */
+// boolean isAllEvenLISTGADGET(ListGADGET l);
+// /* Menghailkan true jika semua elemen l genap */
 
 /* ********** SORTING ********** */
-void sortLISTPOS(ListPos *l, boolean asc);
+void sortLISTGADGET(ListGADGET *l, boolean asc);
 /* I.S. l boleh kosong */
 /* F.S. Jika asc = true, l terurut membesar */
 /*      Jika asc = false, l terurut mengecil */
@@ -128,12 +110,12 @@ void sortLISTPOS(ListPos *l, boolean asc);
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastLISTPOS(ListPos *l, ElType val);
+void insertLastLISTGADGET(ListGADGET *l, int id, long price);
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastLISTPOS(ListPos *l, ElType *val);
+void deleteLISTGADGET(ListGADGET *l, int id);
 /* Proses : Menghapus elemen terakhir List */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
