@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "wordmachine.h": "c"
+        "wordmachine.h": "c",
+        "stdlib.h": "c",
+        "gadgetinventory.h": "c",
+        "stdio.h": "c"
     }
 }

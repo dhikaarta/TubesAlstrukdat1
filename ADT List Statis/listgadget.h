@@ -20,14 +20,14 @@
 /* Definisi elemen dan koleksi objek */
 typedef struct
 {
-    int idGADGET;
-    long priceGADGET;
+   int idGADGET;
+   long priceGADGET;
 } ElType; /* type elemen List */
 
 typedef struct
 {
-    ElType contents[CAPACITY_LISTGAGDET]; /* memori tempat penyimpan elemen (container) */
-    int Neff;
+   ElType contents[CAPACITY_LISTGAGDET]; /* memori tempat penyimpan elemen (container) */
+   int Neff;
 } ListGADGET;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListGADGET, cara deklarasi dan akses: */

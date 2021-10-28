@@ -128,7 +128,12 @@ void insertLastLISTGADGET(ListGADGET *l, int id, long price)
     /* Proses: Menambahkan val sebagai elemen terakhir List */
     /* I.S. List l boleh kosong, tetapi tidak penuh */
     /* F.S. val adalah elemen terakhir l yang baru */
-    int i = (*l).Neff;
+    int i = 0;
+    while (i < CAPACITY_LISTGAGDET && (*l).contents[i].idGADGET != VAL_UNDEF)
+    {
+        i++;
+    }
+
     (*l).contents[i].idGADGET = id;
     (*l).contents[i].priceGADGET = price;
     (*l).Neff++;
@@ -142,15 +147,6 @@ void deleteLISTGADGET(ListGADGET *l, int id)
     /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
     /*      Banyaknya elemen List berkurang satu */
     /*      List l mungkin menjadi kosong */
-    boolean found = false;
-    int i = 0;
-    while (found == false && i < CAPACITY_LISTGAGDET)
-    {
-        if (id == (*l).contents[i].idGADGET)
-        {
-            (*l).contents[i].idGADGET = VAL_UNDEF;
-            (*l).Neff--;
-            found = true;
-        }
-    }
+    (*l).contents[id - 1].idGADGET = VAL_UNDEF;
+    (*l).Neff--;
 }
