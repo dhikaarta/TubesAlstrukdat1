@@ -6,6 +6,8 @@
 boolean endWord;
 Word currentWord;
 
+
+
 void ignoreBlankWORD()
 {
     while(currentChar == BLANK){
@@ -21,7 +23,8 @@ void startWORD(){
     ignoreBlankWORD();
     if (currentChar == MARK){
         endWord = true;
-    } else{
+    } else
+    {   
         endWord = false;
         copyWORD();
     }
@@ -31,13 +34,14 @@ void startWORD(){
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
+
+
 void advWORD(){
     ignoreBlankWORD();
     if (currentChar == MARK){
         endWord  = true;
     } else {
         copyWORD();
-        ignoreBlankWORD();
     }
 }
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
@@ -59,9 +63,6 @@ void copyWORD()
     } else{
         currentWord.length = count;
     }
-
-    
-
 }
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
@@ -69,3 +70,26 @@ void copyWORD()
           currentChar = BLANK atau currentChar = MARK; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+
+boolean isKataEqual(Word W1, Word W2)
+{
+    int i = 0;
+    boolean flag = true;
+    if (W1.length != W2.length)
+    {
+        flag = false;
+    }
+    else
+    {
+        while ((flag) && i < W1.length)
+        {
+
+            if (W1.contents[i] != W2.contents[i]) 
+            {
+                    flag = false;
+            }
+            i++;
+        }
+    }
+    return flag;
+}

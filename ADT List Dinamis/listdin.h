@@ -14,7 +14,7 @@
 /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElType; /* type elemen list */
+typedef char ElType; /* type elemen list */
 typedef int IdxType;
 typedef struct
 {

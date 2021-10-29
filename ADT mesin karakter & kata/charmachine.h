@@ -6,7 +6,7 @@
 
 #include "../boolean.h"
 
-#define MARK '.'
+#define MARK '\n'
 /* Char Engine State */
 extern char currentChar;
 extern boolean eot;
@@ -18,6 +18,7 @@ void start();
    F.S. : currentChar adalah karakter pertama pada pita
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
+
 
 void adv();
 /* Pita dimajukan satu karakter. 

@@ -8,6 +8,7 @@ char currentChar;
 boolean eot;
 
 static FILE * tape;
+static FILE * tape2;
 static int retval;
 
 void start() {
@@ -23,6 +24,7 @@ void start() {
 	adv();
 }
 
+
 void adv() {
 /* Pita dimajukan satu karakter. 
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
@@ -33,7 +35,5 @@ void adv() {
 	/* Algoritma */
 	retval = fscanf(tape,"%c",&currentChar);
 	eot = (currentChar == MARK);
-	if (eot) {
-       fclose(tape);
- 	}
+
 }
