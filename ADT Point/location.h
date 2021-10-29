@@ -4,8 +4,8 @@
 #include "../boolean.h"
 
 typedef struct { 
-	float X; /* absis   */
-	float Y; /* ordinat */
+	int X; /* absis   */
+	int Y; /* ordinat */
 } POINT;
 
 typedef struct { 
@@ -18,7 +18,7 @@ typedef struct {
 #define LOC_X(P) (P).B.X
 #define LOC_Y(P) (P).B.Y
         
-LOCATION MakeLOCATION (char A, float X, float Y);
+LOCATION MakeLOCATION (char A, int X, int Y);
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */                                                 
 void BacaLOCATION (LOCATION* p); 
 void TulisLOCATION (LOCATION P);   
