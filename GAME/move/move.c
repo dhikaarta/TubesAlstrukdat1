@@ -4,3 +4,4 @@
 #include "../../ADT matriks/matrix.h"
 #include "../../boolean.h"
 
+void 
