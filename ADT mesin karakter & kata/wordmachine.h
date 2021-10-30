@@ -18,6 +18,8 @@ typedef struct {
 /* Word Engine State */
 extern boolean endWord;
 extern Word currentWord;
+extern boolean endWordfile;
+extern Word currentWordfile;
 
 
 
@@ -26,12 +28,17 @@ void ignoreBlankWORD();
    I.S. : currentChar sembarang 
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
+
+void ignoreBlankWORDfile();
+
+
 void startWORD();
 /* I.S. : currentChar sembarang 
    F.S. : endWord = true, dan currentChar = MARK; 
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
+void startWORDfile(char filename[]);
 
 void advWORD();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
@@ -40,6 +47,8 @@ void advWORD();
           Jika currentChar = MARK, endWord = true.		  
    Proses : Akuisisi kata menggunakan procedure copyWORD */
 
+void advWORDfile();
+
 void copyWORD();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
@@ -47,6 +56,8 @@ void copyWORD();
           currentChar = BLANK atau currentChar = MARK; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+
+void copyWORDfile();
 
 
 boolean isKataEqual(Word W1 , Word W2);

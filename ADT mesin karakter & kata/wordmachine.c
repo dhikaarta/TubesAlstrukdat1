@@ -5,6 +5,8 @@
 
 boolean endWord;
 Word currentWord;
+boolean endWordfile;
+Word currentWordfile;
 
 
 
@@ -17,6 +19,13 @@ void ignoreBlankWORD()
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang 
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+
+void ignoreBlankWORDfile()
+{
+    while(currentCharfile == BLANK && currentCharfile != MARK)  {
+        advFile();
+    }
+}
 
 void startWORD(){
     start();
@@ -34,6 +43,17 @@ void startWORD(){
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
+void startWORDfile(char filename[]){
+    startfile(filename);
+    ignoreBlankWORDfile();
+    if (currentCharfile == MARK){
+        endWordfile = true;
+    } else
+    {   
+        endWordfile = false;
+        copyWORDfile();
+    }
+}
 
 
 void advWORD(){
@@ -50,6 +70,14 @@ void advWORD(){
           Jika currentChar = MARK, endWord = true.		  
    Proses : Akuisisi kata menggunakan procedure copyWORD */
 
+void advWORDfile(){
+    ignoreBlankWORDfile();
+    if (currentCharfile == MARK){
+        endWordfile  = true;
+    } else {
+        copyWORDfile();
+    }
+}
 void copyWORD()
 {
     int count = 0;
@@ -62,6 +90,21 @@ void copyWORD()
         currentWord.length = CAPACITYWORD;
     } else{
         currentWord.length = count;
+    }
+}
+
+void copyWORDfile()
+{
+    int count = 0;
+    while((currentCharfile != MARK) && (currentCharfile != BLANK)){
+        currentWordfile.contents[count] = currentCharfile;
+        advFile();
+        count += 1;
+    }
+    if (count > CAPACITYWORD){
+        currentWordfile.length = CAPACITYWORD;
+    } else{
+        currentWordfile.length = count;
     }
 }
 /* Mengakuisisi kata, menyimpan dalam currentWord

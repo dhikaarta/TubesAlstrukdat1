@@ -5,11 +5,13 @@
 #include <stdio.h>
 
 char currentChar;
+char currentCharfile;
 boolean eot;
 
 static FILE * tape;
-static FILE * tape2;
+static FILE * tapefile;
 static int retval;
+static int retvalfile;
 
 void start() {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -24,6 +26,12 @@ void start() {
 	adv();
 }
 
+void startfile(char fileName[])
+{
+   tapefile = fopen(fileName, "r");
+   advFile();
+}
+
 
 void adv() {
 /* Pita dimajukan satu karakter. 
@@ -36,4 +44,21 @@ void adv() {
 	retval = fscanf(tape,"%c",&currentChar);
 	eot = (currentChar == MARK);
 
+}
+
+void advFile()
+{
+   retvalfile = fscanf(tapefile,"%c",&currentCharfile);
+   
+	if(retvalfile == EOF)
+   {
+      fclose(tapefile);
+   }
+   else
+   {
+      if(currentCharfile == '\n')
+      {
+         currentCharfile = BLANK;
+      }
+   }
 }

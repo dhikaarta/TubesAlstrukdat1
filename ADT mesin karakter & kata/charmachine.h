@@ -9,6 +9,7 @@
 #define MARK '\n'
 /* Char Engine State */
 extern char currentChar;
+extern char currentCharfile;
 extern boolean eot;
 
 void start();
@@ -19,6 +20,9 @@ void start();
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
+void startfile();
+/* Sama seperti start, namun versi untuk file*/
+
 
 void adv();
 /* Pita dimajukan satu karakter. 
@@ -26,5 +30,8 @@ void adv();
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
+
+void advFile();
+/* Sama seperti adv, namun versi untuk file*/
 
 #endif

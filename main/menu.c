@@ -13,25 +13,25 @@ Word kataBuy = {"BUY", 3};    Word kataInventory = {"INVENTORY", 9};    Word kat
 Word getInput()
 {
     startWORD();
-        Word kataInput;
-        //printf("%s\n", currentWord.contents);
-        kataInput.length = currentWord.length;
-        for (int i =0; i < currentWord.length; i++)
-        {
-            kataInput.contents[i] = currentWord.contents[i];
-        }
-        //printf("%s\n", currentWord.contents);
-        advWORD();
-        while (!endWord)
-        {
+    Word kataInput = currentWord;
+    printf("%i\n", currentWord.length);
+    /*for (int i =0; i < currentWord.length; i++)
+    {
+        kataInput.contents[i] = currentWord.contents[i];
+    }*/
+    /*printf("%s\n", currentWord.contents);
+    printf("%s\n", kataInput.contents);*/
+    advWORD();
+    while (!endWord)
+    {
             
-            for (int j = 0; j<currentWord.length; j++)
-            {
-                kataInput.contents[j + kataInput.length] = currentWord.contents[j];
-            }
-            kataInput.length += currentWord.length;
-            advWORD();
+        for (int j = 0; j<currentWord.length; j++)
+        {
+            kataInput.contents[j + kataInput.length] = currentWord.contents[j];
         }
+        kataInput.length += currentWord.length;
+        advWORD();
+     }
     return kataInput;
 }
 /* fungsi buat dapetin input dari user pake mesin kata*/
@@ -48,13 +48,26 @@ int main()
         Word kataInput = getInput();
         printf("%s\n", kataInput.contents);
         //printf("%s\n", currentWord.contents);
+        
 
         if(isKataEqual(kataInput, kataNewGame))
         {
+            printf("Silahkan masukkan file konfigurasi : ");
+            kataInput = getInput();
+            /*printf("%s\n", currentWord.contents);
+            printf("%i\n", currentWord.length);
+            printf("%i\n", endWord);
+            printf("%i\n", kataInput.length);*/
+            printf("%s\n", kataInput.contents);
+            startWORDfile(kataInput.contents);
+            printf("%s\n", currentWordfile.contents);
+            /*advWORDfile();
+            printf("%s\n", currentWordfile.contents);*/
             printf("ENTER COMMAND : ");
             while (true)
             {
                 kataInput = getInput();
+                printf("%s\n", kataInput.contents);
                 if (isKataEqual(kataInput,kataMove))
                 {
                     printf("placeholder move \n");
