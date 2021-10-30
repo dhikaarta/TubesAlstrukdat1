@@ -7,7 +7,6 @@
 void CreateLISTTASK(ListTASK *l)
 {
     (*l).Neff = 0;
-    (*l).idxHead = IDX_UNDEF;
 }
 
 void ReadLISTTASK(ListTASK *l)
@@ -23,7 +22,6 @@ void ReadLISTTASK(ListTASK *l)
         }
     }
     (*l).Neff = nTask;
-    (*l).idxHead = 0;
 }
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
@@ -48,9 +46,9 @@ void displayLISTTASK(ListTASK l)
     }
     else
     {
-        for (int i = l.idxHead; i < l.Neff + l.idxHead; i++)
+        for (int i = 0; i < l.Neff; i++)
         {
-            printf("%d. Time Task = %d\n", i + 1 - l.idxHead, l.contents[i].timeTASK);
+            printf("%d. Time Task = %d\n", i + 1, l.contents[i].timeTASK);
             printf("   Pick Up Point = %c\n", l.contents[i].pickUpTASK);
             printf("   Drop Off Point = %c\n", l.contents[i].dropOffTASK);
             printf("   Item Task = %c\n", l.contents[i].itemTASK);
@@ -64,20 +62,43 @@ void displayLISTTASK(ListTASK l)
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void deleteFirstLISTTASK(ListTASK *l)
+void deleteAtLISTTASK(ListTASK *l, ElTypeTASK *val, int idx)
 {
-    if (lengthLISTTASK(*l) == 1)
+    *val = (*l).contents[idx];
+    if (lengthLISTTASK(*l) > 1)
     {
-        //(*l).idxHead++;
-        (*l).Neff = 0;
-    } else
-    {
-        /* code */
+        for (int i = idx; i < (*l).Neff - 1; i++)
+        {
+            (*l).contents[i] = (*l).contents[i + 1];
+        }
     }
-    
-    
+    (*l).Neff--;
 }
 
-void sortLISTTASK(ListTASK *l)
+ListTASK sortLISTTASK(ListTASK l)
 {
+    ListTASK l2;
+    CreateLISTTASK(&l2);
+    int idx2 = 0;
+    int idxMin = 0;
+    int n = l.Neff;
+    ElTypeTASK val;
+    for (int i = 0; i < n; i++)
+    {
+        int minVal = l.contents[0].timeTASK;
+        int idxMin = 0;
+        for (int j = 0; j < l.Neff; j++)
+        {
+            if (l.contents[j].timeTASK < minVal)
+            {
+                minVal = l.contents[j].timeTASK;
+                idxMin = j;
+            }
+        }
+        deleteAtLISTTASK(&l, &val, idxMin);
+        l2.contents[idx2] = val;
+        l2.Neff++;
+        idx2++;
+    }
+    return l2;
 }

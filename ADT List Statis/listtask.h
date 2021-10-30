@@ -31,7 +31,6 @@ typedef struct
 {
     ElTypeTASK contents[CAPACITY_LISTTASK]; /* memori tempat penyimpan elemen (container) */
     int Neff;
-    int idxHead;
 } ListTASK;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListTASK, cara deklarasi dan akses: */
@@ -83,6 +82,6 @@ void deleteFirstLISTTASK(ListTASK *l);
 
 void deleteAtLISTTASK(ListTASK *l, ElTypeTASK *val, int idx);
 
-void sortLISTTASK(ListTASK *l);
+ListTASK sortLISTTASK(ListTASK l);
 
 #endif
