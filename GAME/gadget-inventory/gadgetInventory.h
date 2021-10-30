@@ -2,7 +2,7 @@
 #ifndef GADGET_INVENTORY_H
 #define GADGET_INVENTORY_H
 
-#include "../ADT List Statis/listgadget.h"
+#include "../../ADT List Statis/listgadget.h"
 #include <stdio.h>
 #include <stdlib.h>
 

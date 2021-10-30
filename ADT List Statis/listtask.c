@@ -66,8 +66,16 @@ void displayLISTTASK(ListTASK l)
 /* *** Menambahkan elemen terakhir *** */
 void deleteFirstLISTTASK(ListTASK *l)
 {
-    (*l).idxHead++;
-    (*l).Neff--;
+    if (lengthLISTTASK(*l) == 1)
+    {
+        //(*l).idxHead++;
+        (*l).Neff = 0;
+    } else
+    {
+        /* code */
+    }
+    
+    
 }
 
 void sortLISTTASK(ListTASK *l)
