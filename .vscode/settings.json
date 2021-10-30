@@ -5,6 +5,8 @@
         "gadgetinventory.h": "c",
         "stdio.h": "c",
         "listgadget.h": "c",
-        "listtask.h": "c"
+        "listtask.h": "c",
+        "time-to-do-list.h": "c",
+        "timetodolist.h": "c"
     }
 }
