@@ -16,15 +16,14 @@ int main(){
     nTempat = 17;
     
     //MEMBUAT ARRAY OF LOC
-    tempat = makeArrayOfLOCATION(nTempat);
-
+    tempat = makeArrayOfLOCATION(nTempat, x_hq, y_hq);
     // MEMBUAT MAP SESUAI NXM
     Matrix MAP;
     CreateMAP(N,M, &MAP);
     int i;
 
     // BUAT STRUKTUR MAP SESUAI ELMT
-    readMAPConfiguration(&MAP, tempat, nTempat, x_hq, y_hq);
+    readMAPConfiguration(&MAP, tempat, nTempat);
 
     // DISPLAY ALAMAT MAP
     displayMAP(MAP);

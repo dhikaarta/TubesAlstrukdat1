@@ -11,13 +11,17 @@ void CreateMAP(int nRow, int nCol, Matrix *m)
     COLSMATRIX(*m) = nCol+2;
 
 }
+    // HARUS JADI PARAMETER
+    // - posisi nobita (kerjaan aq)
+    // - pick up 
+    // - drop off  
+    // array of loc --> DONE!!
 void displayMAP(Matrix m)
 {   
     int i,j;
-    boolean bool= true;
     for (i=0; i<ROWSMATRIX(m);i++){
         for (j=0; j<COLSMATRIX(m);j++){
-            print("%c", ELMTMATRIX(m, i,j));
+            printf("%c", ELMTMATRIX(m, i,j));
             if (i==0){
                 printf("*");
             }else if (i == ROWSMATRIX(m)-1){
@@ -36,10 +40,7 @@ void displayMAP(Matrix m)
     }   
 }
 
-void readMAPConfiguration(Matrix *m, LOCATION* tempat, int n, int x_hq, int y_hq){
-    int nobitaSymbol = 8;
-    char nobita = nobitaSymbol+'0';
-    ELMTMATRIX(*m, x_hq, y_hq) = nobita;
+void readMAPConfiguration(Matrix *m, LOCATION* tempat, int n){
     int indexArray;
     for(indexArray=0; indexArray<n;indexArray++){
         // UNTUK MENGECEK
@@ -48,5 +49,9 @@ void readMAPConfiguration(Matrix *m, LOCATION* tempat, int n, int x_hq, int y_hq
         // printf("char %d = %c\n",indexArray, CHAR(tempat[indexArray]));
         ELMTMATRIX(*m, LOC_X(tempat[indexArray]), LOC_Y(tempat[indexArray])) = CHAR(tempat[indexArray]);
     }
+}
+
+LOCATION getLocHQ(LOCATION *tempat ){
+    return tempat[0];
 }
 
