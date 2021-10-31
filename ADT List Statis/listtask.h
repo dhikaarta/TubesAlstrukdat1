@@ -50,6 +50,8 @@ void CreateLISTTASK(ListTASK *l);
 
 void ReadLISTTASK(ListTASK *l);
 
+void ReadLISTTASKfile(ListTASK *l, int nTask);
+
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
 int lengthLISTTASK(ListTASK l);

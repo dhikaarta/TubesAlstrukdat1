@@ -1,26 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../ADT point/location.h"
-#include "../ADT point/location.c"
+#include "../ADT list statis/listtask.h"
+#include "../ADT list statis/listtask.c"
 
 
 Word kataNewGame = {"NEWGAME", 7};  Word kataExit = {"EXIT", 4};
 Word kataMove = {"MOVE", 4};    Word kataPickUp = {"PICK_UP", 7};    Word kataDropOff = {"DROP_OFF", 8};
 Word kataMap = {"MAP", 3};    Word kataToDo = {"TO_DO", 5};    Word kataInProgress = {"IN_PROGRESS", 11};
 Word kataBuy = {"BUY", 3};    Word kataInventory = {"INVENTORY", 9};    Word kataHelp = {"HELP", 4};
+
 Word getInput()
 {
     startWORD();
     Word kataInput = currentWord;
-    printf("%i\n", currentWord.length);
-    /*for (int i =0; i < currentWord.length; i++)
-    {
-        kataInput.contents[i] = currentWord.contents[i];
-    }*/
-    printf("%s\n", currentWord.contents);
-    /*printf("%s\n", kataInput.contents);*/
     advWORD();
-    printf("%s\n", currentWord.contents);
     while (!endWord)
     {
             
@@ -38,24 +31,20 @@ Word getInput()
 int main()
 {
     boolean flag = true;
-    int N,M,i_headquarters,j_headquarters,L;
+    int N,M,i_headquarters,j_headquarters,L,P;
 
     while (flag)
     {
-        //printf("%c\n", currentChar);
+     
         printf("this is start\n");
         Word kataInput = getInput();
-        printf("%s\n", kataInput.contents);
-        //printf("%s\n", currentWord.contents);
-        
+
 
         if(isKataEqual(kataInput, kataNewGame))
         {
             printf("Silahkan masukkan file konfigurasi : ");
             kataInput = getInput();
-            /*printf("%s\n", currentWord.contents);
-            printf("%i\n", endWord);
-            printf("%i\n", kataInput.length);*/
+
             startWORDfile(kataInput.contents);
             printf("%s\n", currentWordfile.contents);
             N = atoi(currentWordfile.contents);
@@ -69,13 +58,21 @@ int main()
             advWORDfile();
             L = atoi(currentWordfile.contents);
             printf("%i %i %i %i %i \n",N,M,i_headquarters,j_headquarters,L);
-            LOCATION* arrayLoc = makeArrayOfLOCATION(L);
+            LOCATION* arrayLoc = makeArrayOfLOCATION(L,i_headquarters,j_headquarters);
             displaylistLOCATION(arrayLoc, L);
+            Matrix Madj = makeMatrixAdj(L);
+            displayMATRIX(Madj); printf("\n");
+            advWORDfile();
+            P = atoi(currentWordfile.contents);
+            ListTASK lTask;
+            ReadLISTTASKfile(&lTask,P);
+            lTask = sortLISTTASK(lTask);
+            displayLISTTASK(lTask); printf("\n");
+
             printf("ENTER COMMAND : ");
             while (true)
             {
                 kataInput = getInput();
-                printf("%s\n", kataInput.contents);
                 if (isKataEqual(kataInput,kataMove))
                 {
                     printf("placeholder move \n");

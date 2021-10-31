@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matrix.h"
-
+#include "../ADT point/location.h"
+#include "../ADT point/location.c"
 
 void CreateMATRIX(int nRow, int nCol, Matrix *m)
 {
@@ -381,3 +382,22 @@ void transposeMATRIX(Matrix *m)
 }
 /* I.S. m terdefinisi dan isSquareMATRIX(m) */
 /* F.S. m "di-transposeMATRIX", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
+
+Matrix makeMatrixAdj(int L)
+{
+    Matrix Madj; int nRow = L + 1; int nCol = L + 1;
+    int val;
+    CreateMATRIX(nRow,nCol, &Madj);
+    for(int i = 0;i < nRow;i++)
+    {
+        for(int j = 0; j< nCol;j++)
+        {
+            advWORDfile();
+            val = atoi(currentWordfile.contents);
+            ELMTMATRIX(Madj,i,j) = val;
+            printf("%i\n",ELMTMATRIX(Madj,i,j));
+        }
+    }
+   
+    return Madj;
+}

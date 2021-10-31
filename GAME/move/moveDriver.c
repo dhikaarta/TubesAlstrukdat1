@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "move.c"
-#include "../../ADT matriks/matrix.c"
+#include "../../ADT matriks/matrix.h"
 #include "../../ADT Point/point.h"
 #include "../map/map.c"
+#include "../../ADT Point/location.c"
+#include "../pcolor/pcolor.c"
+
 
 
 int main(){
@@ -29,15 +32,17 @@ int main(){
 
     // DISPLAY ALAMAT MAP
     displayMAP(MAP);
-///////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////
+
     Matrix adjacency;
     int nPoint = 17;
     // ADJ MAT PSTI NXN
     // headquarter(1) + nPoint(17) = 18
-    readMATRIX(&adjacency, 18,18);
+
+    readMATRIX(&adjacency, nPoint+1 ,nPoint+1);
     printf("\n");
     displayMATRIX(adjacency);
-    return 0;
 
     // INI HARUS ADA DI GLOBAL
     // - posisi nobita (kerjaan aq)
@@ -48,6 +53,26 @@ int main(){
     LOCATION nobita;
     // SET DI HEADQUARTER BUAT YANG PALING AWAL
     nobita = getLocHQ(tempat);
-    
+    // nobita = getLocKeX(tempat,5);
 
+    //INI BUAT JUMLAH POSSIBLE MOVES, DI SET DI 0 TERUS TIAP PANGGIL ARRAY OF POSSIBLE MOVES
+    int lokasiDipilih;
+    do{
+        int nPossibleMoves;
+        LOCATION* arrayPosMove;
+        arrayPosMove = makeArrayOfPossibleMoves(adjacency, tempat, nobita, nPoint, &nPossibleMoves);
+        printf("\nPosisi yang dapat dicapai:\n");
+        for (i=0;i<nPossibleMoves;i++){
+            printf("%d. %c (%d,%d)\n", i+1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
+        }
+        displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves);
+        printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali) ");
+        scanf("%d", &lokasiDipilih);
+        nobita = arrayPosMove[lokasiDipilih-1];
+        printf("\nMobita sekarang berada di titik ");
+        TulisLOCATION(nobita);
+        printf("!");
+        printf("\n");
+    }while (lokasiDipilih!=0);
+    return 0;
 }

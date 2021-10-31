@@ -9,7 +9,7 @@ typedef struct {
 } POINT;
 
 typedef struct { 
-	char* A;
+	char A;
     POINT B; 
 } LOCATION;
 
@@ -18,12 +18,12 @@ typedef struct {
 #define LOC_X(P) (P).B.X
 #define LOC_Y(P) (P).B.Y
         
-LOCATION MakeLOCATION (char* A, float X, float Y);
+LOCATION MakeLOCATION (char A, int X, int Y);
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */                                                 
 void BacaLOCATION (LOCATION* p); 
 void BacaLOCATIONfile (LOCATION* p);
 void TulisLOCATION (LOCATION P);   
-LOCATION* makeArrayOfLOCATION(int n);
+LOCATION* makeArrayOfLOCATION(int n, int i_headquarters, int j_headquarters);
 void displaylistLOCATION(LOCATION* Loc, int L);
 
 

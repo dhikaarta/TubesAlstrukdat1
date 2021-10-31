@@ -127,4 +127,7 @@ void transposeMATRIX(Matrix *m);
 /* I.S. m terdefinisi dan isSquareMATRIX(m) */
 /* F.S. m "di-transposeMATRIX", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
 
+Matrix makeMatrixAdj(int L);
+/*Fungsi yang berguna untuk membuat matrix adjancecy dari membaca file konfigurasi*/  
+
 #endif
