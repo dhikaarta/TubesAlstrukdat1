@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "wordmachine.h"
 
 
@@ -22,12 +23,13 @@ void ignoreBlankWORD()
 
 void ignoreBlankWORDfile()
 {
-    while(currentCharfile == BLANK && currentCharfile != MARK)  {
+    while(currentCharfile == BLANK)  {
         advFile();
     }
 }
 
 void startWORD(){
+    Word currentWord = {0, 0};
     start();
     ignoreBlankWORD();
     if (currentChar == MARK){
@@ -44,6 +46,7 @@ void startWORD(){
           currentChar karakter pertama sesudah karakter terakhir kata */
 
 void startWORDfile(char filename[]){
+
     startfile(filename);
     ignoreBlankWORDfile();
     if (currentCharfile == MARK){
@@ -57,6 +60,7 @@ void startWORDfile(char filename[]){
 
 
 void advWORD(){
+    Word currentWord = {0, 0};
     ignoreBlankWORD();
     if (currentChar == MARK){
         endWord  = true;
@@ -71,6 +75,7 @@ void advWORD(){
    Proses : Akuisisi kata menggunakan procedure copyWORD */
 
 void advWORDfile(){
+    Word currentWordfile = {0, 0};
     ignoreBlankWORDfile();
     if (currentCharfile == MARK){
         endWordfile  = true;
@@ -80,6 +85,10 @@ void advWORDfile(){
 }
 void copyWORD()
 {
+    if (currentWord.length != 0)
+    {
+        memset (currentWord.contents, 0, strlen(currentWord.contents));
+    }
     int count = 0;
     while((currentChar != MARK) && (currentChar != BLANK)){
         currentWord.contents[count] = currentChar;
@@ -95,6 +104,10 @@ void copyWORD()
 
 void copyWORDfile()
 {
+    if (currentWordfile.length != 0)
+    {
+        memset (currentWordfile.contents, 0, strlen(currentWordfile.contents));
+    }
     int count = 0;
     while((currentCharfile != MARK) && (currentCharfile != BLANK)){
         currentWordfile.contents[count] = currentCharfile;

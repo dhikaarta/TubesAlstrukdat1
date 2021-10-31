@@ -58,7 +58,7 @@ void advFile()
    {
       if(currentCharfile == '\n')
       {
-         currentCharfile = BLANK;
+         currentCharfile = ' ';
       }
    }
 }

@@ -5,11 +5,11 @@
 #include "../ADT mesin karakter & kata/charmachine.h"
 #include "../ADT mesin karakter & kata/charmachine.c"
 
+
 Word kataNewGame = {"NEWGAME", 7};  Word kataExit = {"EXIT", 4};
 Word kataMove = {"MOVE", 4};    Word kataPickUp = {"PICK_UP", 7};    Word kataDropOff = {"DROP_OFF", 8};
 Word kataMap = {"MAP", 3};    Word kataToDo = {"TO_DO", 5};    Word kataInProgress = {"IN_PROGRESS", 11};
 Word kataBuy = {"BUY", 3};    Word kataInventory = {"INVENTORY", 9};    Word kataHelp = {"HELP", 4};
-
 Word getInput()
 {
     startWORD();
@@ -19,9 +19,10 @@ Word getInput()
     {
         kataInput.contents[i] = currentWord.contents[i];
     }*/
-    /*printf("%s\n", currentWord.contents);
-    printf("%s\n", kataInput.contents);*/
+    printf("%s\n", currentWord.contents);
+    /*printf("%s\n", kataInput.contents);*/
     advWORD();
+    printf("%s\n", currentWord.contents);
     while (!endWord)
     {
             
@@ -36,10 +37,10 @@ Word getInput()
 }
 /* fungsi buat dapetin input dari user pake mesin kata*/
 
-
 int main()
 {
     boolean flag = true;
+    int N,M,i_headquarters,j_headquarters,L;
 
     while (flag)
     {
@@ -55,14 +56,19 @@ int main()
             printf("Silahkan masukkan file konfigurasi : ");
             kataInput = getInput();
             /*printf("%s\n", currentWord.contents);
-            printf("%i\n", currentWord.length);
             printf("%i\n", endWord);
             printf("%i\n", kataInput.length);*/
-            printf("%s\n", kataInput.contents);
             startWORDfile(kataInput.contents);
             printf("%s\n", currentWordfile.contents);
-            /*advWORDfile();
-            printf("%s\n", currentWordfile.contents);*/
+            N = atoi(currentWordfile.contents);
+            advWORDfile();
+            printf("%s\n", currentWordfile.contents);
+            M = atoi(currentWordfile.contents);
+            advWORDfile();
+            i_headquarters = atoi(currentWordfile.contents);
+            advWORDfile();
+            j_headquarters = atoi(currentWordfile.contents);
+            printf("%i %i %i %i", N, M, i_headquarters, j_headquarters);
             printf("ENTER COMMAND : ");
             while (true)
             {
