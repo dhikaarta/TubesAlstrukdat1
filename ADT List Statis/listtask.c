@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listtask.h"
+#include "../ADT matriks/matrix.h"
+#include "../ADT matriks/matrix.c"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
@@ -26,6 +28,28 @@ void ReadLISTTASK(ListTASK *l)
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
+
+void ReadLISTTASKfile(ListTASK *l, int nTask)
+{
+    for (int i = 0; i < nTask; i++)
+    {
+        advWORDfile();
+        (*l).contents[i].timeTASK = atoi(currentWordfile.contents);
+        advWORDfile();
+        (*l).contents[i].pickUpTASK = currentWordfile.contents[0];
+        advWORDfile();
+        (*l).contents[i].dropOffTASK = currentWordfile.contents[0];
+        advWORDfile();
+        (*l).contents[i].itemTASK = currentWordfile.contents[0];
+        if ((*l).contents[i].itemTASK == 'P')
+        {
+            advWORDfile();
+            (*l).contents[i].timeExpTASK = atoi(currentWordfile.contents);
+        }
+        (*l).Neff = nTask;
+    }
+}
+
 int lengthLISTTASK(ListTASK l)
 {
     return l.Neff;

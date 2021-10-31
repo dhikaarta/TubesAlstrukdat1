@@ -6,7 +6,7 @@
 #include "../ADT mesin karakter & kata/charmachine.h"
 #include "../ADT mesin karakter & kata/charmachine.c"
 
-LOCATION MakeLOCATION (char* A, float X, float Y){
+LOCATION MakeLOCATION (char A, int X, int Y){
     LOCATION p;
     CHAR(p) = A;
     LOC_X(p) = X;
@@ -15,7 +15,7 @@ LOCATION MakeLOCATION (char* A, float X, float Y){
 }
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */                                                 
 void BacaLOCATION (LOCATION* p){
-    char* a;
+    char a;
     int x,y;
     scanf("%c", &a);
     while (getchar()!='\n' ){
@@ -26,20 +26,14 @@ void BacaLOCATION (LOCATION* p){
 
 void BacaLOCATIONfile (LOCATION* p)
 {
-    char* a;
-    float x,y;
+    char a;
+    int x,y;
     advWORDfile();
-    printf("%s\n", currentWordfile.contents);
-    a = currentWordfile.contents;
-    printf("%s\n", a);
+    a = currentWordfile.contents[0];
     advWORDfile();
-    printf("%s\n", currentWordfile.contents);
-    x = atof(currentWordfile.contents);
-    printf("%f\n", x);
+    x = atoi(currentWordfile.contents);
     advWORDfile();
-    printf("%s\n", currentWordfile.contents);
-    y = atof(currentWordfile.contents);
-    printf("%f\n", y);
+    y = atoi(currentWordfile.contents);
     *p = MakeLOCATION(a,x,y);
 }
 
@@ -47,10 +41,11 @@ void TulisLOCATION (LOCATION P){
     printf("%c (%.d,%d)", CHAR(P),LOC_X(P), LOC_Y(P));
 }           
 
-LOCATION* makeArrayOfLOCATION(int n){
+LOCATION* makeArrayOfLOCATION(int n, int i_headquarters, int j_headquarters){
     int i;
-    LOCATION *arrayOfLoc = malloc(sizeof(LOCATION)*n);
-    for(i=0;i<n;i++){
+    LOCATION *arrayOfLoc = malloc(sizeof(LOCATION)*(n+1));
+    arrayOfLoc[0] = MakeLOCATION('8', i_headquarters,j_headquarters);
+    for(i=1;i<n+1;i++){
             BacaLOCATIONfile(&arrayOfLoc[i]);
     } 
     return arrayOfLoc;
@@ -59,10 +54,12 @@ LOCATION* makeArrayOfLOCATION(int n){
 
 void displaylistLOCATION(LOCATION* arrayOfLoc, int L)
 {
+    printf("[");
     for (int i = 0; i < L; i++)
     {
-        printf("[");
-        printf("%s, (%f, %f)", CHAR(arrayOfLoc[i]), LOC_X(arrayOfLoc[i]), LOC_Y(arrayOfLoc[i]));
-        printf("]\n");
+        printf("%c(%i, %i) ,", CHAR(arrayOfLoc[i]), LOC_X(arrayOfLoc[i]), LOC_Y(arrayOfLoc[i]));
+        
     }
+    printf("%c(%i, %i)", CHAR(arrayOfLoc[L]), LOC_X(arrayOfLoc[L]), LOC_Y(arrayOfLoc[L]));
+    printf("]\n");
 }
