@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../ADT mesin karakter & kata/wordmachine.h"
-#include "../ADT mesin karakter & kata/wordmachine.c"
-#include "../ADT mesin karakter & kata/charmachine.h"
-#include "../ADT mesin karakter & kata/charmachine.c"
+#include "../ADT point/location.h"
+#include "../ADT point/location.c"
 
 
 Word kataNewGame = {"NEWGAME", 7};  Word kataExit = {"EXIT", 4};
@@ -68,7 +66,11 @@ int main()
             i_headquarters = atoi(currentWordfile.contents);
             advWORDfile();
             j_headquarters = atoi(currentWordfile.contents);
-            printf("%i %i %i %i", N, M, i_headquarters, j_headquarters);
+            advWORDfile();
+            L = atoi(currentWordfile.contents);
+            printf("%i %i %i %i %i \n",N,M,i_headquarters,j_headquarters,L);
+            LOCATION* arrayLoc = makeArrayOfLOCATION(L);
+            displaylistLOCATION(arrayLoc, L);
             printf("ENTER COMMAND : ");
             while (true)
             {
