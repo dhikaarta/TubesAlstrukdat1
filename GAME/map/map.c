@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../../ADT Point/location.h"
 #include "../../ADT matriks/matrix.c"
+// #include "../move/move.c"
 #include "../../boolean.h"
 
 // FUNCTION TAMBAHAN UNTUK GAME
@@ -40,6 +41,42 @@ void displayMAP(Matrix m)
     }   
 }
 
+// BELOM NERIMA PARAMETER TMPT PICK UP AND DROP OFF
+void displayMAPColor(Matrix m, LOCATION nobita, LOCATION* ArrayOfPosMoves, int nPossibleMoves)
+{   
+    int i,j;
+    for (i=0; i<ROWSMATRIX(m);i++){
+        for (j=0; j<COLSMATRIX(m);j++){
+            if (i!=0 && i != ROWSMATRIX(m)-1 &&j!=0 && j!=COLSMATRIX(m)-1 && ELMTMATRIX(m,i,j)!='\0'){
+                boolean bool = checkLocationInPossibleMoves(i, j, ArrayOfPosMoves, nPossibleMoves);
+                if (bool){
+                    print_green(ELMTMATRIX(m, i,j));
+                }
+                else if(LOC_X(nobita) == i && LOC_Y(nobita) == j){
+                    print_yellow(ELMTMATRIX(m, i,j));
+                }else{
+                    printf("%c",ELMTMATRIX(m, i,j));
+                }
+            }else{
+                if (i==0){
+                    printf("*");
+                }else if (i == ROWSMATRIX(m)-1){
+                    printf("*");
+                }else if (j==0){
+                    printf("*");
+                }else if (j==COLSMATRIX(m)-1){
+                    printf("*");
+                }else if (ELMTMATRIX(m,i,j)=='\0'){
+                    printf(" ");
+                }
+            }
+        }
+        if (i < getLastIdxRowMATRIX(m)){
+            printf("\n");
+        }
+    }   
+}
+
 void readMAPConfiguration(Matrix *m, LOCATION* tempat, int n){
     int indexArray;
     for(indexArray=0; indexArray<n;indexArray++){
@@ -53,5 +90,9 @@ void readMAPConfiguration(Matrix *m, LOCATION* tempat, int n){
 
 LOCATION getLocHQ(LOCATION *tempat ){
     return tempat[0];
+}
+
+LOCATION getLocKeX(LOCATION *tempat, int x){
+    return tempat[x];
 }
 
