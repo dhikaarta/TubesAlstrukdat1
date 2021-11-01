@@ -1,13 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../ADT list statis/listtask.h"
+#include "../GAME/map/map.c"
 #include "../ADT list statis/listtask.c"
+#include "../ADT list statis/listtask.h"
+#include "../GAME/pcolor/pcolor.c"
+#include "../GAME/help/help.c"
+
 
 
 Word kataNewGame = {"NEWGAME", 7};  Word kataExit = {"EXIT", 4};
 Word kataMove = {"MOVE", 4};    Word kataPickUp = {"PICK_UP", 7};    Word kataDropOff = {"DROP_OFF", 8};
 Word kataMap = {"MAP", 3};    Word kataToDo = {"TO_DO", 5};    Word kataInProgress = {"IN_PROGRESS", 11};
 Word kataBuy = {"BUY", 3};    Word kataInventory = {"INVENTORY", 9};    Word kataHelp = {"HELP", 4};
+
+LOCATION nobita; LOCATION pickUp; LOCATION dropOff;
 
 Word getInput()
 {
@@ -57,11 +63,20 @@ int main()
             j_headquarters = atoi(currentWordfile.contents);
             advWORDfile();
             L = atoi(currentWordfile.contents);
-            printf("%i %i %i %i %i \n",N,M,i_headquarters,j_headquarters,L);
+            
+            
             LOCATION* arrayLoc = makeArrayOfLOCATION(L,i_headquarters,j_headquarters);
             displaylistLOCATION(arrayLoc, L);
+            Matrix MAP;
+            CreateMAP(N,M,&MAP);
+            readMAPConfiguration(&MAP, arrayLoc, L);
+
+    
             Matrix Madj = makeMatrixAdj(L);
             displayMATRIX(Madj); printf("\n");
+            
+            nobita = getLocHQ(arrayLoc);
+
             advWORDfile();
             P = atoi(currentWordfile.contents);
             ListTASK lTask;
@@ -75,7 +90,32 @@ int main()
                 kataInput = getInput();
                 if (isKataEqual(kataInput,kataMove))
                 {
-                    printf("placeholder move \n");
+                    int i;
+                    int lokasiDipilih;
+                    do{
+                        int nPossibleMoves;
+                        LOCATION* arrayPosMove;
+                        arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
+                        printf("\nPosisi yang dapat dicapai:\n");
+                        for (i=0;i<nPossibleMoves;i++){
+                            printf("%d. %c (%d,%d)\n", i+1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
+                        }
+                        displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves);
+                        printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali) ");
+                        scanf("%d", &lokasiDipilih);
+                        LOCATION prevNobita = nobita;
+                        nobita = arrayPosMove[lokasiDipilih-1];
+                        
+            
+                        printf("\nMobita sekarang berada di titik ");
+
+                        if (lokasiDipilih==0){
+                            nobita = prevNobita;
+                        }
+                        TulisLOCATION(nobita);
+                        printf("!");
+                        printf("\n");
+                    }while (lokasiDipilih !=0 );
                 }
                 else if (isKataEqual(kataInput,kataPickUp))
                 {
@@ -107,7 +147,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput,kataHelp))
                 {
-                    printf("placeholder help\n");
+                   printHelp();
                 }
                 else
                 {

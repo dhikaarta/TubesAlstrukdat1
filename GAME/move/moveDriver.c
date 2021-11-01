@@ -5,13 +5,13 @@
 #include "../../ADT Point/point.h"
 #include "../map/map.c"
 #include "../../ADT Point/location.c"
-#include "../pcolor/pcolor.c"
+
 
 
 
 int main(){
     // INSIASI TEMPAT-TEMPAT
-    LOCATION* tempat;
+    LOCATION* tempat ;
     int N, M, x_hq, y_hq, nTempat;
     // SESUAI INPUTAN DI MAIN MENU
     N = 10;
