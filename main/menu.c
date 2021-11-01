@@ -94,8 +94,10 @@ int main()
             while (true)
             {
                 kataInput = getInput();
+
                 if (isKataEqual(kataInput,kataMove))
                 {
+                    printf("itu masuk sini \n");
                     int i;
                     // INISIASI LOKASI YANG AKAN DIPILIH
                     int lokasiDipilih;
@@ -117,17 +119,23 @@ int main()
                         printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali)\n");
                         printf("\n");
                         printf("ENTER COMMAND: ");
-                        scanf("%d", &lokasiDipilih);
+                        kataInput = getInput();
+                        lokasiDipilih = atoi(kataInput.contents);
 
                         printf("\nMobita sekarang berada di titik ");
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih!=0){
                             nobita = arrayPosMove[lokasiDipilih-1];
                         }
+                        else{
+                            nobita = nobita;
+                        }
                         TulisLOCATION(nobita);
                         printf("!");
                         printf("\n");
+                        printf("%i\n", lokasiDipilih);
                     }while (lokasiDipilih !=0 );
+                    printf("tes\n");
                 }
                 else if (isKataEqual(kataInput,kataPickUp))
                 {
