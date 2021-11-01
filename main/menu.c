@@ -64,17 +64,23 @@ int main()
             advWORDfile();
             L = atoi(currentWordfile.contents);
             
-            
+            // MEMBUAT ARRAY OF LOC UNTUK HEADQUARTERS DAN TITIK
             LOCATION* arrayLoc = makeArrayOfLOCATION(L,i_headquarters,j_headquarters);
+            // MENGETES ARRAY OF LOC
             displaylistLOCATION(arrayLoc, L);
+            // MENGINISIASI MAP BERTIPE MATRIX
             Matrix MAP;
+            // MEMBUAT MAP
             CreateMAP(N,M,&MAP);
+            // MEMBACA ELEMEN DARI MAP DENGAN MENANDAI TITIK TITIK YANG TELAH DIINPUT
             readMAPConfiguration(&MAP, arrayLoc, L);
 
-    
+            // MEMBUAT MATRIX ADJ
             Matrix Madj = makeMatrixAdj(L);
+            // MENAMPILAN MATRIX ADJ
             displayMATRIX(Madj); printf("\n");
             
+            // NOBITA PERTAMA KALI DI SET DI HEADQUARTERS
             nobita = getLocHQ(arrayLoc);
 
             advWORDfile();
@@ -91,23 +97,33 @@ int main()
                 if (isKataEqual(kataInput,kataMove))
                 {
                     int i;
+                    // INISIASI LOKASI YANG AKAN DIPILIH
                     int lokasiDipilih;
                     do{
+                        // INISIASI JUMLAH LOKASI YANG DAPAT DICAPAI
                         int nPossibleMoves;
+                        // MENGINISIASI ARRAY OF LOCATION DARI JUMLAH LOKASI YANG DAPAT DICAPAI
                         LOCATION* arrayPosMove;
+                        // MEMBUAT ARRAY OF LOCATION MANA SAJA YANG DAPAT DICAPAI
                         arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
                         printf("\nPosisi yang dapat dicapai:\n");
+                        // MENAMPILKAN KE USER AGAR DAPAT DIPILIH
                         for (i=0;i<nPossibleMoves;i++){
                             printf("%d. %c (%d,%d)\n", i+1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
                         }
+                        // MENAMPILKAN PETA DENGAN WARNA
                         displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves);
-                        printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali) ");
+                        // MENERIMA INPUTAN USER UNTUK LOKASI YANG DIPILIH
+                        printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali)\n");
+                        printf("\n");
+                        printf("ENTER COMMAND: ");
                         scanf("%d", &lokasiDipilih);
-                        LOCATION prevNobita = nobita;
-                        nobita = arrayPosMove[lokasiDipilih-1];
-                        
-            
+
                         printf("\nMobita sekarang berada di titik ");
+                        // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
+                        if (lokasiDipilih!=0){
+                            nobita = arrayPosMove[lokasiDipilih-1];
+                        }
                         TulisLOCATION(nobita);
                         printf("!");
                         printf("\n");
