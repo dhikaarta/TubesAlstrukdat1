@@ -108,10 +108,6 @@ int main()
                         
             
                         printf("\nMobita sekarang berada di titik ");
-
-                        if (lokasiDipilih==0){
-                            nobita = prevNobita;
-                        }
                         TulisLOCATION(nobita);
                         printf("!");
                         printf("\n");
@@ -127,7 +123,10 @@ int main()
                 }
                 else if (isKataEqual(kataInput,kataMap))
                 {
-                    printf("placeholder map\n");
+                    int nPossibleMoves;
+                    LOCATION* arrayPosMove;
+                    arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
+                    displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves);
                 }
                 else if (isKataEqual(kataInput,kataToDo))
                 {
@@ -151,8 +150,9 @@ int main()
                 }
                 else
                 {
-                    printf("command tidak valid ! kembali ke menu awal");
+                    printf("command tidak valid ! kembali ke menu awal\n");
                 }
+                printf("ENTER COMMAND : ");
                 
             }
         }
