@@ -1,5 +1,9 @@
 #include "list_linked.h"
 #include <stdio.h>
+#include "../ADT mesin karakter & kata/wordmachine.h"
+#include "../ADT mesin karakter & kata/wordmachine.c"
+#include "../ADT mesin karakter & kata/charmachine.h"
+#include "../ADT mesin karakter & kata/charmachine.c"
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
@@ -14,9 +18,9 @@ boolean isEmptyLINKEDLIST(List l){
     return (FIRST(l) == NULL); 
 }
 /****************** GETTER SETTER ******************/
-ElType getElmtLINKEDLIST(List l, int idx){
+ElTypeTASK getTASKLINKEDLIST(List l, int idx){
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
-/* F.S. Mengembalikan nilai elemen l pada indeks idx */
+/* F.S. Mengembalikan nilai pesanan l pada indeks idx */
 /* KAMUS LOKAL */
     Address p; 
     int ctr; 
@@ -30,9 +34,9 @@ ElType getElmtLINKEDLIST(List l, int idx){
     return (INFO(p));
 }
 
-void setElmtLINKEDLIST(List *l, int idx, ElType val){
+void setTASKLINKEDLIST(List *l, int idx, ElTypeTASK task){
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
-/* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
+/* F.S. Mengubah pesanan pada indeks ke-idx menjadi task */
 /* KAMUS LOKAL */
     Address p; 
     int ctr;
@@ -43,13 +47,13 @@ void setElmtLINKEDLIST(List *l, int idx, ElType val){
         ctr++;
         p = NEXT(p);
     } /* ctr = idx*/
-    INFO(p) = val;
+    INFO(p) = task;
 
 }
-int indexOfLINKEDLIST(List l, ElType val){
-/* I.S. l, val terdefinisi */
-/* F.S. Mencari apakah ada elemen list l yang bernilai val */
-/* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
+int indexOfLINKEDLIST(List l, ElTypeTASK task){
+/* I.S. l, task terdefinisi */
+/* F.S. Mencari apakah ada pesanan list l yang bernilai task */
+/* Jika ada, mengembalikan indeks pesanan pertama l yang bernilai task */
 /* Mengembalikan IDX_UNDEF jika tidak ditemukan */
 /* KAMUS LOKAL */
     Address p; 
@@ -60,7 +64,7 @@ int indexOfLINKEDLIST(List l, ElType val){
     idx = 0; 
     found = false;
     while ((p != NULL) && !found){
-        if (INFO(p) == val){
+        if (ITEMTASK(l) == ITEMTASK(l)){
             found = true;
         } else {
             idx++;
@@ -73,35 +77,52 @@ int indexOfLINKEDLIST(List l, ElType val){
         return IDX_UNDEF;
     }
 }
+void ReadLINKEDLISTTASKfile(List *l){
+/* BACA 1 pesanan TYPE DARI FILE */
+    ElTypeTASK task;
+    advWORDfile();
+    task.timeTASK = atoi(currentWordfile.contents);
+    advWORDfile();
+    task.pickUpTASK = currentWordfile.contents[0];
+    advWORDfile();
+    task.dropOffTASK = currentWordfile.contents[0];
+    advWORDfile();
+    task.itemTASK = currentWordfile.contents[0];
+    if (task.itemTASK == 'P') {
+        advWORDfile();
+        task.timeExpTASK = atoi(currentWordfile.contents);
+    }
+    insertLastLINKEDLIST(l, task);
+}
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
-/*** PENAMBAHAN ELEMEN ***/
-void insertFirstLINKEDLIST(List *l, ElType val){
+/*** PENAMBAHAN pesanan ***/
+void insertFirstLINKEDLIST(List *l, ElTypeTASK task){
 /* I.S. l mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
+/* F.S. Melakukan alokasi sebuah pesanan dan */
+/* menambahkan pesanan pertama dengan pesanan jika alokasi berhasil. */
 /* Jika alokasi gagal: I.S.= F.S. */
 /* KAMUS LOKAL */
     Address p; 
 /* ALGORITMA */ 
-    p = newNode(val);
+    p = newNode(task);
     if (p != NULL){
         NEXT(p) = *l; 
         *l = p; 
     }
 }
-void insertLastLINKEDLIST(List *l, ElType val){
+void insertLastLINKEDLIST(List *l, ElTypeTASK task){
 /* I.S. l mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen list di akhir: elemen terakhir yang baru */
-/* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+/* F.S. Melakukan alokasi sebuah pesanan dan */
+/* menambahkan pesanan list di akhir: pesanan terakhir yang baru */
+/* bernilai task jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 /* KAMUS LOKAL */
     Address p, last; 
 /* ALGORITMA */
     if (isEmptyLINKEDLIST(*l)){
-        insertFirstLINKEDLIST(l, val);
+        insertFirstLINKEDLIST(l, task);
     }
     else {
-        p = newNode(val);
+        p = newNode(task);
         if (p != NULL){
             last = *l; 
             while (NEXT(last) != NULL){
@@ -112,19 +133,19 @@ void insertLastLINKEDLIST(List *l, ElType val){
         }
     }
 }
-void insertAtLINKEDLIST(List *l, ElType val, int idx){
+void insertAtLINKEDLIST(List *l, ElTypeTASK task, int idx){
 /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
-/* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+/* F.S. Melakukan alokasi sebuah pesanan dan */
+/* menyisipkan pesanan dalam list pada indeks ke-idx (bukan menimpa pesanan di i) */
+/* yang bernilai task jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 /* KAMUS LOKAL */
     int ctr; 
     Address p, loc; 
 /* ALGORITMA */
     if (idx == 0){
-        insertFirstLINKEDLIST(l, val);
+        insertFirstLINKEDLIST(l, task);
     } else {
-        p = newNode(val);
+        p = newNode(task);
         ctr = 0;
         loc = *l; 
         while (ctr < idx-1) {
@@ -136,23 +157,23 @@ void insertAtLINKEDLIST(List *l, ElType val, int idx){
     }
 
 }
-/*** PENGHAPUSAN ELEMEN ***/
-void deleteFirstLINKEDLIST(List *l, ElType *val){
+/*** PENGHAPUSAN PESANAN ***/
+void deleteFirstLINKEDLIST(List *l, ElTypeTASK *task){
 /* I.S. List l tidak kosong  */
-/* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
-/*      dan alamat elemen pertama di-dealokasi */
+/* F.S. Pesanan pertama list dihapus: nilai info disimpan pada x */
+/*      dan alamat pesanan pertama di-dealokasi */
 /* KAMUS LOKAL */
     Address p; 
 /* ALGORITMA */   
     p = *l;
-    *val = INFO(p);
+    *task = INFO(p);
     *l = NEXT(p);
     free(p);
 }
-void deleteLastLINKEDLIST(List *l, ElType *val){
+void deleteLastLINKEDLIST(List *l, ElTypeTASK *task){
 /* I.S. list tidak kosong */
-/* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
-/*      dan alamat elemen terakhir di-dealokasi */
+/* F.S. Pesanan terakhir list dihapus: nilai info disimpan pada x */
+/*      dan alamat pesanan terakhir di-dealokasi */
 /* KAMUS LOKAL */
     Address p, loc; 
 /* ALGORITMA */
@@ -168,19 +189,19 @@ void deleteLastLINKEDLIST(List *l, ElType *val){
     else {
         NEXT(loc) = NULL;
     }
-    *val = INFO(p);
+    *task = INFO(p);
     free(p);
 }
-void deleteAtLINKEDLIST(List *l, int idx, ElType *val){
+void deleteAtLINKEDLIST(List *l, int idx, ElTypeTASK *task){
 /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
-/* F.S. val diset dengan elemen l pada indeks ke-idx. */
-/*      Elemen l pada indeks ke-idx dihapus dari l */
+/* F.S. task diset dengan pesanan l pada indeks ke-idx. */
+/*      Pesanan l pada indeks ke-idx dihapus dari l */
 /* KAMUS LOKAL */
     Address p, loc; 
     int ctr;
 /* ALGORITMA */
     if (idx == 0) {
-        deleteFirstLINKEDLIST(l, val);
+        deleteFirstLINKEDLIST(l, task);
     } else {
         ctr = 0; 
         loc = *l; 
@@ -189,36 +210,44 @@ void deleteAtLINKEDLIST(List *l, int idx, ElType *val){
             loc = NEXT(loc);
         } /* ctr = idx-1*/
         p = NEXT(loc);
-        *val = INFO(p);
+        *task = INFO(p);
         NEXT(loc) = NEXT(p); 
         free(p);
     }
 }
-/****************** PROSES SEMUA ELEMEN LIST ******************/
+/****************** PROSES SEMUA PESANAN LIST ******************/
 void displayLINKEDLIST(List l){
 // void printInfo(List l);
 /* I.S. List mungkin kosong */
-/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
+/* F.S. Jika list tidak kosong, isi list dicetak ke kanan: [e1,e2,...,en] */
+/* Contoh : jika ada tiga pesanan bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 /* KAMUS LOKAL */
     Address p; 
+    int i; 
 /* ALGORITMA */
     if (isEmptyLINKEDLIST(l)){
-        printf("[]");
+        printf("Tidak ada pesanan!");
     } else {
-        p = l;
-        printf("[");
-        while (NEXT(p) != NULL){
-            printf("%d,", INFO(p));
+        p = FIRST(l);
+        i = 0;
+        while (p != NULL){
+            printf("%d. Time Task = %d\n", i + 1, TIMETASK(p));
+            printf("   Pick Up Point = %c\n", PICKUPTASK(p));
+            printf("   Drop Off Point = %c\n", DROPOFFTASK(p));
+            printf("   Item Task = %c\n", ITEMTASK(p));
+            if (ITEMTASK(p) == 'P')
+            {
+                printf("   Expired Time = %d\n", TIMEEXPTASK(p));
+            }
+            i++;
             p = NEXT(p);
-        } /* NEXT(p) = NULL*/
-        printf("%d]", INFO(p));
+        } /* p = NULL*/
     }
 }
 int lengthLINKEDLIST(List l){
-/* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
+/* Mengirimkan banyaknya pesanan list; mengirimkan 0 jika list kosong */
 /* KAMUS LOKAL */
     Address p; 
     int ctr; 
@@ -239,7 +268,7 @@ List concatLINKEDLIST(List l1, List l2){
 /* I.S. l1 dan l2 sembarang */
 /* F.S. l3 adalah hasil konkatenasi l1 & l2 */
 /* Konkatenasi dua buah list : l1 dan l2    */
-/* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
+/* menghasilkan l3 yang baru (dengan pesanan list l1 dan l2 secara berurutan). */
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 /* KAMUS LOKAL */
     Address p; 

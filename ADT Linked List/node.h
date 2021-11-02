@@ -2,18 +2,17 @@
 #define NODE_H
 
 #include <stdlib.h>
-
-typedef int ElType;
+#include "../ADT List Statis/listtask.h"
 typedef struct node* Address;
 typedef struct node {
-    ElType info;
+    ElTypeTASK info;
     Address next;
 } Node;
 
 #define INFO(p) (p)->info
 #define NEXT(p) (p)->next
 
-Address newNode(ElType val);
+Address newNode(ElTypeTASK val);
 
 
 #endif
