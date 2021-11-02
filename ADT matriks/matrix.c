@@ -395,7 +395,6 @@ Matrix makeMatrixAdj(int L)
             advWORDfile();
             val = atoi(currentWordfile.contents);
             ELMTMATRIX(Madj,i,j) = val;
-            printf("%i\n",ELMTMATRIX(Madj,i,j));
         }
     }
    

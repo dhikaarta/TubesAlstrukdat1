@@ -26,24 +26,19 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
         displayLISTGADGETSTORE(listGadgetStore);
         printf("Gadget mana yang ingin dibeli? (ketik 0 jika ingin kembali)\n");
         int id;
-        printf("ENTER COMMAND: ");
+        printf("ENTER COMMAND (BUY): ");
         scanf("%d", &id);
-        while ((id < 0 || id > 4 || *money < listGadgetStore.contents[id - 1].priceGADGET) && id != 0)
-        {
-            if (id < 0 || id > 4)
-            {
-                printf("Input yang dimasukkan masih salah, coba lagi !!\n\n");
-            }
-            else if ((*money < listGadgetStore.contents[id - 1].priceGADGET))
-            {
-                printf("Uang tidak cukup untuk membeli gadget!\n\n");
-            }
-            printf("ENTER COMMAND: ");
-            scanf("%d", &id);
-        }
 
         // Update Inventory
-        if (id > 0)
+        if (id < 1 || id > 4)
+        {
+            printf("Input yang dimasukkan salah!!\n\n");
+        }
+        else if ((*money < listGadgetStore.contents[id - 1].priceGADGET))
+        {
+            printf("Uang tidak cukup untuk membeli gadget!\n\n");
+        }
+        else if (id > 0)
         {
             *money -= listGadgetStore.contents[id - 1].priceGADGET;
             insertLastLISTGADGET(listInventory, id, listGadgetStore.contents[id - 1].priceGADGET);
@@ -73,24 +68,19 @@ void useInventory(ListGADGET *listInventory)
     printf("\nGadget mana yang ingin digunakan? (Ketik 0 jika ingin kembali)\n");
     int idInventory, idGadget;
     displayLISTINVENTORY(*listInventory);
-    printf("\nENTER COMMAND: ");
+    printf("\nENTER COMMAND (Inventory): ");
     scanf("%d", &idInventory);
     // Asumsi input pengguna selalu benar
-    while (((*listInventory).contents[idInventory - 1].idGADGET == VAL_UNDEF || idInventory > 5) && idInventory != 0)
+    if (isEmptyLISTGADGET(*listInventory))
     {
-        printf("Tidak ada gadget yang dapat digunakan!!");
-        if (isEmptyLISTGADGET(*listInventory))
-        {
-            printf(" Anda tidak memiliki gadget apapun pada Inventory\n\n");
-            idInventory = 0;
-        }
-        else
-        {
-            printf(" Coba lagi..\n");
-            printf("\nENTER COMMAND: ");
-            scanf("%d", &idInventory);
-        }
+        printf("Tidak ada gadget yang dapat digunakan!! Anda tidak memiliki gadget apapun pada Inventory\n\n");
     }
+
+    else if ((*listInventory).contents[idInventory - 1].idGADGET == VAL_UNDEF)
+    {
+        printf("Tidak ada gadget yang dapat digunakan!!\n");
+    }
+
     if (idInventory > 0)
     {
         idGadget = (*listInventory).contents[idInventory - 1].idGADGET;

@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include "../../ADT Point/location.h"
 #include "../../ADT matriks/matrix.c"
-// #include "../move/move.c"
+#include "../move/move.c"
 #include "../../boolean.h"
+#include "../pcolor/pcolor.h"
 
 // FUNCTION TAMBAHAN UNTUK GAME
 void CreateMAP(int nRow, int nCol, Matrix *m)
