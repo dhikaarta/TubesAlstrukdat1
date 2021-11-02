@@ -5,15 +5,23 @@
 #include "../ADT list statis/listtask.h"
 #include "../GAME/pcolor/pcolor.c"
 #include "../GAME/help/help.c"
+#include "../GAME/gadget-inventory/gadgetInventory.h"
 
+Word kataNewGame = {"NEWGAME", 7};
+Word kataExit = {"EXIT", 4};
+Word kataMove = {"MOVE", 4};
+Word kataPickUp = {"PICK_UP", 7};
+Word kataDropOff = {"DROP_OFF", 8};
+Word kataMap = {"MAP", 3};
+Word kataToDo = {"TO_DO", 5};
+Word kataInProgress = {"IN_PROGRESS", 11};
+Word kataBuy = {"BUY", 3};
+Word kataInventory = {"INVENTORY", 9};
+Word kataHelp = {"HELP", 4};
 
-
-Word kataNewGame = {"NEWGAME", 7};  Word kataExit = {"EXIT", 4};
-Word kataMove = {"MOVE", 4};    Word kataPickUp = {"PICK_UP", 7};    Word kataDropOff = {"DROP_OFF", 8};
-Word kataMap = {"MAP", 3};    Word kataToDo = {"TO_DO", 5};    Word kataInProgress = {"IN_PROGRESS", 11};
-Word kataBuy = {"BUY", 3};    Word kataInventory = {"INVENTORY", 9};    Word kataHelp = {"HELP", 4};
-
-LOCATION nobita; LOCATION pickUp; LOCATION dropOff;
+LOCATION nobita;
+LOCATION pickUp;
+LOCATION dropOff;
 
 Word getInput()
 {
@@ -22,14 +30,14 @@ Word getInput()
     advWORD();
     while (!endWord)
     {
-            
-        for (int j = 0; j<currentWord.length; j++)
+
+        for (int j = 0; j < currentWord.length; j++)
         {
             kataInput.contents[j + kataInput.length] = currentWord.contents[j];
         }
         kataInput.length += currentWord.length;
         advWORD();
-     }
+    }
     return kataInput;
 }
 /* fungsi buat dapetin input dari user pake mesin kata*/
@@ -37,16 +45,15 @@ Word getInput()
 int main()
 {
     boolean flag = true;
-    int N,M,i_headquarters,j_headquarters,L,P;
+    int N, M, i_headquarters, j_headquarters, L, P;
 
     while (flag)
     {
-     
+
         printf("this is start\n");
         Word kataInput = getInput();
 
-
-        if(isKataEqual(kataInput, kataNewGame))
+        if (isKataEqual(kataInput, kataNewGame))
         {
             printf("Silahkan masukkan file konfigurasi : ");
             kataInput = getInput();
@@ -63,58 +70,69 @@ int main()
             j_headquarters = atoi(currentWordfile.contents);
             advWORDfile();
             L = atoi(currentWordfile.contents);
-            
+
             // MEMBUAT ARRAY OF LOC UNTUK HEADQUARTERS DAN TITIK
-            LOCATION* arrayLoc = makeArrayOfLOCATION(L,i_headquarters,j_headquarters);
+            LOCATION *arrayLoc = makeArrayOfLOCATION(L, i_headquarters, j_headquarters);
             // MENGETES ARRAY OF LOC
             displaylistLOCATION(arrayLoc, L);
             // MENGINISIASI MAP BERTIPE MATRIX
             Matrix MAP;
             // MEMBUAT MAP
-            CreateMAP(N,M,&MAP);
+            CreateMAP(N, M, &MAP);
             // MEMBACA ELEMEN DARI MAP DENGAN MENANDAI TITIK TITIK YANG TELAH DIINPUT
             readMAPConfiguration(&MAP, arrayLoc, L);
 
             // MEMBUAT MATRIX ADJ
             Matrix Madj = makeMatrixAdj(L);
             // MENAMPILAN MATRIX ADJ
-            displayMATRIX(Madj); printf("\n");
-            
+            displayMATRIX(Madj);
+            printf("\n");
+
             // NOBITA PERTAMA KALI DI SET DI HEADQUARTERS
             nobita = getLocHQ(arrayLoc);
 
+            // Untuk List Task
             advWORDfile();
             P = atoi(currentWordfile.contents);
             ListTASK lTask;
-            ReadLISTTASKfile(&lTask,P);
+            ReadLISTTASKfile(&lTask, P);
             lTask = sortLISTTASK(lTask);
-            displayLISTTASK(lTask); printf("\n");
+            displayLISTTASK(lTask);
+            printf("\n");
+
+            // Untuk inisialisasi GADGET dan INVENTORY
+            long money = 20000;
+            ListGADGET listGadgetStore = initialGadgetStore();
+            ListGADGET listInventory;
+            CreateLISTGADGET(&listInventory);
 
             printf("ENTER COMMAND : ");
             while (true)
             {
                 kataInput = getInput();
 
-                if (isKataEqual(kataInput,kataMove))
+                if (isKataEqual(kataInput, kataMove))
                 {
                     printf("itu masuk sini \n");
                     int i;
                     // INISIASI LOKASI YANG AKAN DIPILIH
                     int lokasiDipilih;
-                    do{
+                    do
+                    {
                         // INISIASI JUMLAH LOKASI YANG DAPAT DICAPAI
                         int nPossibleMoves;
                         // MENGINISIASI ARRAY OF LOCATION DARI JUMLAH LOKASI YANG DAPAT DICAPAI
-                        LOCATION* arrayPosMove;
+                        LOCATION *arrayPosMove;
                         // MEMBUAT ARRAY OF LOCATION MANA SAJA YANG DAPAT DICAPAI
                         arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
                         printf("\nPosisi yang dapat dicapai:\n");
                         // MENAMPILKAN KE USER AGAR DAPAT DIPILIH
-                        for (i=0;i<nPossibleMoves;i++){
-                            printf("%d. %c (%d,%d)\n", i+1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
+                        for (i = 0; i < nPossibleMoves; i++)
+                        {
+                            printf("%d. %c (%d,%d)\n", i + 1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
                         }
                         // MENAMPILKAN PETA DENGAN WARNA
-                        displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves);
+                        displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves);
                         // MENERIMA INPUTAN USER UNTUK LOKASI YANG DIPILIH
                         printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali)\n");
                         printf("\n");
@@ -124,63 +142,66 @@ int main()
 
                         printf("\nMobita sekarang berada di titik ");
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
-                        if (lokasiDipilih!=0){
-                            nobita = arrayPosMove[lokasiDipilih-1];
+                        if (lokasiDipilih != 0)
+                        {
+                            nobita = arrayPosMove[lokasiDipilih - 1];
                         }
-                        else{
+                        else
+                        {
                             nobita = nobita;
                         }
                         TulisLOCATION(nobita);
                         printf("!");
                         printf("\n");
                         printf("%i\n", lokasiDipilih);
-                    }while (lokasiDipilih !=0 );
+                    } while (lokasiDipilih != 0);
                     printf("tes\n");
                 }
-                else if (isKataEqual(kataInput,kataPickUp))
+                else if (isKataEqual(kataInput, kataPickUp))
                 {
                     printf("placeholder pick up\n");
                 }
-                else if (isKataEqual(kataInput,kataDropOff))
+                else if (isKataEqual(kataInput, kataDropOff))
                 {
                     printf("placeholder drop off\n");
                 }
-                else if (isKataEqual(kataInput,kataMap))
+                else if (isKataEqual(kataInput, kataMap))
                 {
                     int nPossibleMoves;
-                    LOCATION* arrayPosMove;
+                    LOCATION *arrayPosMove;
                     arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
-                    displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves);
+                    displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves);
                 }
-                else if (isKataEqual(kataInput,kataToDo))
+                else if (isKataEqual(kataInput, kataToDo))
                 {
                     printf("placeholder todo\n");
                 }
-                else if (isKataEqual(kataInput,kataInProgress))
+                else if (isKataEqual(kataInput, kataInProgress))
                 {
                     printf("placeholder in progress\n");
                 }
-                else if (isKataEqual(kataInput,kataBuy))
+                else if (isKataEqual(kataInput, kataBuy))
                 {
                     printf("placeholder buy\n");
+                    gadgetStore(listGadgetStore, &listInventory, &money);
                 }
-                else if (isKataEqual(kataInput,kataInventory))
+                else if (isKataEqual(kataInput, kataInventory))
                 {
                     printf("placeholder inventory\n");
+                    useInventory(&listInventory);
                 }
-                else if (isKataEqual(kataInput,kataHelp))
+                else if (isKataEqual(kataInput, kataHelp))
                 {
-                   printHelp();
+                    printHelp();
                 }
                 else
                 {
                     printf("command tidak valid ! kembali ke menu awal\n");
                 }
                 printf("ENTER COMMAND : ");
-                
             }
         }
-        else if(isKataEqual(kataInput, kataExit))
+        else if (isKataEqual(kataInput, kataExit))
         {
             printf("EXIT GAME");
             flag = false;
