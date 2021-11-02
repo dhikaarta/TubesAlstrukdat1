@@ -39,7 +39,8 @@ int LengthQUEUETASK(QueueTASK qt){
 }
 
 void ReadQUEUETASK(QueueTASK *qt, int nTask){
-    for (int i = 0; i < nTask; i++)
+    int i;
+    for (i = 0; i < nTask; i++)
     {
         ElTypeTASK task;
         scanf("%d %c %c %c", &(task.timeTASK), &(task.pickUpTASK), &(task.dropOffTASK), &(task.itemTASK));
@@ -102,7 +103,8 @@ void displayQUEUETASK(QueueTASK qt){
     if (IsEmptyQUEUETASK(qt)) {
         printf("Tidak ada pesanan");
     } else {
-        for (int i = IDX_HEAD_QUEUETASK(qt); i <= IDX_TAIL_QUEUETASK(qt)+1; i++) {
+        int i;
+        for (i = IDX_HEAD_QUEUETASK(qt); i <= IDX_TAIL_QUEUETASK(qt); i++) {
             ElTypeTASK task; 
             DequeueQUEUETASK(&qt, &task);
             printf("%d. Time Task = %d\n", i + 1, task.timeTASK);
