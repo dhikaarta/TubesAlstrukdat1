@@ -8,7 +8,7 @@ void timeInitial(TIME *t)
     (*t).incTime = 0.5;
 }
 
-void updateTimeToDoList(ListTASK *l, TIME *t)
+void updateTimeToDoList(ListTASK *l, TIME *t, List *LinkedToDoList)
 {
     (*t).currentTime = (*t).currentTime + (*t).incTime;
 
@@ -16,7 +16,7 @@ void updateTimeToDoList(ListTASK *l, TIME *t)
     {
         ElTypeTASK val;
         deleteAtLISTTASK(l, &val, 0);
-        // insertLast ke linked list to-do-list
+        insertLastLINKEDLIST(LinkedToDoList, val);
     }
 }
 

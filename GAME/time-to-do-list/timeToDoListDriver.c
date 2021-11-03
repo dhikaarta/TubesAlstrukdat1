@@ -4,12 +4,16 @@
 
 int main()
 {
-    // Di Mainn
+    // Di Mainn (ini udah sama dhika)
     ListTASK l, l2;
     CreateLISTTASK(&l);
     CreateLISTTASK(&l2);
     ReadLISTTASK(&l);
     l2 = sortLISTTASK(l);
+
+    // Inisialisasi di MAIN
+    List LinkedToDoList;
+    CreateLINKEDLIST(&LinkedToDoList);
 
     // TIME
     TIME time;
@@ -17,18 +21,10 @@ int main()
     long money = 20;
 
     // Setiap melakukan MOVE:
-    updateTimeToDoList(&l2, &time);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
     displayCurrentTimeAndMoney(time, money);
-    updateTimeToDoList(&l2, &time);
-    displayCurrentTimeAndMoney(time, money);
-    updateTimeToDoList(&l2, &time);
-    displayCurrentTimeAndMoney(time, money);
-    updateTimeToDoList(&l2, &time);
-    displayCurrentTimeAndMoney(time, money);
-    updateTimeToDoList(&l2, &time);
-    displayCurrentTimeAndMoney(time, money);
-    updateTimeToDoList(&l2, &time);
-    displayCurrentTimeAndMoney(time, money);
+    displayLINKEDLIST(LinkedToDoList);
+
     //displayCurrentTimeAndMoney(time, money);
 
     return 0;
