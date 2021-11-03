@@ -1,9 +1,5 @@
 #include "list_linked.h"
 #include <stdio.h>
-#include "../ADT mesin karakter & kata/wordmachine.h"
-#include "../ADT mesin karakter & kata/wordmachine.c"
-#include "../ADT mesin karakter & kata/charmachine.h"
-#include "../ADT mesin karakter & kata/charmachine.c"
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
@@ -64,7 +60,7 @@ int indexOfLINKEDLIST(List l, ElTypeTASK task){
     idx = 0; 
     found = false;
     while ((p != NULL) && !found){
-        if (ITEMTASK(l) == ITEMTASK(l)){
+        if (TIMETASK(l) == task.timeTASK && PICKUPTASK(l) == task.pickUpTASK && DROPOFFTASK(l) == task.dropOffTASK && ITEMTASK(l) == task.itemTASK && TIMEEXPTASK(l) == task.timeExpTASK){
             found = true;
         } else {
             idx++;
