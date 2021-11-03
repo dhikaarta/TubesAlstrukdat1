@@ -4,10 +4,10 @@
 #include "node.h"
 #include <stdlib.h>
 
-Address newNode(ElType val) {
+Address newNode(ElTypeTASK task) {
     Address p = (Address) malloc(sizeof(Node));
     if (p!=NULL) {
-        INFO(p) = val;
+        INFO(p) = task;
         NEXT(p) = NULL;
     }
     return p;

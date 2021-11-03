@@ -7,6 +7,7 @@
         "listgadget.h": "c",
         "listtask.h": "c",
         "time-to-do-list.h": "c",
-        "timetodolist.h": "c"
+        "timetodolist.h": "c",
+        "list_linked.h": "c"
     }
 }
