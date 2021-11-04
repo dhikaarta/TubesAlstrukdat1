@@ -5,7 +5,7 @@
 void timeInitial(TIME *t)
 {
     (*t).currentTime = 0;
-    (*t).incTime = 0.5;
+    (*t).incTime = 1;
 }
 
 void updateTimeToDoList(ListTASK *l, TIME *t, List *LinkedToDoList)

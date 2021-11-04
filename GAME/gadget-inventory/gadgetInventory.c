@@ -50,16 +50,23 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
         Word kataInput = dapetInput();
         id = atoi(kataInput.contents);
 
+        while ((id < 0 || id > 4 || *money < listGadgetStore.contents[id - 1].priceGADGET) && id != 0)
+        {
+            if (id < 0 || id > 4)
+            {
+                printf("Input yang dimasukkan masih salah, coba lagi !!\n\n");
+            }
+            else if ((*money < listGadgetStore.contents[id - 1].priceGADGET))
+            {
+                printf("Uang tidak cukup untuk membeli gadget!\n\n");
+            }
+            printf("ENTER COMMAND (BUY): ");
+            Word kataInput = dapetInput();
+            id = atoi(kataInput.contents);
+        }
+
         // Update Inventory
-        if (id < 1 || id > 4)
-        {
-            printf("Input yang dimasukkan salah!!\n\n");
-        }
-        else if ((*money < listGadgetStore.contents[id - 1].priceGADGET))
-        {
-            printf("Uang tidak cukup untuk membeli gadget!\n\n");
-        }
-        else if (id > 0)
+        if (id > 0)
         {
             *money -= listGadgetStore.contents[id - 1].priceGADGET;
             insertLastLISTGADGET(listInventory, id, listGadgetStore.contents[id - 1].priceGADGET);
@@ -92,17 +99,24 @@ void useInventory(ListGADGET *listInventory)
     printf("\nENTER COMMAND (Inventory): ");
     Word kataInput = dapetInput();
     idInventory = atoi(kataInput.contents);
+
     // Asumsi input pengguna selalu benar
-    if (isEmptyLISTGADGET(*listInventory))
+    while (((*listInventory).contents[idInventory - 1].idGADGET == VAL_UNDEF || idInventory > 5) && idInventory != 0)
     {
-        printf("Tidak ada gadget yang dapat digunakan!! Anda tidak memiliki gadget apapun pada Inventory\n\n");
+        printf("Tidak ada gadget yang dapat digunakan!!");
+        if (isEmptyLISTGADGET(*listInventory))
+        {
+            printf(" Anda tidak memiliki gadget apapun pada Inventory\n\n");
+            idInventory = 0;
+        }
+        else
+        {
+            printf(" Coba lagi..\n");
+            printf("\nENTER COMMAND (Inventory): ");
+            Word kataInput = dapetInput();
+            idInventory = atoi(kataInput.contents);
+        }
     }
-
-    else if ((*listInventory).contents[idInventory - 1].idGADGET == VAL_UNDEF)
-    {
-        printf("Tidak ada gadget yang dapat digunakan!!\n");
-    }
-
     if (idInventory > 0)
     {
         idGadget = (*listInventory).contents[idInventory - 1].idGADGET;

@@ -22,6 +22,8 @@ int main()
 
     // Setiap melakukan MOVE:
     updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
     displayCurrentTimeAndMoney(time, money);
     displayLINKEDLIST(LinkedToDoList);
 

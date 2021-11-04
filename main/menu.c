@@ -182,12 +182,10 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataBuy))
                 {
-                    printf("placeholder buy\n");
                     gadgetStore(listGadgetStore, &listInventory, &money);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
-                    printf("placeholder inventory\n");
                     useInventory(&listInventory);
                 }
                 else if (isKataEqual(kataInput, kataHelp))
