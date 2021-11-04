@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "listtask.h"
 #include "../ADT matriks/matrix.h"
+#include "../ADT mesin karakter & kata/wordmachine.h"
 //#include "../ADT matriks/matrix.c"
 
 /* ********** KONSTRUKTOR ********** */

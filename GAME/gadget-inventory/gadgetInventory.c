@@ -1,6 +1,26 @@
 #include "gadgetInventory.h"
+#include "../../ADT mesin karakter & kata/charmachine.h"
+#include "../../ADT mesin karakter & kata/wordmachine.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+Word dapetInput()
+{
+    startWORD();
+    Word kataInput = currentWord;
+    advWORD();
+    while (!endWord)
+    {
+
+        for (int j = 0; j < currentWord.length; j++)
+        {
+            kataInput.contents[j + kataInput.length] = currentWord.contents[j];
+        }
+        kataInput.length += currentWord.length;
+        advWORD();
+    }
+    return kataInput;
+}
 
 ListGADGET initialGadgetStore()
 {
@@ -27,7 +47,8 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
         printf("Gadget mana yang ingin dibeli? (ketik 0 jika ingin kembali)\n");
         int id;
         printf("ENTER COMMAND (BUY): ");
-        scanf("%d", &id);
+        Word kataInput = dapetInput();
+        id = atoi(kataInput.contents);
 
         // Update Inventory
         if (id < 1 || id > 4)
@@ -69,7 +90,8 @@ void useInventory(ListGADGET *listInventory)
     int idInventory, idGadget;
     displayLISTINVENTORY(*listInventory);
     printf("\nENTER COMMAND (Inventory): ");
-    scanf("%d", &idInventory);
+    Word kataInput = dapetInput();
+    idInventory = atoi(kataInput.contents);
     // Asumsi input pengguna selalu benar
     if (isEmptyLISTGADGET(*listInventory))
     {

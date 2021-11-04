@@ -8,6 +8,7 @@
         "listtask.h": "c",
         "time-to-do-list.h": "c",
         "timetodolist.h": "c",
-        "list_linked.h": "c"
+        "list_linked.h": "c",
+        "charmachine.h": "c"
     }
 }
