@@ -6,7 +6,7 @@ void KainPembungkusWaktu(Stack b) {
   int i, idx;
   boolean found = false;
   for (i = IDX_TOP_STACK(b); i >= 0; i++) {
-    if (b.buffer[i].itemTASK == 'H') {
+    if (b.buffer[i].itemTASK == 'P') {
       found = true;
       idx = i;
       break;
@@ -24,6 +24,7 @@ void SenterPembesar(Stack *b) {
 }
 
 void PintuKemanaSaja(TIME *t) {
+  // Kondisi move ke lokasi tertentu
   (*t).incTime = 0;
 }
 
