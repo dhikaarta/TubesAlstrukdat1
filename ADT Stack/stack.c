@@ -5,7 +5,9 @@
 /* *** Konstruktor/Kreator *** */
 void CreateSTACK(Stack *s)
 {
+    CURRENT_CAP_STACK(*s) = 3;
     IDX_TOP_STACK(*s) = IDX_UNDEF;
+    
 }
 
 /* ************ Prototype ************ */
@@ -16,11 +18,11 @@ boolean IsEmptySTACK(Stack s)
 
 boolean IsFullSTACK(Stack s)
 {
-    return IDX_TOP_STACK(s) == CAPACITY_STACK - 1;
+    return IDX_TOP_STACK(s) == CURRENT_CAP_STACK(s) - 1;
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void PushSTACK(Stack *s, ElType val)
+void PushSTACK(Stack *s, ElTypeTASK task)
 {
     if (IsEmptySTACK(*s))
     {
@@ -31,13 +33,13 @@ void PushSTACK(Stack *s, ElType val)
         IDX_TOP_STACK(*s)
         ++;
     }
-    TOP_STACK(*s) = val;
+    TOP_STACK(*s) = task;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void PopSTACK(Stack *s, ElType *val)
+void PopSTACK(Stack *s, ElTypeTASK *task)
 {
-    *val = TOP_STACK(*s);
+    *task = TOP_STACK(*s);
     if (IDX_TOP_STACK(*s) == 0)
     {
         IDX_TOP_STACK(*s) = IDX_UNDEF;

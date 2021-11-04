@@ -6,18 +6,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../boolean.h"
-
+#include "../ADT List Statis/listtask.h"
 /* KAMUS UMUM */
 #define IDX_UNDEF -1
 #define VAL_UNDEF -999
 /* Definisi tipe elemen pesanan */
-typedef struct {
-    int timeTASK;
-    char pickUpTASK;
-    char dropOffTASK;
-    char itemTASK;
-    int timeExpTASK;
-} ElTypeTASK;
+
 
 /* Definisi Queue Task (Dinamis) */
 typedef struct {
