@@ -12,7 +12,7 @@ void processMoneyDropOff(ElTypeTASK task, long *money){
 }
 
 
-void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, ListTASK *todo, long *money){
+void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo, long *money){
     if (TOP_STACK(*bag).dropOffTASK != currentloc.A){
         printf("Tidak ada pesanan untuk di drop off!");
     } else {
@@ -21,18 +21,23 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, ListTASK *
         int i; 
         i = indexOfLINKEDLIST(*in_progress, taskdone);
         deleteAtLINKEDLIST(in_progress, i, &taskdone);
+
+        Address p;
         int j;
-        j = 0; 
+        p = FIRST(*todo); 
+        j = 0;
         boolean found;
         found = false; 
-        while (j < lengthLISTTASK(*todo) && !found){
-            if (todo->contents[j].dropOffTASK == currentloc.A) {
+        while (p != NULL && !found){
+            if (INFO(*todo).dropOffTASK == currentloc.A) {
                 found = true;
             } else {
+                p = NEXT(p);
                 j++;
             }
         }
-        deleteAtLISTTASK(todo, &taskdone, j);
+
+        deleteAtLINKEDLIST(todo, j, &taskdone);
         printf("%d", taskdone.timeTASK);
         processMoneyDropOff(taskdone, money);
     }
