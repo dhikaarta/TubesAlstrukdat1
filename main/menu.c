@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../GAME/map/map.c"
-#include "../ADT list statis/listtask.c"
 #include "../ADT list statis/listtask.h"
 #include "../GAME/pcolor/pcolor.c"
 #include "../GAME/help/help.c"
 #include "../GAME/gadget-inventory/gadgetInventory.h"
+#include "../GAME/time-to-do-list/timeToDoList.h"
+#include "../GAME/in_progress/in_progress.h"
+#include "../GAME/pickup/pickup.h"
+#include "../GAME/dropoff/dropoff.h"
+
 
 Word kataNewGame = {"NEWGAME", 7};
 Word kataExit = {"EXIT", 4};
@@ -105,11 +109,31 @@ int main()
             ListGADGET listGadgetStore = initialGadgetStore();
             ListGADGET listInventory;
             CreateLISTGADGET(&listInventory);
+            
+            //Inisialisasi ToDoList
+            List LinkedToDoList;
+            CreateLINKEDLIST(&LinkedToDoList);
+            List inProgressList;
+            CreateLINKEDLIST(&inProgressList);
+            
+            // Inisialisasi waktu
+            TIME time;
+            timeInitial(&time);
+
+            // Inisialisasi Tas
+            Stack b;
+            CreateBAG(&b);
+            
+            int successfulDropOff = 0;
 
             printf("ENTER COMMAND : ");
             while (true)
             {
                 kataInput = getInput();
+                printf("Mobita berada di posisi ");
+                TulisLOCATION(nobita);printf("\n");
+                printf("Waktu: %f\n", time.currentTime);
+                printf("Uang yang dimiliki : %lu Yen\n ",money);
 
                 if (isKataEqual(kataInput, kataMove))
                 {
@@ -119,6 +143,9 @@ int main()
                     int lokasiDipilih;
                     do
                     {
+                        //updateisi todolist
+                        updateTimeToDoList(&lTask, &time, &LinkedToDoList);
+                        
                         // INISIASI JUMLAH LOKASI YANG DAPAT DICAPAI
                         int nPossibleMoves;
                         // MENGINISIASI ARRAY OF LOCATION DARI JUMLAH LOKASI YANG DAPAT DICAPAI
@@ -144,6 +171,7 @@ int main()
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
+                            time.incTime = 1;
                             nobita = arrayPosMove[lokasiDipilih - 1];
                         }
                         else
@@ -154,16 +182,18 @@ int main()
                         printf("!");
                         printf("\n");
                         printf("%i\n", lokasiDipilih);
+
                     } while (lokasiDipilih != 0);
                     printf("tes\n");
                 }
                 else if (isKataEqual(kataInput, kataPickUp))
                 {
-                    printf("placeholder pick up\n");
+                    pickUpAtloc(nobita,&b, &inProgressList, LinkedToDoList);
                 }
                 else if (isKataEqual(kataInput, kataDropOff))
                 {
-                    printf("placeholder drop off\n");
+                    dropOffAtloc(nobita,&b,&inProgressList,&LinkedToDoList,&money);
+                    
                 }
                 else if (isKataEqual(kataInput, kataMap))
                 {
@@ -174,11 +204,11 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataToDo))
                 {
-                    printf("placeholder todo\n");
+                    displayLINKEDLIST(LinkedToDoList);
                 }
                 else if (isKataEqual(kataInput, kataInProgress))
                 {
-                    printf("placeholder in progress\n");
+                    displayInProgress(LinkedToDoList);
                 }
                 else if (isKataEqual(kataInput, kataBuy))
                 {
@@ -186,11 +216,18 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
-                    useInventory(&listInventory);
+                    useInventory(&listInventory,&b,&time);
                 }
                 else if (isKataEqual(kataInput, kataHelp))
                 {
                     printHelp();
+                }
+                else if(isEmptyLISTTASK(lTask) && isEmptyLINKEDLIST(LinkedToDoList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                {
+                    printf("Game Selesai !\n");
+                    printf("Waktu yang dilampaui : %i\n", time);
+
+                    break;
                 }
                 else
                 {

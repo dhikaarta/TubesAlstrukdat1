@@ -1,6 +1,7 @@
 #include "gadgetInventory.h"
 #include "../../ADT mesin karakter & kata/charmachine.h"
 #include "../../ADT mesin karakter & kata/wordmachine.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -91,7 +92,7 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
     }
 }
 
-void useInventory(ListGADGET *listInventory)
+void useInventory(ListGADGET *listInventory, Stack *b,TIME *t)
 {
     printf("\nGadget mana yang ingin digunakan? (Ketik 0 jika ingin kembali)\n");
     int idInventory, idGadget;
@@ -123,21 +124,25 @@ void useInventory(ListGADGET *listInventory)
         deleteLISTGADGET(listInventory, idInventory);
         if (idGadget == 1)
         {
+            KainPembungkusWaktu(b);
             printf("Kain Pembungkus Waktu berhasil digunakan!!\n\n");
             /* Fungsi aktivasi Kain Pembungkus Waktu */
         }
         else if (idGadget == 2)
         {
+            SenterPembesar(b);
             printf("Senter Pembesar berhasil digunakan!!\n\n");
             /* Fungsi aktivasi Senter Pembesar */
         }
         else if (idGadget == 3)
         {
+            MesinWaktu(t);
             printf("Pintu Kemana Saja berhasil digunakan!!\n\n");
             /* Fungsi aktivasi Pintu Kemana Saja */
         }
         else if (idGadget == 4)
         {
+            MesinWaktu(t);
             printf("Mesin Waktu berhasil digunakan!!\n\n");
             /* Fungsi aktivasi Mesin Waktu */
         }

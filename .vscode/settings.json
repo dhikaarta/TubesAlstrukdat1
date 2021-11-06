@@ -9,6 +9,9 @@
         "time-to-do-list.h": "c",
         "timetodolist.h": "c",
         "list_linked.h": "c",
-        "charmachine.h": "c"
+        "charmachine.h": "c",
+        "in_progress.h": "c",
+        "pickup.h": "c",
+        "dropoff.h": "c"
     }
 }

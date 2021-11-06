@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "gadget.h"
 
-void KainPembungkusWaktu(Stack b) {
+void KainPembungkusWaktu(Stack *b) {
   int i, idx;
   boolean found = false;
-  for (i = IDX_TOP_STACK(b); i >= 0; i--) {
-    if (b.buffer[i].itemTASK == 'P') {
+  for (i = IDX_TOP_STACK(*b); i >= 0; i--) {
+    if ((*b).buffer[i].itemTASK == 'P') {
       found = true;
       idx = i;
       break;
@@ -14,7 +14,7 @@ void KainPembungkusWaktu(Stack b) {
   }
   if (found == true) {
     // Mengembalikan time perishable item ke waktu semula
-    b.buffer[idx].timeExpTASK = b.buffer[idx].initTimeExpTASK;
+    (*b).buffer[idx].timeExpTASK = (*b).buffer[idx].initTimeExpTASK;
   }
 }
 

@@ -3,6 +3,7 @@
 #define GADGET_INVENTORY_H
 
 #include "../../ADT List Statis/listgadget.h"
+#include "../gadget/gadget.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -20,7 +21,7 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
    F.S. listInventory dapat bertambah satu elemen atau tidak
         Jumlah money akan berkurang sesuai dengan harga gadget yang dibeli*/
 
-void useInventory(ListGADGET *listInventory);
+void useInventory(ListGADGET *listInventory, Stack *b,TIME *t);
 /* Proses: Menampilkan inventory user dari listInventory
            Meminta pengguna memasukkan id Inventory yang ingin digunakan sesuai
            ketentuan (id Inventory harus berisi gadget)

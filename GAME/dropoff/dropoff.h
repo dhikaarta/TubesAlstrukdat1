@@ -1,11 +1,10 @@
-#ifndef PICKUP_H
-#define PICKUP_H
+#ifndef DROPOFF_H
+#define DROPOFF_H
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../ADT Point/location.h"
 #include "../../ADT Stack/bag.h"
 #include "../../ADT Linked List/list_linked.h"
-#include "dropoff.h"
 
 
 void processMoneyDropOff(ElTypeTASK task, long *money);

@@ -1,6 +1,6 @@
 #include "bag.h"
-#include "stack.c"
-#include "../ADT List Statis/listtask.c"
+#include "stack.h"
+#include "../ADT List Statis/listtask.h"
 
 void CreateBAG(Stack *bag){
     CreateSTACK(bag);

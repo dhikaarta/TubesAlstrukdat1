@@ -6,7 +6,7 @@ void displayInProgress(List in_progress)
 {
     if (isEmptyLINKEDLIST(in_progress))
     {
-        printf("Nothing in In Progress List");
+        printf("Nothing in In Progress List\n");
     } 
     else 
     {

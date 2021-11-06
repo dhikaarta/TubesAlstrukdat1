@@ -6,7 +6,7 @@
 #include "../time-to-do-list/timeToDoList.h"
 
 /* Waktu dari perishable item teratas dalam tas kembali ke durasi semula */
-void KainPembungkusWaktu(Stack b);
+void KainPembungkusWaktu(Stack *b);
 /* Memperbesar kapasitas tas menjadi dua kali lipat, tidak melebihi batas maksimum
 kapasitas tas */
 /*

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dropoff.h"
-#include "../pickup/pickup.c"
+#include "../pickup/pickup.h"
 
 void processMoneyDropOff(ElTypeTASK task, long *money){
     if (task.itemTASK == 'N'){
