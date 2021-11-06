@@ -7,7 +7,7 @@
 #include "../../ADT Linked List/list_linked.h"
 
 
-void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, ListTASK todo);
+void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List todo);
 /* Prosedur mengambil pesanan pada currentloc, update in_progress list dan update bag*/
 /* I.S. bebas */
 /* F.S. Jika tas penuh atau tidak ada pesanan maka akan menampilkan pesan

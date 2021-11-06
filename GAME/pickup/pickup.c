@@ -4,30 +4,30 @@
 #include "../../ADT Stack/bag.c"
 #include "../../ADT Linked List/list_linked.c"
 #include "../../ADT Linked List/node.c"
-
-void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, ListTASK todo){
+#include "../../ADT point/location.c"
+void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List todo){
     /* KAMUS LOKAL */ 
-    int i;
+    Address p; 
     boolean found;
     /* ALGORITMA */
     
     if (IsFullSTACK(*bag)){ /* Tas sudah penuh maka pesanan tidak masuk ke dalam tas */
         printf("Tas sudah penuh. Tidak dapat pickup pesanan lagi\n");
     } else { /* Search apakah ada pesanan dalam qt dengan pickup location currentloc */
-        i = 0;
+        p = FIRST(todo);
         found = false; 
-        while (i < lengthLISTTASK(todo) && !found){
-            if (todo.contents[i].pickUpTASK == currentloc.A) {
+        while (p != NULL && !found){
+            if (INFO(todo).pickUpTASK == currentloc.A) {
                 found = true; 
             } else {
-                i++;
+                p = NEXT(p);
             }
         } 
         if (!found) {
             printf("Tidak ada pesanan pada lokasi");
         } else {
             ElTypeTASK newtask; 
-            newtask = todo.contents[i];
+            newtask = INFO(p);
             insertFirstLINKEDLIST(in_progress, newtask); /*Update In-Progress List*/
             PushBAG(bag, newtask); /* Insert item(task) to bag */
         }
