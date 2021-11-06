@@ -5,6 +5,7 @@
 #include "../../ADT Linked List/list_linked.h"
 #include "../../ADT Linked List/node.h"
 #include "../../ADT point/location.h"
+#include "../in_progress/in_progress.h"
 void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List todo){
     /* KAMUS LOKAL */ 
     Address p; 
@@ -24,12 +25,16 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List todo){
             }
         } 
         if (!found) {
-            printf("Tidak ada pesanan pada lokasi");
+            printf("Tidak ada pesanan pada lokasi\n");
         } else {
             ElTypeTASK newtask; 
             newtask = INFO(p);
             insertFirstLINKEDLIST(in_progress, newtask); /*Update In-Progress List*/
             PushBAG(bag, newtask); /* Insert item(task) to bag */
+            printf("Pesanan berupa");
+            processItemType(newtask);
+            printf("berhasil diambil!\n");
+            printf("Tujuan Pesanan: %c\n", newtask.dropOffTASK);
         }
     }
     
