@@ -263,7 +263,7 @@ void displayLINKEDLIST(List l)
     /* ALGORITMA */
     if (isEmptyLINKEDLIST(l))
     {
-        printf("Tidak ada pesanan!");
+        printf("Tidak ada pesanan!\n");
     }
     else
     {
