@@ -28,7 +28,7 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, ListTASK to
         } else {
             ElTypeTASK newtask; 
             newtask = todo.contents[i];
-            insertLastLINKEDLIST(in_progress, newtask); /*Update In-Progress List*/
+            insertFirstLINKEDLIST(in_progress, newtask); /*Update In-Progress List*/
             PushBAG(bag, newtask); /* Insert item(task) to bag */
         }
     }

@@ -18,6 +18,5 @@ int main() {
     pickUpAtloc(A, &bag, &in_progress, todo);
     pickUpAtloc(B, &bag, &in_progress, todo);
     pickUpAtloc(C, &bag, &in_progress, todo);
-    pickUpAtloc(D, &bag, &in_progress, todo);
-
+    displayLINKEDLIST(in_progress);
 }
