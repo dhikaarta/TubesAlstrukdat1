@@ -22,6 +22,7 @@ void ReadLISTTASK(ListTASK *l)
         if ((*l).contents[i].itemTASK == 'P')
         {
             scanf(" %d", &(*l).contents[i].timeExpTASK);
+            (*l).contents[i].initTimeExpTASK = (*l).contents[i].timeExpTASK;
         }
     }
     (*l).Neff = nTask;
@@ -46,6 +47,7 @@ void ReadLISTTASKfile(ListTASK *l, int nTask)
         {
             advWORDfile();
             (*l).contents[i].timeExpTASK = atoi(currentWordfile.contents);
+            (*l).contents[i].initTimeExpTASK = (*l).contents[i].timeExpTASK;
         }
         (*l).Neff = nTask;
     }

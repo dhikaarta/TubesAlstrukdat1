@@ -5,7 +5,7 @@
 void KainPembungkusWaktu(Stack b) {
   int i, idx;
   boolean found = false;
-  for (i = IDX_TOP_STACK(b); i >= 0; i++) {
+  for (i = IDX_TOP_STACK(b); i >= 0; i--) {
     if (b.buffer[i].itemTASK == 'P') {
       found = true;
       idx = i;
@@ -14,7 +14,7 @@ void KainPembungkusWaktu(Stack b) {
   }
   if (found == true) {
     // Mengembalikan time perishable item ke waktu semula
-    // b.buffer[idx].timeExpTASK = something
+    b.buffer[idx].timeExpTASK = b.buffer[idx].initTimeExpTASK;
   }
 }
 

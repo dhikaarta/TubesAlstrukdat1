@@ -25,6 +25,7 @@ typedef struct
     char dropOffTASK;
     char itemTASK;
     int timeExpTASK;
+    int initTimeExpTASK;
 } ElTypeTASK; /* type elemen List */
 
 typedef struct
