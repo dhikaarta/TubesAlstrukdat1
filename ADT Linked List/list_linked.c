@@ -284,6 +284,47 @@ void displayLINKEDLIST(List l)
         } /* p = NULL*/
     }
 }
+
+void displayToDoList(List l)
+{
+    /* I.S. List mungkin kosong */
+    /* F.S. Jika list tidak kosong, akan mencetak tempat pick up, drop off, dan
+            jenis item yang harus diambil pada to do list */
+    /* KAMUS LOKAL */
+    Address p;
+    int i;
+    /* ALGORITMA */
+    if (isEmptyLINKEDLIST(l))
+    {
+        printf("Tidak ada pesanan yang harus diambil!\n");
+    }
+    else
+    {
+        p = FIRST(l);
+        i = 0;
+        printf("Pesanan pada To Do List:\n");
+        while (p != NULL)
+        {
+            printf("%d. %c -> %c ", i + 1, PICKUPTASK(p), DROPOFFTASK(p));
+            if (ITEMTASK(p) == 'N')
+            {
+                printf("(Normal Item)");
+            }
+            if (ITEMTASK(p) == 'H')
+            {
+                printf("(Heavy Item)");
+            }
+            if (ITEMTASK(p) == 'P')
+            {
+                printf("(Perishable Item)");
+            }
+            printf("\n");
+            i++;
+            p = NEXT(p);
+        } /* p = NULL*/
+    }
+}
+
 int lengthLINKEDLIST(List l)
 {
     /* Mengirimkan banyaknya pesanan list; mengirimkan 0 jika list kosong */

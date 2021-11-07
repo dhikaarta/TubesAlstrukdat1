@@ -17,8 +17,6 @@ typedef Address List;
 #define ITEMTASK(l) INFO(l).itemTASK
 #define TIMEEXPTASK(l) INFO(l).timeExpTASK
 
-
-
 /* Definisi List : */
 /* List kosong : FIRST(l) = NULL */
 /* Setiap pesanan dengan Address p dapat diacu INFO(p), NEXT(p) */
@@ -89,7 +87,6 @@ void deleteAtLINKEDLIST(List *l, int idx, ElTypeTASK *task);
 /* F.S. val diset dengan pesanan l pada indeks ke-idx. */
 /*      pesanan l pada indeks ke-idx dihapus dari l */
 
-
 /****************** PROSES SEMUA pesanan LIST ******************/
 void displayLINKEDLIST(List l);
 // void printInfo(List l);
@@ -99,17 +96,20 @@ void displayLINKEDLIST(List l);
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
+void displayToDoList(List l);
+/* I.S. List mungkin kosong */
+/* F.S. Jika list tidak kosong, akan mencetak tempat pick up, drop off, dan
+        jenis item yang harus diambil pada to do list */
+
 int lengthLINKEDLIST(List l);
 /* Mengirimkan banyaknya pesanan list; mengirimkan 0 jika list kosong */
 
 /****************** PROSES TERHADAP LIST ******************/
-List concatLINKEDLIST(List l1, List l2) ;
+List concatLINKEDLIST(List l1, List l2);
 /* I.S. l1 dan l2 sembarang */
 /* F.S. l3 adalah hasil konkatenasi l1 & l2 */
 /* Konkatenasi dua buah list : l1 dan l2    */
 /* menghasilkan l3 yang baru (dengan pesanan list l1 dan l2 secara beurutan). */
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
-
-
 
 #endif

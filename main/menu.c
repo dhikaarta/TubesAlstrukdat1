@@ -10,7 +10,6 @@
 #include "../GAME/pickup/pickup.h"
 #include "../GAME/dropoff/dropoff.h"
 
-
 Word kataNewGame = {"NEWGAME", 7};
 Word kataExit = {"EXIT", 4};
 Word kataMove = {"MOVE", 4};
@@ -109,13 +108,13 @@ int main()
             ListGADGET listGadgetStore = initialGadgetStore();
             ListGADGET listInventory;
             CreateLISTGADGET(&listInventory);
-            
+
             //Inisialisasi ToDoList
             List LinkedToDoList;
             CreateLINKEDLIST(&LinkedToDoList);
             List inProgressList;
             CreateLINKEDLIST(&inProgressList);
-            
+
             // Inisialisasi waktu
             TIME time;
             timeInitial(&time);
@@ -123,7 +122,7 @@ int main()
             // Inisialisasi Tas
             Stack b;
             CreateBAG(&b);
-            
+
             int successfulDropOff = 0;
 
             printf("ENTER COMMAND : ");
@@ -131,9 +130,10 @@ int main()
             {
                 kataInput = getInput();
                 printf("Mobita berada di posisi ");
-                TulisLOCATION(nobita);printf("\n");
+                TulisLOCATION(nobita);
+                printf("\n");
                 printf("Waktu: %f\n", time.currentTime);
-                printf("Uang yang dimiliki : %lu Yen\n ",money);
+                printf("Uang yang dimiliki : %lu Yen\n ", money);
 
                 if (isKataEqual(kataInput, kataMove))
                 {
@@ -145,7 +145,7 @@ int main()
                     {
                         //updateisi todolist
                         updateTimeToDoList(&lTask, &time, &LinkedToDoList);
-                        
+
                         // INISIASI JUMLAH LOKASI YANG DAPAT DICAPAI
                         int nPossibleMoves;
                         // MENGINISIASI ARRAY OF LOCATION DARI JUMLAH LOKASI YANG DAPAT DICAPAI
@@ -188,12 +188,11 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataPickUp))
                 {
-                    pickUpAtloc(nobita,&b, &inProgressList, LinkedToDoList);
+                    pickUpAtloc(nobita, &b, &inProgressList, LinkedToDoList);
                 }
                 else if (isKataEqual(kataInput, kataDropOff))
                 {
-                    dropOffAtloc(nobita,&b,&inProgressList,&LinkedToDoList,&money);
-                    
+                    dropOffAtloc(nobita, &b, &inProgressList, &LinkedToDoList, &money);
                 }
                 else if (isKataEqual(kataInput, kataMap))
                 {
@@ -204,7 +203,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataToDo))
                 {
-                    displayLINKEDLIST(LinkedToDoList);
+                    displayToDoList(LinkedToDoList);
                 }
                 else if (isKataEqual(kataInput, kataInProgress))
                 {
@@ -212,17 +211,24 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataBuy))
                 {
-                    gadgetStore(listGadgetStore, &listInventory, &money);
+                    if (LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                    {
+                        gadgetStore(listGadgetStore, &listInventory, &money);
+                    }
+                    else
+                    {
+                        printf("Anda hanya bisa membeli gadget di Headquarters!!\n");
+                    }
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
-                    useInventory(&listInventory,&b,&time);
+                    useInventory(&listInventory, &b, &time);
                 }
                 else if (isKataEqual(kataInput, kataHelp))
                 {
                     printHelp();
                 }
-                else if(isEmptyLISTTASK(lTask) && isEmptyLINKEDLIST(LinkedToDoList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                else if (isEmptyLISTTASK(lTask) && isEmptyLINKEDLIST(LinkedToDoList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
                 {
                     printf("Game Selesai !\n");
                     printf("Waktu yang dilampaui : %i\n", time);
