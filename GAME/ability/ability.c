@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include "ability.h"
 
-void speedBoost(TIME *t, ElTypeTASK item) {
-  // Setiap berpindah 2 lokasi, waktu bertambah 1 unit
-  int n = 10;
-  int i;
-  (*t).incTime = 0.5;
-  if (item.itemTASK == 'H') {
+void speedBoost(TIME *t, int moveFreq) {
+  if (moveFreq != 10) {
+    (*t).incTime = 0.5;
+  } else if (moveFreq == 10) {
     (*t).incTime = 1;
+    moveFreq = 0;
   }
 }
 

@@ -125,6 +125,8 @@ int main()
 
             int successfulDropOff = 0;
 
+            int moveFreq = 0;
+
             printf("ENTER COMMAND : ");
             while (true)
             {
@@ -172,6 +174,9 @@ int main()
                         if (lokasiDipilih != 0)
                         {
                             time.incTime = 1;
+                            if (time.incTime == 0.5) {
+                                moveFreq++;
+                            }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                         }
                         else
