@@ -33,13 +33,10 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List todo, 
             insertFirstLINKEDLIST(in_progress, newtask); /*Update In-Progress List*/
             PushBAG(bag, newtask); /* Insert item(task) to bag */
             
-            // MENGAKTIFKAN DAN MENDAKTIFKAN SPEED BOOST
+            // MENDISAKTIFKAN SPEED BOOST
             extern int moveFreq;
             if ((*t).incTime == 0.5) {
                 moveFreq = 10;
-                speedBoost(t, moveFreq);
-            } else if ((*t).incTime == 1) {
-                moveFreq = 0;
                 speedBoost(t, moveFreq);
             }
             
