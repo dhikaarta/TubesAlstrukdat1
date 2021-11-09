@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "dropoff.h"
 #include "../pickup/pickup.h"
-
+#include "../in_progress/in_progress.h"
 void processMoneyDropOff(ElTypeTASK task, long *money){
     if (task.itemTASK == 'N'){
         *money += 200;
@@ -18,6 +18,7 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo
     } else {
         ElTypeTASK taskdone; 
         PopBAG(bag, &taskdone);
+        
         int i; 
         i = indexOfLINKEDLIST(*in_progress, taskdone);
         deleteAtLINKEDLIST(in_progress, i, &taskdone);
@@ -29,16 +30,19 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo
         boolean found;
         found = false; 
         while (p != NULL && !found){
-            if (INFO(*todo).dropOffTASK == currentloc.A) {
+            if (INFO(p).dropOffTASK == currentloc.A) {
                 found = true;
             } else {
                 p = NEXT(p);
                 j++;
             }
         }
-
+        long oldmoney = *money;
         deleteAtLINKEDLIST(todo, j, &taskdone);
-        printf("%d", taskdone.timeTASK);
         processMoneyDropOff(taskdone, money);
+        printf("Pesanan");
+        processItemType(taskdone);
+        printf("berhasil diantarkan\n");
+        printf("Uang yang didapatkan: %lu Yen\n", *money - oldmoney);
     }
 }
