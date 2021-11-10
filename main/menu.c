@@ -143,9 +143,6 @@ int main()
                     int lokasiDipilih;
                     do
                     {
-                        //updateisi todolist
-                        updateTimeToDoList(&lTask, &time, &LinkedToDoList);
-
                         // INISIASI JUMLAH LOKASI YANG DAPAT DICAPAI
                         int nPossibleMoves;
                         // MENGINISIASI ARRAY OF LOCATION DARI JUMLAH LOKASI YANG DAPAT DICAPAI
@@ -166,13 +163,15 @@ int main()
                         printf("ENTER COMMAND: ");
                         kataInput = getInput();
                         lokasiDipilih = atoi(kataInput.contents);
-
+                        
                         printf("\nNobita sekarang berada di titik ");
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
                             time.incTime = 1;
                             nobita = arrayPosMove[lokasiDipilih - 1];
+                            //updateisi todolist
+                            updateTimeToDoList(&lTask, &time, &LinkedToDoList);
                         }
                         else
                         {
