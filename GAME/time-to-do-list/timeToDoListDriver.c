@@ -24,6 +24,15 @@ int main()
     updateTimeToDoList(&l2, &time, &LinkedToDoList);
     updateTimeToDoList(&l2, &time, &LinkedToDoList);
     updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&l2, &time, &LinkedToDoList);
     displayCurrentTimeAndMoney(time, money);
     displayLINKEDLIST(LinkedToDoList);
 

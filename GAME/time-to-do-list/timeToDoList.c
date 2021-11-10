@@ -12,7 +12,7 @@ void updateTimeToDoList(ListTASK *l, TIME *t, List *LinkedToDoList)
 {
     (*t).currentTime = (*t).currentTime + (*t).incTime;
 
-    while ((*l).contents[0].timeTASK == (int)floor((*t).currentTime))
+    while ((*l).contents[0].timeTASK == (int)floor((*t).currentTime) && lengthLISTTASK(*l) != 0)
     {
         ElTypeTASK val;
         deleteAtLISTTASK(l, &val, 0);
