@@ -136,8 +136,7 @@ int main()
                 printf("Mobita berada di posisi ");
                 TulisLOCATION(nobita);
                 printf("\n");
-                printf("Waktu: %f\n", time.currentTime);
-                printf("Uang yang dimiliki : %lu Yen\n", money);
+                displayCurrentTimeAndMoney(time, money);
 
                 if (isKataEqual(kataInput, kataMove))
                 {
