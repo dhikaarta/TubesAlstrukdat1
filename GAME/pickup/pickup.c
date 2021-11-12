@@ -10,28 +10,31 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo)
     /* KAMUS LOKAL */ 
     Address p; 
     boolean found;
+    int i;
+    ElTypeTASK newtask;
     /* ALGORITMA */
     
     if (IsFullSTACK(*bag)){ /* Tas sudah penuh maka pesanan tidak masuk ke dalam tas */
         printf("Tas sudah penuh. Tidak dapat pickup pesanan lagi\n");
     } else { /* Search apakah ada pesanan dalam qt dengan pickup location currentloc */
-        p = FIRST(*todo);
+        p = *todo;
         found = false; 
+        i = 0;
         while (p != NULL && !found){
             if (INFO(p).pickUpTASK == currentloc.A) {
                 found = true; 
             } else {
                 p = NEXT(p);
+                i++;
             }
         } 
         if (!found) {
             printf("Tidak ada pesanan pada lokasi %c\n", currentloc.A);
         } else {
-            ElTypeTASK newtask; 
             newtask = INFO(p);
             insertFirstLINKEDLIST(in_progress, newtask); /*Update In-Progress List*/
             PushBAG(bag, newtask); /* Insert item(task) to bag */
-            deleteAtLINKEDLIST(todo, indexOfLINKEDLIST(*todo, newtask), &newtask);
+            deleteAtLINKEDLIST(todo, i, &newtask); /* Detele todo list*/
             printf("Pesanan berupa");
             processItemType(newtask);
             printf("berhasil diambil!\n");

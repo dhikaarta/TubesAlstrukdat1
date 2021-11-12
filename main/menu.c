@@ -156,7 +156,7 @@ int main()
                             printf("%d. %c (%d,%d)\n", i + 1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
                         }
                         // MENAMPILKAN PETA DENGAN WARNA
-                        displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, inProgressList);
+                        displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, b);
                         // MENERIMA INPUTAN USER UNTUK LOKASI YANG DIPILIH
                         printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali)\n");
                         printf("\n");
@@ -191,14 +191,14 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataDropOff))
                 {
-                    dropOffAtloc(nobita, &b, &inProgressList, &LinkedToDoList, &money);
+                    dropOffAtloc(nobita, &b, &inProgressList, &money, &successfulDropOff);
                 }
                 else if (isKataEqual(kataInput, kataMap))
                 {
                     int nPossibleMoves;
                     LOCATION *arrayPosMove;
                     arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
-                    displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, inProgressList);
+                    displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, b);
                     printf("\n");
                 }
                 else if (isKataEqual(kataInput, kataToDo))
@@ -228,7 +228,7 @@ int main()
                 {
                     printHelp();
                 }
-                else if (isEmptyLISTTASK(lTask) && isEmptyLINKEDLIST(LinkedToDoList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                else if (isEmptyLISTTASK(lTask) && isEmptyLINKEDLIST(LinkedToDoList) && isEmptyLINKEDLIST(inProgressList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
                 {
                     printf("Game Selesai !\n");
                     printf("Waktu yang dilampaui : %i\n", time);

@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dropoff.h"
-
+/* Compile: gcc dropoffDriver.c dropoff.c "../../ADT Stack/stack.c" "../../ADT Stack/bag.c" "../in_progress/in_progress.c" "../../ADT Point/location.c" "../pickup/pickup.c" */
 int main() {
     Stack bag; 
     LOCATION A, B, C, D, G; 
     List in_progress; 
     List todo; 
     ElTypeTASK task1, task2;
+    int successfulDropOff; 
+    successfulDropOff = 0;
     task1.timeTASK = 1;
     task1.itemTASK = 'N';
     task1.pickUpTASK = 'A';
@@ -29,14 +31,15 @@ int main() {
     insertFirstLINKEDLIST(&todo, task1);
     insertFirstLINKEDLIST(&todo, task2);
     displayLINKEDLIST(todo);
-    pickUpAtloc(A, &bag, &in_progress, todo);
-    pickUpAtloc(B, &bag, &in_progress, todo);
+    pickUpAtloc(A, &bag, &in_progress, &todo);
+    pickUpAtloc(B, &bag, &in_progress, &todo);
     displayInProgress(in_progress);
-    dropOffAtloc(G, &bag, &in_progress, &todo, &money);
+    dropOffAtloc(G, &bag, &in_progress, &money, &successfulDropOff);
+    dropOffAtloc(B, &bag, &in_progress, &money, &successfulDropOff);
     displayInProgress(in_progress);
     printf("\n");
     displayLINKEDLIST(in_progress);
-    
+    printf("%d\n", successfulDropOff);
     printf("%lu", money);
     
 }
