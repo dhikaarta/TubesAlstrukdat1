@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include "ability.h"
 
-void speedBoost(TIME *t, int moveFreq) {
-  if (moveFreq != 10) {
+void speedBoost(TIME *t, int *moveFreq) {
+  if (*moveFreq <= 10) {
     (*t).incTime = 0.5;
-  } else if (moveFreq == 10) {
+  } else {
     (*t).incTime = 1;
-    moveFreq = 0;
+    *moveFreq = 0;
+    printf("Ability Speed Boost telah hilang\n");
   }
 }
 

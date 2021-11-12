@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "pickup.h"
 #include "../../ADT Stack/bag.h"
 #include "../../ADT Linked List/list_linked.h"
@@ -36,8 +37,10 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List todo, 
             // MENDISAKTIFKAN SPEED BOOST
             extern int moveFreq;
             if ((*t).incTime == 0.5) {
-                moveFreq = 10;
-                speedBoost(t, moveFreq);
+                printf("Ability Speed Boost telah hilang\n");
+                (*t).currentTime = floor((*t).currentTime);
+                (*t).incTime = 1;
+                moveFreq = 0;
             }
             
             printf("Pesanan berupa");

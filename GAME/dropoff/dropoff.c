@@ -24,7 +24,8 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo
         // MENGAKTIFKAN SPEED BOOST JIKA BERHASIL MENGANTARKAN HEAVY ITEM
         extern int moveFreq;
         if (taskdone.itemTASK == 'H') {
-            speedBoost(t, moveFreq);
+            printf("Ability Speed Boost telah aktif\n");
+            (*t).incTime = 0.5;
         }
         
         int i; 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "timeToDoList.h"
 
 void timeInitial(TIME *t)

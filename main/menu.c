@@ -26,6 +26,8 @@ LOCATION nobita;
 LOCATION pickUp;
 LOCATION dropOff;
 
+int moveFreq = 0;
+
 Word getInput()
 {
     startWORD();
@@ -34,7 +36,8 @@ Word getInput()
     while (!endWord)
     {
 
-        for (int j = 0; j < currentWord.length; j++)
+        int j;
+        for (j = 0; j < currentWord.length; j++)
         {
             kataInput.contents[j + kataInput.length] = currentWord.contents[j];
         }
@@ -125,7 +128,6 @@ int main()
 
             int successfulDropOff = 0;
 
-            int moveFreq = 0;
 
             printf("ENTER COMMAND : ");
             while (true)
@@ -170,9 +172,10 @@ int main()
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
-                            time.incTime = 1;
+                            // time.incTime = 1;
                             if (time.incTime == 0.5) {
                                 moveFreq++;
+                                speedBoost(&time, &moveFreq);
                             }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                             //updateisi todolist
@@ -192,11 +195,11 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataPickUp))
                 {
-                    pickUpAtloc(nobita, &b, &inProgressList, LinkedToDoList);
+                    pickUpAtloc(nobita, &b, &inProgressList, LinkedToDoList, &time);
                 }
                 else if (isKataEqual(kataInput, kataDropOff))
                 {
-                    dropOffAtloc(nobita, &b, &inProgressList, &LinkedToDoList, &money);
+                    dropOffAtloc(nobita, &b, &inProgressList, &LinkedToDoList, &money, &time);
                 }
                 else if (isKataEqual(kataInput, kataMap))
                 {
