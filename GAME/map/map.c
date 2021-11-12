@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../../ADT Point/location.h"
 #include "../../ADT matriks/matrix.c"
+#include "../../ADT Linked List/list_linked.h"
 #include "../move/move.c"
 #include "../../boolean.h"
 #include "../pcolor/pcolor.h"
@@ -43,19 +44,48 @@ void displayMAP(Matrix m)
 }
 
 // BELOM NERIMA PARAMETER TMPT PICK UP AND DROP OFF
-void displayMAPColor(Matrix m, LOCATION nobita, LOCATION* ArrayOfPosMoves, int nPossibleMoves)
+void displayMAPColor(Matrix m, LOCATION nobita, LOCATION* ArrayOfPosMoves, int nPossibleMoves, List todo, List in_progress)
 {   
     int i,j;
+    
     for (i=0; i<ROWSMATRIX(m);i++){
         for (j=0; j<COLSMATRIX(m);j++){
             if (i!=0 && i != ROWSMATRIX(m)-1 &&j!=0 && j!=COLSMATRIX(m)-1 && ELMTMATRIX(m,i,j)!='\0'){
                 boolean bool = checkLocationInPossibleMoves(i, j, ArrayOfPosMoves, nPossibleMoves);
-                if (bool){
+                boolean blue, red;
+                Address p, q;
+                blue = false;
+                red = false;
+                p = FIRST(in_progress);
+                q = FIRST(todo);
+                while (!blue && p != NULL){
+                    if (ELMTMATRIX(m,i,j) == INFO(p).dropOffTASK) {
+                        blue = true;
+                    } else {
+                        p = NEXT(p);
+                    }
+                } 
+                while (!red && q != NULL){
+                    if (ELMTMATRIX(m,i,j) == INFO(q).pickUpTASK) {
+                        red = true;
+                    } else {
+                        q = NEXT(q);
+                    }
+                }
+                if(LOC_X(nobita) == i && LOC_Y(nobita) == j){
+                    print_yellow(ELMTMATRIX(m, i,j));
+                } 
+                
+                if (blue && !(LOC_X(nobita) == i && LOC_Y(nobita) == j)){
+                    print_blue(ELMTMATRIX(m, i,j));
+                }
+                if (red && !blue && !(LOC_X(nobita) == i && LOC_Y(nobita) == j)){
+                    print_red(ELMTMATRIX(m, i,j));
+                }
+                if (bool && !red && !blue && !(LOC_X(nobita) == i && LOC_Y(nobita) == j)){
                     print_green(ELMTMATRIX(m, i,j));
                 }
-                else if(LOC_X(nobita) == i && LOC_Y(nobita) == j){
-                    print_yellow(ELMTMATRIX(m, i,j));
-                }else{
+                if (!bool && !red && !blue && !(LOC_X(nobita) == i && LOC_Y(nobita) == j)){
                     printf("%c",ELMTMATRIX(m, i,j));
                 }
             }else{

@@ -19,14 +19,14 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List todo, 
         p = FIRST(todo);
         found = false; 
         while (p != NULL && !found){
-            if (INFO(todo).pickUpTASK == currentloc.A) {
+            if (INFO(p).pickUpTASK == currentloc.A) {
                 found = true; 
             } else {
                 p = NEXT(p);
             }
         } 
         if (!found) {
-            printf("Tidak ada pesanan pada lokasi\n");
+            printf("Tidak ada pesanan pada lokasi %c\n", currentloc.A);
         } else {
             ElTypeTASK newtask; 
             newtask = INFO(p);

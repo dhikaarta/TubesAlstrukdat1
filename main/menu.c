@@ -135,7 +135,7 @@ int main()
                 TulisLOCATION(nobita);
                 printf("\n");
                 printf("Waktu: %f\n", time.currentTime);
-                printf("Uang yang dimiliki : %lu Yen\n ", money);
+                printf("Uang yang dimiliki : %lu Yen\n", money);
 
                 if (isKataEqual(kataInput, kataMove))
                 {
@@ -145,9 +145,6 @@ int main()
                     int lokasiDipilih;
                     do
                     {
-                        //updateisi todolist
-                        updateTimeToDoList(&lTask, &time, &LinkedToDoList);
-
                         // INISIASI JUMLAH LOKASI YANG DAPAT DICAPAI
                         int nPossibleMoves;
                         // MENGINISIASI ARRAY OF LOCATION DARI JUMLAH LOKASI YANG DAPAT DICAPAI
@@ -161,15 +158,15 @@ int main()
                             printf("%d. %c (%d,%d)\n", i + 1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
                         }
                         // MENAMPILKAN PETA DENGAN WARNA
-                        displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves);
+                        displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, inProgressList);
                         // MENERIMA INPUTAN USER UNTUK LOKASI YANG DIPILIH
                         printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali)\n");
                         printf("\n");
                         printf("ENTER COMMAND: ");
                         kataInput = getInput();
                         lokasiDipilih = atoi(kataInput.contents);
-
-                        printf("\nMobita sekarang berada di titik ");
+                        
+                        printf("\nNobita sekarang berada di titik ");
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
@@ -178,6 +175,8 @@ int main()
                                 moveFreq++;
                             }
                             nobita = arrayPosMove[lokasiDipilih - 1];
+                            //updateisi todolist
+                            updateTimeToDoList(&lTask, &time, &LinkedToDoList);
                         }
                         else
                         {
@@ -204,7 +203,8 @@ int main()
                     int nPossibleMoves;
                     LOCATION *arrayPosMove;
                     arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
-                    displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves);
+                    displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, inProgressList);
+                    printf("\n");
                 }
                 else if (isKataEqual(kataInput, kataToDo))
                 {
@@ -212,7 +212,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataInProgress))
                 {
-                    displayInProgress(LinkedToDoList);
+                    displayInProgress(inProgressList);
                 }
                 else if (isKataEqual(kataInput, kataBuy))
                 {
