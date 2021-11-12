@@ -187,7 +187,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataPickUp))
                 {
-                    pickUpAtloc(nobita, &b, &inProgressList, LinkedToDoList);
+                    pickUpAtloc(nobita, &b, &inProgressList, &LinkedToDoList);
                 }
                 else if (isKataEqual(kataInput, kataDropOff))
                 {

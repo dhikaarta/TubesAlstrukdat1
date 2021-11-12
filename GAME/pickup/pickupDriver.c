@@ -21,8 +21,8 @@ int main() {
     t2.dropOffTASK = 'D';
     insertFirstLINKEDLIST(&todo, t1);
     insertFirstLINKEDLIST(&todo, t2);
-    pickUpAtloc(A, &bag, &in_progress, todo);
-    pickUpAtloc(B, &bag, &in_progress, todo);
-    pickUpAtloc(C, &bag, &in_progress, todo);
+    pickUpAtloc(B, &bag, &in_progress, &todo);
+    pickUpAtloc(C, &bag, &in_progress, &todo);
     displayLINKEDLIST(in_progress);
+    displayLINKEDLIST(todo);
 }
