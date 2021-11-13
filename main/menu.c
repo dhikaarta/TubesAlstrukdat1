@@ -83,7 +83,7 @@ int main()
             // MEMBUAT MAP
             CreateMAP(N, M, &MAP);
             // MEMBACA ELEMEN DARI MAP DENGAN MENANDAI TITIK TITIK YANG TELAH DIINPUT
-            readMAPConfiguration(&MAP, arrayLoc, L);
+            readMAPConfiguration(&MAP, arrayLoc, L+1);
 
             // MEMBUAT MATRIX ADJ
             Matrix Madj = makeMatrixAdj(L);
