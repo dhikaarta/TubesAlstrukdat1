@@ -12,6 +12,7 @@
         "charmachine.h": "c",
         "in_progress.h": "c",
         "pickup.h": "c",
-        "dropoff.h": "c"
+        "dropoff.h": "c",
+        "stack.h": "c"
     }
 }
