@@ -3,9 +3,11 @@
 #include "../../ADT Point/location.h"
 #include "../../ADT matriks/matrix.c"
 #include "../../ADT Linked List/list_linked.h"
+#include "../../ADT Stack/bag.h"
 #include "../move/move.c"
 #include "../../boolean.h"
 #include "../pcolor/pcolor.h"
+
 
 // FUNCTION TAMBAHAN UNTUK GAME
 void CreateMAP(int nRow, int nCol, Matrix *m)
@@ -44,7 +46,7 @@ void displayMAP(Matrix m)
 }
 
 // BELOM NERIMA PARAMETER TMPT PICK UP AND DROP OFF
-void displayMAPColor(Matrix m, LOCATION nobita, LOCATION* ArrayOfPosMoves, int nPossibleMoves, List todo, List in_progress)
+void displayMAPColor(Matrix m, LOCATION nobita, LOCATION* ArrayOfPosMoves, int nPossibleMoves, List todo, Stack bag)
 {   
     int i,j;
     
@@ -53,18 +55,15 @@ void displayMAPColor(Matrix m, LOCATION nobita, LOCATION* ArrayOfPosMoves, int n
             if (i!=0 && i != ROWSMATRIX(m)-1 &&j!=0 && j!=COLSMATRIX(m)-1 && ELMTMATRIX(m,i,j)!='\0'){
                 boolean bool = checkLocationInPossibleMoves(i, j, ArrayOfPosMoves, nPossibleMoves);
                 boolean blue, red;
-                Address p, q;
+                ElTypeTASK p; 
+                Address q;
                 blue = false;
                 red = false;
-                p = FIRST(in_progress);
+                p = TOP_STACK(bag);
                 q = FIRST(todo);
-                while (!blue && p != NULL){
-                    if (ELMTMATRIX(m,i,j) == INFO(p).dropOffTASK) {
-                        blue = true;
-                    } else {
-                        p = NEXT(p);
-                    }
-                } 
+                if (ELMTMATRIX(m,i,j) == p.dropOffTASK) {
+                    blue = true; 
+                }
                 while (!red && q != NULL){
                     if (ELMTMATRIX(m,i,j) == INFO(q).pickUpTASK) {
                         red = true;
