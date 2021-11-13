@@ -125,15 +125,15 @@ int main()
 
             int successfulDropOff = 0;
 
-            printf("ENTER COMMAND : ");
             while (true)
             {
-                kataInput = getInput();
                 printf("Mobita berada di posisi ");
                 TulisLOCATION(nobita);
                 printf("\n");
                 printf("Waktu: %f\n", time.currentTime);
                 printf("Uang yang dimiliki : %lu Yen\n", money);
+                printf("ENTER COMMAND : ");
+                kataInput = getInput();
 
                 if (isKataEqual(kataInput, kataMove))
                 {
@@ -239,7 +239,7 @@ int main()
                 {
                     printf("command tidak valid ! kembali ke menu awal\n");
                 }
-                printf("ENTER COMMAND : ");
+            
             }
         }
         else if (isKataEqual(kataInput, kataExit))
