@@ -86,7 +86,7 @@ int main()
             // MEMBUAT MAP
             CreateMAP(N, M, &MAP);
             // MEMBACA ELEMEN DARI MAP DENGAN MENANDAI TITIK TITIK YANG TELAH DIINPUT
-            readMAPConfiguration(&MAP, arrayLoc, L);
+            readMAPConfiguration(&MAP, arrayLoc, L+1);
 
             // MEMBUAT MATRIX ADJ
             Matrix Madj = makeMatrixAdj(L);
@@ -171,14 +171,18 @@ int main()
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
+                            updateTimeToDoList(&lTask, &time, &LinkedToDoList);
                             // time.incTime = 1;
                             if (time.incTime == 0.5) {
                                 moveFreq++;
                                 speedBoost(&time, &moveFreq);
                             }
+                            else if (time.incTime == 0)
+                            {
+                                time.incTime = 1;
+                            }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                             //updateisi todolist
-                            updateTimeToDoList(&lTask, &time, &LinkedToDoList);
                         }
                         else
                         {
