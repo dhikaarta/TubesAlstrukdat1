@@ -55,7 +55,8 @@ LOCATION* makeArrayOfLOCATION(int n, int i_headquarters, int j_headquarters){
 void displaylistLOCATION(LOCATION* arrayOfLoc, int L)
 {
     printf("[");
-    for (int i = 0; i < L; i++)
+    int i;
+    for (i = 0; i < L; i++)
     {
         printf("%c(%i, %i) ,", CHAR(arrayOfLoc[i]), LOC_X(arrayOfLoc[i]), LOC_Y(arrayOfLoc[i]));
         

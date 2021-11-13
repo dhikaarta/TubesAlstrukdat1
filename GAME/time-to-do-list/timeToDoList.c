@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "timeToDoList.h"
 
 void timeInitial(TIME *t)
@@ -23,5 +24,5 @@ void updateTimeToDoList(ListTASK *l, TIME *t, List *LinkedToDoList)
 void displayCurrentTimeAndMoney(TIME t, long money)
 {
     printf("Waktu: %.f\n", floor(t.currentTime));
-    printf("Uang yang dimiliki: %ld Yen\n\n", money);
+    printf("Uang yang dimiliki: %ld Yen\n", money);
 }

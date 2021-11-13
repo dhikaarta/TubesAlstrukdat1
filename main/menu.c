@@ -26,6 +26,8 @@ LOCATION nobita;
 LOCATION pickUp;
 LOCATION dropOff;
 
+int moveFreq = 0;
+
 Word getInput()
 {
     startWORD();
@@ -34,7 +36,8 @@ Word getInput()
     while (!endWord)
     {
 
-        for (int j = 0; j < currentWord.length; j++)
+        int j;
+        for (j = 0; j < currentWord.length; j++)
         {
             kataInput.contents[j + kataInput.length] = currentWord.contents[j];
         }
@@ -130,8 +133,7 @@ int main()
                 printf("Mobita berada di posisi ");
                 TulisLOCATION(nobita);
                 printf("\n");
-                printf("Waktu: %f\n", time.currentTime);
-                printf("Uang yang dimiliki : %lu Yen\n", money);
+                displayCurrentTimeAndMoney(time, money);
                 printf("ENTER COMMAND : ");
                 kataInput = getInput();
 
@@ -168,10 +170,18 @@ int main()
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
-                            time.incTime = 1;
+                            updateTimeToDoList(&lTask, &time, &LinkedToDoList);
+                            // time.incTime = 1;
+                            if (time.incTime == 0.5) {
+                                moveFreq++;
+                                speedBoost(&time, &moveFreq);
+                            }
+                            else if (time.incTime == 0)
+                            {
+                                time.incTime = 1;
+                            }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                             //updateisi todolist
-                            updateTimeToDoList(&lTask, &time, &LinkedToDoList);
                         }
                         else
                         {
@@ -187,11 +197,11 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataPickUp))
                 {
-                    pickUpAtloc(nobita, &b, &inProgressList, &LinkedToDoList);
+                    pickUpAtloc(nobita, &b, &inProgressList, &LinkedToDoList, &time);
                 }
                 else if (isKataEqual(kataInput, kataDropOff))
                 {
-                    dropOffAtloc(nobita, &b, &inProgressList, &money, &successfulDropOff);
+                    dropOffAtloc(nobita, &b, &inProgressList, &money, &successfulDropOff, &time);
                 }
                 else if (isKataEqual(kataInput, kataMap))
                 {

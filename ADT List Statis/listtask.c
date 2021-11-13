@@ -15,8 +15,9 @@ void CreateLISTTASK(ListTASK *l)
 void ReadLISTTASK(ListTASK *l)
 {
     int nTask;
+    int i;
     scanf("%d", &nTask);
-    for (int i = 0; i < nTask; i++)
+    for (i = 0; i < nTask; i++)
     {
         scanf("%d %c %c %c", &((*l).contents[i].timeTASK), &((*l).contents[i].pickUpTASK), &((*l).contents[i].dropOffTASK), &((*l).contents[i].itemTASK));
         if ((*l).contents[i].itemTASK == 'P')
@@ -33,7 +34,8 @@ void ReadLISTTASK(ListTASK *l)
 
 void ReadLISTTASKfile(ListTASK *l, int nTask)
 {
-    for (int i = 0; i < nTask; i++)
+    int i;
+    for (i = 0; i < nTask; i++)
     {
         advWORDfile();
         (*l).contents[i].timeTASK = atoi(currentWordfile.contents);
@@ -73,7 +75,8 @@ void displayLISTTASK(ListTASK l)
     }
     else
     {
-        for (int i = 0; i < l.Neff; i++)
+        int i;
+        for (i = 0; i < l.Neff; i++)
         {
             printf("%d. Time Task = %d\n", i + 1, l.contents[i].timeTASK);
             printf("   Pick Up Point = %c\n", l.contents[i].pickUpTASK);
@@ -91,10 +94,11 @@ void displayLISTTASK(ListTASK l)
 /* *** Menambahkan elemen terakhir *** */
 void deleteAtLISTTASK(ListTASK *l, ElTypeTASK *val, int idx)
 {
+    int i;
     *val = (*l).contents[idx];
     if (lengthLISTTASK(*l) > 1)
     {
-        for (int i = idx; i < (*l).Neff - 1; i++)
+        for (i = idx; i < (*l).Neff - 1; i++)
         {
             (*l).contents[i] = (*l).contents[i + 1];
         }
@@ -110,11 +114,12 @@ ListTASK sortLISTTASK(ListTASK l)
     int idxMin = 0;
     int n = l.Neff;
     ElTypeTASK val;
-    for (int i = 0; i < n; i++)
+    int i, j;
+    for (i = 0; i < n; i++)
     {
         int minVal = l.contents[0].timeTASK;
         int idxMin = 0;
-        for (int j = 0; j < l.Neff; j++)
+        for (j = 0; j < l.Neff; j++)
         {
             if (l.contents[j].timeTASK < minVal)
             {

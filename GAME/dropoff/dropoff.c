@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include "dropoff.h"
 #include "../pickup/pickup.h"
+#include "../ability/ability.h"
 #include "../in_progress/in_progress.h"
+
 void processMoneyDropOff(ElTypeTASK task, long *money){
     if (task.itemTASK == 'N'){
         *money += 200;
@@ -12,13 +14,21 @@ void processMoneyDropOff(ElTypeTASK task, long *money){
 }
 
 
-void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *money, int *successfulDroppedOff){
+void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *money, int *successfulDroppedOff, TIME *t){
     if (TOP_STACK(*bag).dropOffTASK != currentloc.A){
         printf("Tidak ada pesanan untuk di drop off!");
     } else {
         ElTypeTASK taskdone; 
         PopBAG(bag, &taskdone);
         *successfulDroppedOff += 1;
+
+        // MENGAKTIFKAN SPEED BOOST JIKA BERHASIL MENGANTARKAN HEAVY ITEM
+        extern int moveFreq;
+        if (taskdone.itemTASK == 'H') {
+            printf("Ability Speed Boost telah aktif\n");
+            (*t).incTime = 0.5;
+        }
+        
         int i; 
         i = indexOfLINKEDLIST(*in_progress, taskdone);
         deleteAtLINKEDLIST(in_progress, i, &taskdone);

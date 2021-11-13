@@ -7,7 +7,7 @@
 
 /* Waktu akan bertambah 1 unit setiap Mobita berpindah 2 lokasi. Efek berlangsung
 hingga Mobita telah melewati 10 lokasi */
-void speedBoost(TIME *t, ElTypeTASK item);
+void speedBoost(TIME *t, int *moveFreq);
 /* Kapasitas tas bertambah 1 */
 void increaseCapacity(Stack *b);
 

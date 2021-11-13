@@ -34,7 +34,7 @@ boolean isFullLISTGADGET(ListGADGET l)
 void displayLISTINVENTORY(ListGADGET l)
 {
     int i;
-    for (int i = 0; i < CAPACITY_LISTGAGDET; i++)
+    for (i = 0; i < CAPACITY_LISTGAGDET; i++)
     {
         int id = l.contents[i].idGADGET;
         if (id == VAL_UNDEF)
@@ -62,7 +62,7 @@ void displayLISTINVENTORY(ListGADGET l)
 void displayLISTGADGETSTORE(ListGADGET l)
 {
     int i;
-    for (int i = 0; i < CAPACITY_LISTGAGDET; i++)
+    for (i = 0; i < CAPACITY_LISTGAGDET; i++)
     {
         int id = l.contents[i].idGADGET;
         if (id == 1)

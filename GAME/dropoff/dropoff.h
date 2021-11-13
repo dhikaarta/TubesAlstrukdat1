@@ -7,13 +7,13 @@
 #include "../../ADT Linked List/list_linked.h"
 #include "../in_progress/in_progress.h"
 #include "../pickup/pickup.h"
+
 void processMoneyDropOff(ElTypeTASK task, long *money);
 /* Update money tergantung pada pesanan yang di drop off */
 
-void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *money, int *successfulDroppedOff);
+void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *money, int *successfulDroppedOff, TIME *t);
 /* Prosedur dropoff pesanan pada currentloc, update in_progress list, update bag, dan update jumlah pesanan yang berhasil di drop off*/
 /* I.S. currentloc, bag, in_progress, money, dan successfuldropped off terdefinisi */
 /* F.S. Jika pesanan pada top of bag sesuai, maka item akan di drop, bag akan di pop, in_progress akan terupdate, jumlah pesanan berhasil diantar bertambah satu, Nobita dapet duit */
-
 
 #endif

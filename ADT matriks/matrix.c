@@ -388,9 +388,10 @@ Matrix makeMatrixAdj(int L)
     Matrix Madj; int nRow = L + 1; int nCol = L + 1;
     int val;
     CreateMATRIX(nRow,nCol, &Madj);
-    for(int i = 0;i < nRow;i++)
+    int i,j;
+    for(i = 0;i < nRow;i++)
     {
-        for(int j = 0; j< nCol;j++)
+        for(j = 0; j< nCol;j++)
         {
             advWORDfile();
             val = atoi(currentWordfile.contents);

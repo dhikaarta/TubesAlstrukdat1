@@ -13,7 +13,8 @@ Word dapetInput()
     while (!endWord)
     {
 
-        for (int j = 0; j < currentWord.length; j++)
+        int j;
+        for (j = 0; j < currentWord.length; j++)
         {
             kataInput.contents[j + kataInput.length] = currentWord.contents[j];
         }
