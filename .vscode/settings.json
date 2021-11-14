@@ -13,6 +13,8 @@
         "in_progress.h": "c",
         "pickup.h": "c",
         "dropoff.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "queuetask.h": "c",
+        "node.h": "c"
     }
 }

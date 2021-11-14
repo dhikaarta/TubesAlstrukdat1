@@ -9,6 +9,7 @@
 #include "../GAME/in_progress/in_progress.h"
 #include "../GAME/pickup/pickup.h"
 #include "../GAME/dropoff/dropoff.h"
+#include "../ADT Queue/queuetask.h"
 
 Word kataNewGame = {"NEWGAME", 7};
 Word kataExit = {"EXIT", 4};
@@ -86,7 +87,7 @@ int main()
             // MEMBUAT MAP
             CreateMAP(N, M, &MAP);
             // MEMBACA ELEMEN DARI MAP DENGAN MENANDAI TITIK TITIK YANG TELAH DIINPUT
-            readMAPConfiguration(&MAP, arrayLoc, L+1);
+            readMAPConfiguration(&MAP, arrayLoc, L + 1);
 
             // MEMBUAT MATRIX ADJ
             Matrix Madj = makeMatrixAdj(L);
@@ -103,8 +104,11 @@ int main()
             ListTASK lTask;
             ReadLISTTASKfile(&lTask, P);
             lTask = sortLISTTASK(lTask);
-            displayLISTTASK(lTask);
-            printf("\n");
+
+            // Memindahkan isi List Task ke Queue Task
+            QueueTASK qTask;
+            CreateQUEUETASK(&qTask, lTask.Neff);
+            qTask = CopyListToQueueTASK(lTask);
 
             // Untuk inisialisasi GADGET dan INVENTORY
             long money = 20000;
@@ -165,16 +169,17 @@ int main()
                         printf("ENTER COMMAND: ");
                         kataInput = getInput();
                         lokasiDipilih = atoi(kataInput.contents);
-                        
+
                         printf("\nNobita sekarang berada di titik ");
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
-                            updateTimeToDoList(&lTask, &time, &LinkedToDoList);
+                            updateTimeToDoList(&qTask, &time, &LinkedToDoList);
                             // time.incTime = 1;
-                            if (time.incTime == 0.5) {
+                            if (time.incTime == 0.5)
+                            {
                                 moveFreq++;
-                                speedBoost(&time, &moveFreq);
+                                speedBoost(&time, &moveFreq, b);
                             }
                             else if (time.incTime == 0)
                             {
@@ -238,7 +243,7 @@ int main()
                 {
                     printHelp();
                 }
-                else if (isEmptyLISTTASK(lTask) && isEmptyLINKEDLIST(LinkedToDoList) && isEmptyLINKEDLIST(inProgressList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                else if (IsEmptyQUEUETASK(qTask) && isEmptyLINKEDLIST(LinkedToDoList) && isEmptyLINKEDLIST(inProgressList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
                 {
                     printf("Game Selesai !\n");
                     printf("Waktu yang dilampaui : %i\n", time);
@@ -249,7 +254,6 @@ int main()
                 {
                     printf("command tidak valid ! kembali ke menu awal\n");
                 }
-            
             }
         }
         else if (isKataEqual(kataInput, kataExit))

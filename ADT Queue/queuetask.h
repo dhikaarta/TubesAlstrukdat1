@@ -1,6 +1,5 @@
 /* MODUL QUEUE TASK */
 
-
 #ifndef QUEUETASK_H
 #define QUEUETASK_H
 #include <stdio.h>
@@ -12,10 +11,10 @@
 #define VAL_UNDEF -999
 /* Definisi tipe elemen pesanan */
 
-
 /* Definisi Queue Task (Dinamis) */
-typedef struct {
-    ElTypeTASK* bufferQUEUETASK;
+typedef struct
+{
+    ElTypeTASK *bufferQUEUETASK;
     int idxHeadTASK;
     int idxTailTASK;
     int capacityQUEUETASK;
@@ -50,7 +49,7 @@ boolean IsFullQUEUETASK(QueueTASK qt);
 int LengthQUEUETASK(QueueTASK qt);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika qt kosong. */
 
-/* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */                                                 
+/* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */
 
 void ReadQUEUETASK(QueueTASK *qt, int nTask);
 /* I.S. qt terdefinisi */
@@ -60,9 +59,10 @@ void ReadQUEUETASKfile(QueueTASK *qt);
 /* I.S. qt terdefinisi */
 /* F.S. Memasukkan elemen ElTypeTASK ke dalam qt dari file */
 
+QueueTASK CopyListToQueueTASK(ListTASK l);
+
 void displayQUEUETASK(QueueTASK qt);
 /* Display task yang ada */
-
 
 /* *** Primitif Add/Delete *** */
 void EnqueueQUEUETASK(QueueTASK *qt, ElTypeTASK task);

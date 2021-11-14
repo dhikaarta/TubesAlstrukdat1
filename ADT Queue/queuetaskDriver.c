@@ -1,11 +1,12 @@
 #include "queuetask.h"
-#include "queuetask.c"
 
-int main(){
-    QueueTASK qt; 
-    int nTask; 
-    scanf("%d\n", &nTask);
-    CreateQUEUETASK(&qt, nTask);
-    ReadQUEUETASK(&qt, nTask);
+int main()
+{
+    QueueTASK qt;
+    ListTASK lt;
+    CreateLISTTASK(&lt);
+    ReadLISTTASK(&lt);
+    lt = sortLISTTASK(lt);
+    qt = CopyListToQueueTASK(lt);
     displayQUEUETASK(qt);
 }

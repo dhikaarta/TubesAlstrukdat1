@@ -5,11 +5,14 @@
 int main()
 {
     // Di Mainn (ini udah sama dhika)
-    ListTASK l, l2;
+    ListTASK l;
     CreateLISTTASK(&l);
-    CreateLISTTASK(&l2);
     ReadLISTTASK(&l);
-    l2 = sortLISTTASK(l);
+    l = sortLISTTASK(l);
+
+    QueueTASK(qTask);
+    CreateQUEUETASK(&qTask, l.Neff);
+    qTask = CopyListToQueueTASK(l);
 
     // Inisialisasi di MAIN
     List LinkedToDoList;
@@ -21,18 +24,10 @@ int main()
     long money = 20;
 
     // Setiap melakukan MOVE:
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
-    updateTimeToDoList(&l2, &time, &LinkedToDoList);
+    updateTimeToDoList(&qTask, &time, &LinkedToDoList);
+    updateTimeToDoList(&qTask, &time, &LinkedToDoList);
+    updateTimeToDoList(&qTask, &time, &LinkedToDoList);
+    updateTimeToDoList(&qTask, &time, &LinkedToDoList);
     displayCurrentTimeAndMoney(time, money);
     displayLINKEDLIST(LinkedToDoList);
 

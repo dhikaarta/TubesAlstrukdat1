@@ -9,14 +9,14 @@ void timeInitial(TIME *t)
     (*t).incTime = 1;
 }
 
-void updateTimeToDoList(ListTASK *l, TIME *t, List *LinkedToDoList)
+void updateTimeToDoList(QueueTASK *qTask, TIME *t, List *LinkedToDoList)
 {
     (*t).currentTime = (*t).currentTime + (*t).incTime;
 
-    while ((*l).contents[0].timeTASK == (int)floor((*t).currentTime) && lengthLISTTASK(*l) != 0)
+    while (HEAD_QUEUETASK(*qTask).timeTASK == (int)floor((*t).currentTime) && LengthQUEUETASK(*qTask) != 0)
     {
         ElTypeTASK val;
-        deleteAtLISTTASK(l, &val, 0);
+        DequeueQUEUETASK(qTask, &val);
         insertLastLINKEDLIST(LinkedToDoList, val);
     }
 }
