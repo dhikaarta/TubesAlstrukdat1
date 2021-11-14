@@ -80,9 +80,9 @@ void insertLastLISTGADGET(ListGADGET *l, int id, long price);
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
 void deleteLISTGADGET(ListGADGET *l, int id);
-/* Proses : Menghapus elemen terakhir List */
+/* Proses : Menghapus elemen dimana id berada */
 /* I.S. List tidak kosong */
-/* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
+/* F.S. val adalah nilai elemen dengan id sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 
