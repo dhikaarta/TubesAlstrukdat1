@@ -4,8 +4,6 @@
 #include "../../ADT Linked List/list_linked.h"
 #include <math.h>
 
-QueueTASK q;
-
 #ifndef TIME_TO_DO_LIST
 #define TIME_TO_DO_LIST
 
