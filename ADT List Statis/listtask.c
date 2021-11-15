@@ -22,7 +22,7 @@ void ReadLISTTASK(ListTASK *l)
         scanf("%d %c %c %c", &((*l).contents[i].timeTASK), &((*l).contents[i].pickUpTASK), &((*l).contents[i].dropOffTASK), &((*l).contents[i].itemTASK));
         if ((*l).contents[i].itemTASK == 'P')
         {
-            scanf(" %d", &(*l).contents[i].timeExpTASK);
+            scanf(" %f", &(*l).contents[i].timeExpTASK);
             (*l).contents[i].initTimeExpTASK = (*l).contents[i].timeExpTASK;
         }
     }
