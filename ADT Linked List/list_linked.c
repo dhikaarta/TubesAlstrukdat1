@@ -343,7 +343,7 @@ int lengthLINKEDLIST(List l)
     else
     {
         p = l;
-        ctr = 0;
+        ctr = 1;
         while (NEXT(p) != NULL)
         {
             ctr++;

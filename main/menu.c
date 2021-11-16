@@ -22,10 +22,12 @@ Word kataInProgress = {"IN_PROGRESS", 11};
 Word kataBuy = {"BUY", 3};
 Word kataInventory = {"INVENTORY", 9};
 Word kataHelp = {"HELP", 4};
+Word kataSaveGame = {"SAVE_GAME", 9};
 
 LOCATION nobita;
 LOCATION pickUp;
 LOCATION dropOff;
+FILE *fptr;
 
 int moveFreq = 0;
 
@@ -242,6 +244,97 @@ int main()
                 else if (isKataEqual(kataInput, kataHelp))
                 {
                     printHelp();
+                }
+                else if(isKataEqual(kataInput, kataSaveGame))
+                {
+                    int i,j;
+                    Address p;
+                    char namaFile[32] = "../GAME/SAVE/";
+                    printf("Masukkan nama file save : \n");
+                    kataInput = getInput();
+                     printf("%s\n", kataInput.contents);
+                    strcat(namaFile, kataInput.contents);
+                    printf("%s\n", namaFile);
+                    fptr = fopen(namaFile,"w");
+                    fprintf(fptr, "%i %i\n", N,M);
+                    fprintf(fptr, "%i %i\n%i\n", i_headquarters,j_headquarters,L);
+                    for(i = 0; i<=L; i++)
+                    {
+                        fprintf(fptr, "%c %i %i\n", CHAR(arrayLoc[i]),LOC_X(arrayLoc[i]), LOC_Y(arrayLoc[i]));
+                    }
+                    for(i= 0; i <ROWSMATRIX(Madj); i++){
+                        for (j = 0; j<COLSMATRIX(Madj); j++){
+                            if (j == getLastIdxRowMATRIX(Madj)){
+                                fprintf(fptr,"%d", ELMTMATRIX(Madj,i,j));
+                            }else {
+                                fprintf(fptr,"%d ", ELMTMATRIX(Madj,i,j));
+                            }
+                        }
+
+                        if (i < getLastIdxRowMATRIX(Madj)){
+                        fprintf(fptr,"\n");
+                        } 
+
+                    }
+
+                    fprintf(fptr,"\n%i\n",LengthQUEUETASK(qTask));
+                    for (i = IDX_HEAD_QUEUETASK(qTask); i < IDX_HEAD_QUEUETASK(qTask) + LengthQUEUETASK(qTask); i++)
+                    {
+                        if(qTask.bufferQUEUETASK[i].itemTASK =='P')
+                        {
+                             fprintf(fptr,"%d %c %c %c %f\n",  qTask.bufferQUEUETASK[i].timeTASK, qTask.bufferQUEUETASK[i].pickUpTASK, qTask.bufferQUEUETASK[i].dropOffTASK, qTask.bufferQUEUETASK[i].itemTASK, qTask.bufferQUEUETASK[i].timeExpTASK);
+                        }
+                        else{
+                            fprintf(fptr,"%d %c %c %c\n",  qTask.bufferQUEUETASK[i].timeTASK, qTask.bufferQUEUETASK[i].pickUpTASK, qTask.bufferQUEUETASK[i].dropOffTASK, qTask.bufferQUEUETASK[i].itemTASK);
+                        }
+                        
+                    }
+
+                    fprintf(fptr,"%f %f\n", time.currentTime, time.incTime);
+                    fprintf(fptr,"%c %d %d\n", CHAR(nobita), LOC_X(nobita), LOC_Y(nobita));
+                    fprintf(fptr,"%li\n", money);
+                    fprintf(fptr, "%i\n", listInventory.Neff);
+                    for(i =0; i < listInventory.Neff;i++)
+                    {
+                        fprintf(fptr,"%i %li\n", listInventory.contents[i].idGADGET,listInventory.contents[i].priceGADGET);
+                    }
+                    fprintf(fptr, "%i\n", lengthLINKEDLIST(LinkedToDoList));
+                   
+                    p = FIRST(LinkedToDoList);
+                    while(p!= NULL)
+                    {
+                        if(ITEMTASK(p) == 'P')
+                        {
+                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                        }
+                        else
+                        {
+                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p));
+                        }
+                        p = NEXT(p);
+                    }
+                    fprintf(fptr, "%i\n", b.currentCAPACITYSTACK);
+                    fprintf(fptr, "%i\n", lengthLINKEDLIST(inProgressList));
+                    p = FIRST(inProgressList);
+                    while(p!= NULL)
+                    {
+                        if(ITEMTASK(p) == 'P')
+                        {
+                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                        }
+                        else
+                        {
+                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p));
+                        }
+                        p = NEXT(p);
+                    }
+                    fprintf(fptr,"%i", moveFreq);
+                    
+
+
+
+
+                    fclose(fptr);     
                 }
                 else if (IsEmptyQUEUETASK(qTask) && isEmptyLINKEDLIST(LinkedToDoList) && isEmptyLINKEDLIST(inProgressList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
                 {
