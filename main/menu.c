@@ -61,7 +61,7 @@ int main()
     while (flag)
     {
 
-        printf("this is start\n");
+        //printf("this is start\n");
         Word kataInput = getInput();
 
         if (isKataEqual(kataInput, kataNewGame))
@@ -70,10 +70,10 @@ int main()
             kataInput = getInput();
 
             startWORDfile(kataInput.contents);
-            printf("%s\n", currentWordfile.contents);
+            //printf("%s\n", currentWordfile.contents);
             N = atoi(currentWordfile.contents);
             advWORDfile();
-            printf("%s\n", currentWordfile.contents);
+            //printf("%s\n", currentWordfile.contents);
             M = atoi(currentWordfile.contents);
             advWORDfile();
             i_headquarters = atoi(currentWordfile.contents);
@@ -85,7 +85,7 @@ int main()
             // MEMBUAT ARRAY OF LOC UNTUK HEADQUARTERS DAN TITIK
             LOCATION *arrayLoc = makeArrayOfLOCATION(L, i_headquarters, j_headquarters);
             // MENGETES ARRAY OF LOC
-            displaylistLOCATION(arrayLoc, L);
+            //displaylistLOCATION(arrayLoc, L);
             // MENGINISIASI MAP BERTIPE MATRIX
             Matrix MAP;
             // MEMBUAT MAP
@@ -96,8 +96,7 @@ int main()
             // MEMBUAT MATRIX ADJ
             Matrix Madj = makeMatrixAdj(L);
             // MENAMPILAN MATRIX ADJ
-            displayMATRIX(Madj);
-            printf("\n");
+            //displayMATRIX(Madj);
 
             // NOBITA PERTAMA KALI DI SET DI HEADQUARTERS
             nobita = getLocHQ(arrayLoc);
@@ -136,18 +135,18 @@ int main()
 
             int successfulDropOff = 0;
 
-            while (true)
+            while (!IsEmptyQUEUETASK(qTask) || !isEmptyLINKEDLIST(LinkedToDoList) || !isEmptyLINKEDLIST(inProgressList) || LOC_X(nobita) != i_headquarters || LOC_Y(nobita) != j_headquarters)
             {
-                printf("Mobita berada di posisi ");
+                printf("\nMobita berada di posisi ");
                 TulisLOCATION(nobita);
                 printf("\n");
                 displayCurrentTimeAndMoney(time, money);
-                printf("ENTER COMMAND : ");
+                printf("\nENTER COMMAND : ");
                 kataInput = getInput();
-
+                printf("\n");
+            
                 if (isKataEqual(kataInput, kataMove))
                 {
-                    printf("itu masuk sini \n");
                     int i;
                     // INISIASI LOKASI YANG AKAN DIPILIH
                     int lokasiDipilih;
@@ -193,18 +192,17 @@ int main()
                             }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                             //updateisi todolist
+                            TulisLOCATION(nobita);
+                            printf("!");
+                            printf("\n");
+                            printf("Waktu: %.f\n", floor(time.currentTime));
                         }
                         else
                         {
                             nobita = nobita;
                         }
-                        TulisLOCATION(nobita);
-                        printf("!");
-                        printf("\n");
-                        printf("%i\n", lokasiDipilih);
-
                     } while (lokasiDipilih != 0);
-                    printf("tes\n");
+                    
                 }
                 else if (isKataEqual(kataInput, kataPickUp))
                 {
@@ -340,10 +338,8 @@ int main()
 
                     fclose(fptr);     
                 }
-                else if (IsEmptyQUEUETASK(qTask) && isEmptyLINKEDLIST(LinkedToDoList) && isEmptyLINKEDLIST(inProgressList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                else if (isKataEqual(kataInput,kataExit))
                 {
-                    printf("Game Selesai !\n");
-                    printf("Waktu yang dilampaui : %i\n", time);
 
                     break;
                 }
@@ -352,7 +348,12 @@ int main()
                     printf("command tidak valid ! kembali ke menu awal\n");
                 }
             }
+            printf("Game Selesai !\n");
+            printf("Waktu yang dilampaui : %f sekon\n", floor(time.currentTime));
+            printf("Pesanan yang berhasil diantar : %i", successfulDropOff);
+            flag = false;
         }
+        //Kode load game
         else if(isKataEqual(kataInput,kataLoad))
         {
             int i,id;
@@ -365,7 +366,7 @@ int main()
             startWORDfile(saveFile);
             N = atoi(currentWordfile.contents);
             advWORDfile();
-            printf("%s\n", currentWordfile.contents);
+            //printf("%s\n", currentWordfile.contents);
             M = atoi(currentWordfile.contents);
             advWORDfile();
             i_headquarters = atoi(currentWordfile.contents);
@@ -377,7 +378,7 @@ int main()
             // MEMBUAT ARRAY OF LOC UNTUK HEADQUARTERS DAN TITIK
             LOCATION *arrayLoc = makeArrayOfLOCATION(L, i_headquarters, j_headquarters);
             // MENGETES ARRAY OF LOC
-            displaylistLOCATION(arrayLoc, L);
+            //displaylistLOCATION(arrayLoc, L);
             // MENGINISIASI MAP BERTIPE MATRIX
             Matrix MAP;
             // MEMBUAT MAP
@@ -388,7 +389,7 @@ int main()
             // MEMBUAT MATRIX ADJ
             Matrix Madj = makeMatrixAdj(L);
             // MENAMPILAN MATRIX ADJ
-            displayMATRIX(Madj);
+            //displayMATRIX(Madj);
             advWORDfile();
             P = atoi(currentWordfile.contents);
             ListTASK lTask;
@@ -470,13 +471,14 @@ int main()
             int successfulDropOff;
             successfulDropOff = atoi(currentWordfile.contents);
             ListGADGET listGadgetStore = initialGadgetStore();
-            while (true)
+            while (!IsEmptyQUEUETASK(qTask) || !isEmptyLINKEDLIST(LinkedToDoList) || !isEmptyLINKEDLIST(inProgressList) || LOC_X(nobita) != i_headquarters || LOC_Y(nobita) != j_headquarters)
             {
-                printf("Mobita berada di posisi ");
+                printf("\nMobita berada di posisi ");
                 TulisLOCATION(nobita);
                 printf("\n");
                 displayCurrentTimeAndMoney(time, money);
-                printf("ENTER COMMAND : ");
+                printf("\nENTER COMMAND : ");
+                printf("\n");
                 kataInput = getInput();
 
                 if (isKataEqual(kataInput, kataMove))
@@ -525,15 +527,15 @@ int main()
                             }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                             //updateisi todolist
+                            TulisLOCATION(nobita);
+                            printf("!");
+                            printf("\n");
+                            printf("%i\n", lokasiDipilih);
                         }
                         else
                         {
                             nobita = nobita;
                         }
-                        TulisLOCATION(nobita);
-                        printf("!");
-                        printf("\n");
-                        printf("%i\n", lokasiDipilih);
 
                     } while (lokasiDipilih != 0);
                     printf("tes\n");
@@ -672,10 +674,8 @@ int main()
 
                     fclose(fptr);     
                 }
-                else if (IsEmptyQUEUETASK(qTask) && isEmptyLINKEDLIST(LinkedToDoList) && isEmptyLINKEDLIST(inProgressList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                else if (isKataEqual(kataInput,kataExit))
                 {
-                    printf("Game Selesai !\n");
-                    printf("Waktu yang dilampaui : %i\n", time);
 
                     break;
                 }
@@ -684,6 +684,10 @@ int main()
                     printf("command tidak valid ! kembali ke menu awal\n");
                 }
             }
+            printf("Game Selesai !\n");
+            printf("Waktu yang dilampaui : %f sekon\n", floor(time.currentTime));
+            printf("Pesanan yang berhasil diantar : %i", successfulDropOff);
+            flag = false;
 
         }
         else if (isKataEqual(kataInput, kataExit))
