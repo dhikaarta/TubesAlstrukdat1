@@ -57,10 +57,29 @@ int main()
 {
     boolean flag = true;
     int N, M, i_headquarters, j_headquarters, L, P;
+    //membaca file dri ascii art
+        FILE *fptr;
 
+        char c;
+        // Open file
+        fptr = fopen("ascii1.txt", "r");
+        if (fptr == NULL)
+        {
+            printf("Cannot open file \n");
+            exit(0);
+        }
+
+        // Read contents from file
+        c = fgetc(fptr);
+        while (c != EOF)
+        {
+            printf ("%c", c);
+            c = fgetc(fptr);
+        }
+
+        fclose(fptr);
     while (flag)
     {
-
         //printf("this is start\n");
         Word kataInput = getInput();
 
