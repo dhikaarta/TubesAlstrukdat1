@@ -316,7 +316,7 @@ void displayToDoList(List l)
             }
             if (ITEMTASK(p) == 'P')
             {
-                printf("(Perishable Item, sisa waktu %d)", TIMEEXPTASK(p));
+                printf("(Perishable Item, sisa waktu %.1f)", TIMEEXPTASK(p));
             }
             if (ITEMTASK(p) == 'V')
             {
