@@ -12,6 +12,7 @@
 #include "../ADT Queue/queuetask.h"
 
 Word kataNewGame = {"NEWGAME", 7};
+Word kataLoad = {"LOADGAME",8};
 Word kataExit = {"EXIT", 4};
 Word kataMove = {"MOVE", 4};
 Word kataPickUp = {"PICK_UP", 7};
@@ -27,6 +28,7 @@ Word kataSaveGame = {"SAVE_GAME", 9};
 LOCATION nobita;
 LOCATION pickUp;
 LOCATION dropOff;
+long money;
 FILE *fptr;
 
 int moveFreq = 0;
@@ -113,7 +115,7 @@ int main()
             qTask = CopyListToQueueTASK(lTask);
 
             // Untuk inisialisasi GADGET dan INVENTORY
-            long money = 20000;
+            money = 20000;
             ListGADGET listGadgetStore = initialGadgetStore();
             ListGADGET listInventory;
             CreateLISTGADGET(&listInventory);
@@ -250,15 +252,15 @@ int main()
                     int i,j;
                     Address p;
                     char namaFile[32] = "../GAME/SAVE/";
-                    printf("Masukkan nama file save : \n");
-                    kataInput = getInput();
-                     printf("%s\n", kataInput.contents);
+                    printf("Masukkan nama file save : ");
+                    kataInput = getInput();printf("\n");
+    
                     strcat(namaFile, kataInput.contents);
-                    printf("%s\n", namaFile);
+                    
                     fptr = fopen(namaFile,"w");
                     fprintf(fptr, "%i %i\n", N,M);
                     fprintf(fptr, "%i %i\n%i\n", i_headquarters,j_headquarters,L);
-                    for(i = 0; i<=L; i++)
+                    for(i = 1; i<=L; i++)
                     {
                         fprintf(fptr, "%c %i %i\n", CHAR(arrayLoc[i]),LOC_X(arrayLoc[i]), LOC_Y(arrayLoc[i]));
                     }
@@ -329,7 +331,7 @@ int main()
                         p = NEXT(p);
                     }
                     fprintf(fptr,"%i", moveFreq);
-                    
+                    fprintf(fptr, "%i", successfulDropOff);
 
 
 
@@ -348,6 +350,339 @@ int main()
                     printf("command tidak valid ! kembali ke menu awal\n");
                 }
             }
+        }
+        else if(isKataEqual(kataInput,kataLoad))
+        {
+            int i,id;
+            Address p;
+            long price;
+            char saveFile[32] = "../GAME/SAVE/";
+            printf("Masukkan nama savefile :");
+            kataInput = getInput();
+            strcat(saveFile, kataInput.contents);
+            startWORDfile(saveFile);
+            N = atoi(currentWordfile.contents);
+            advWORDfile();
+            printf("%s\n", currentWordfile.contents);
+            M = atoi(currentWordfile.contents);
+            advWORDfile();
+            i_headquarters = atoi(currentWordfile.contents);
+            advWORDfile();
+            j_headquarters = atoi(currentWordfile.contents);
+            advWORDfile();
+            L = atoi(currentWordfile.contents);
+
+            // MEMBUAT ARRAY OF LOC UNTUK HEADQUARTERS DAN TITIK
+            LOCATION *arrayLoc = makeArrayOfLOCATION(L, i_headquarters, j_headquarters);
+            // MENGETES ARRAY OF LOC
+            displaylistLOCATION(arrayLoc, L);
+            // MENGINISIASI MAP BERTIPE MATRIX
+            Matrix MAP;
+            // MEMBUAT MAP
+            CreateMAP(N, M, &MAP);
+            // MEMBACA ELEMEN DARI MAP DENGAN MENANDAI TITIK TITIK YANG TELAH DIINPUT
+            readMAPConfiguration(&MAP, arrayLoc, L + 1);
+
+            // MEMBUAT MATRIX ADJ
+            Matrix Madj = makeMatrixAdj(L);
+            // MENAMPILAN MATRIX ADJ
+            displayMATRIX(Madj);
+            advWORDfile();
+            P = atoi(currentWordfile.contents);
+            ListTASK lTask;
+            ReadLISTTASKfile(&lTask, P);
+            lTask = sortLISTTASK(lTask);
+
+            // Memindahkan isi List Task ke Queue Task
+            QueueTASK qTask;
+            CreateQUEUETASK(&qTask, lTask.Neff);
+            qTask = CopyListToQueueTASK(lTask);
+            advWORDfile();
+            TIME time;
+            time.currentTime = atof(currentWordfile.contents);
+            advWORDfile();
+            time.incTime = atof(currentWordfile.contents);
+            advWORDfile();
+            CHAR(nobita) = currentWordfile.contents[0];
+            advWORDfile();
+            LOC_X(nobita) = atoi(currentWordfile.contents);
+            advWORDfile();
+            LOC_Y(nobita) = atoi(currentWordfile.contents);
+            advWORDfile();
+            money = atoll(currentWordfile.contents);
+            int invLength;
+            advWORDfile();
+            invLength = atoi(currentWordfile.contents);
+            ListGADGET listInventory;
+            CreateLISTGADGET(&listInventory);
+            for(i = 0; i < invLength; i++)
+            {
+                advWORDfile();
+                id = atoi(currentWordfile.contents);
+                advWORDfile();
+                price = atoi(currentWordfile.contents);
+                insertLastLISTGADGET(&listInventory, id,price);
+
+            }
+            advWORDfile();
+            int toDoLength;
+            toDoLength = atoi(currentWordfile.contents);
+            List LinkedToDoList;
+            CreateLINKEDLIST(&LinkedToDoList);
+            for(i = 0; i < toDoLength; i++)
+            {
+                ReadLINKEDLISTTASKfile(&LinkedToDoList);
+            }
+            advWORDfile();
+            Stack b; CreateBAG(&b);
+            int bagSize;
+            bagSize = atoi(currentWordfile.contents);
+            List inProgressList;
+            int inProgressLength;
+            CreateLINKEDLIST(&inProgressList);
+            advWORDfile();
+            inProgressLength = atoi(currentWordfile.contents);
+            for(i=0;i<inProgressLength;i++)
+            {
+                ReadLINKEDLISTTASKfile(&inProgressList);
+            }
+            p = FIRST(inProgressList);
+            while(p!=NULL)
+            {
+                ElTypeTASK task;
+                task.timeTASK = TIMETASK(p);
+                task.pickUpTASK= PICKUPTASK(p);
+                task.dropOffTASK= DROPOFFTASK(p);
+                task.itemTASK = ITEMTASK(p);
+                if (task.itemTASK == 'P')
+                {
+                    
+                    task.timeExpTASK = TIMEEXPTASK(p);
+                }
+                PushBAG(&b, task);
+                p = NEXT(p);
+            }
+            advWORDfile();
+            moveFreq = atoi(currentWordfile.contents);
+            advWORDfile();
+            int successfulDropOff;
+            successfulDropOff = atoi(currentWordfile.contents);
+            ListGADGET listGadgetStore = initialGadgetStore();
+            while (true)
+            {
+                printf("Mobita berada di posisi ");
+                TulisLOCATION(nobita);
+                printf("\n");
+                displayCurrentTimeAndMoney(time, money);
+                printf("ENTER COMMAND : ");
+                kataInput = getInput();
+
+                if (isKataEqual(kataInput, kataMove))
+                {
+                    printf("itu masuk sini \n");
+                    int i;
+                    // INISIASI LOKASI YANG AKAN DIPILIH
+                    int lokasiDipilih;
+                    do
+                    {
+                        // INISIASI JUMLAH LOKASI YANG DAPAT DICAPAI
+                        int nPossibleMoves;
+                        // MENGINISIASI ARRAY OF LOCATION DARI JUMLAH LOKASI YANG DAPAT DICAPAI
+                        LOCATION *arrayPosMove;
+                        // MEMBUAT ARRAY OF LOCATION MANA SAJA YANG DAPAT DICAPAI
+                        arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
+                        printf("\nPosisi yang dapat dicapai:\n");
+                        // MENAMPILKAN KE USER AGAR DAPAT DIPILIH
+                        for (i = 0; i < nPossibleMoves; i++)
+                        {
+                            printf("%d. %c (%d,%d)\n", i + 1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
+                        }
+                        // MENAMPILKAN PETA DENGAN WARNA
+                        displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, b);
+                        // MENERIMA INPUTAN USER UNTUK LOKASI YANG DIPILIH
+                        printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali)\n");
+                        printf("\n");
+                        printf("ENTER COMMAND: ");
+                        kataInput = getInput();
+                        lokasiDipilih = atoi(kataInput.contents);
+
+                        printf("\nNobita sekarang berada di titik ");
+                        // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
+                        if (lokasiDipilih != 0)
+                        {
+                            updateTimeToDoList(&qTask, &time, &LinkedToDoList);
+                            // time.incTime = 1;
+                            if (time.incTime == 0.5)
+                            {
+                                moveFreq++;
+                                speedBoost(&time, &moveFreq, b);
+                            }
+                            else if (time.incTime == 0)
+                            {
+                                time.incTime = 1;
+                            }
+                            nobita = arrayPosMove[lokasiDipilih - 1];
+                            //updateisi todolist
+                        }
+                        else
+                        {
+                            nobita = nobita;
+                        }
+                        TulisLOCATION(nobita);
+                        printf("!");
+                        printf("\n");
+                        printf("%i\n", lokasiDipilih);
+
+                    } while (lokasiDipilih != 0);
+                    printf("tes\n");
+                }
+                else if (isKataEqual(kataInput, kataPickUp))
+                {
+                    pickUpAtloc(nobita, &b, &inProgressList, &LinkedToDoList, &time);
+                }
+                else if (isKataEqual(kataInput, kataDropOff))
+                {
+                    dropOffAtloc(nobita, &b, &inProgressList, &money, &successfulDropOff, &time);
+                }
+                else if (isKataEqual(kataInput, kataMap))
+                {
+                    int nPossibleMoves;
+                    LOCATION *arrayPosMove;
+                    arrayPosMove = makeArrayOfPossibleMoves(Madj, arrayLoc, nobita, L, &nPossibleMoves);
+                    displayMAPColor(MAP, nobita, arrayPosMove, nPossibleMoves, LinkedToDoList, b);
+                    printf("\n");
+                }
+                else if (isKataEqual(kataInput, kataToDo))
+                {
+                    displayToDoList(LinkedToDoList);
+                }
+                else if (isKataEqual(kataInput, kataInProgress))
+                {
+                    displayInProgress(inProgressList);
+                }
+                else if (isKataEqual(kataInput, kataBuy))
+                {
+                    if (LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                    {
+                        gadgetStore(listGadgetStore, &listInventory, &money);
+                    }
+                    else
+                    {
+                        printf("Anda hanya bisa membeli gadget di Headquarters!!\n");
+                    }
+                }
+                else if (isKataEqual(kataInput, kataInventory))
+                {
+                    useInventory(&listInventory, &b, &time);
+                }
+                else if (isKataEqual(kataInput, kataHelp))
+                {
+                    printHelp();
+                }
+                else if(isKataEqual(kataInput, kataSaveGame))
+                {
+                    int i,j;
+                    Address p;
+                    char namaFile[32] = "../GAME/SAVE/";
+                    printf("Masukkan nama file save : ");
+                    kataInput = getInput();printf("\n");
+    
+                    strcat(namaFile, kataInput.contents);
+                    
+                    fptr = fopen(namaFile,"w");
+                    fprintf(fptr, "%i %i\n", N,M);
+                    fprintf(fptr, "%i %i\n%i\n", i_headquarters,j_headquarters,L);
+                    for(i = 1; i<=L; i++)
+                    {
+                        fprintf(fptr, "%c %i %i\n", CHAR(arrayLoc[i]),LOC_X(arrayLoc[i]), LOC_Y(arrayLoc[i]));
+                    }
+                    for(i= 0; i <ROWSMATRIX(Madj); i++){
+                        for (j = 0; j<COLSMATRIX(Madj); j++){
+                            if (j == getLastIdxRowMATRIX(Madj)){
+                                fprintf(fptr,"%d", ELMTMATRIX(Madj,i,j));
+                            }else {
+                                fprintf(fptr,"%d ", ELMTMATRIX(Madj,i,j));
+                            }
+                        }
+
+                        if (i < getLastIdxRowMATRIX(Madj)){
+                        fprintf(fptr,"\n");
+                        } 
+
+                    }
+
+                    fprintf(fptr,"\n%i\n",LengthQUEUETASK(qTask));
+                    for (i = IDX_HEAD_QUEUETASK(qTask); i < IDX_HEAD_QUEUETASK(qTask) + LengthQUEUETASK(qTask); i++)
+                    {
+                        if(qTask.bufferQUEUETASK[i].itemTASK =='P')
+                        {
+                             fprintf(fptr,"%d %c %c %c %f\n",  qTask.bufferQUEUETASK[i].timeTASK, qTask.bufferQUEUETASK[i].pickUpTASK, qTask.bufferQUEUETASK[i].dropOffTASK, qTask.bufferQUEUETASK[i].itemTASK, qTask.bufferQUEUETASK[i].timeExpTASK);
+                        }
+                        else{
+                            fprintf(fptr,"%d %c %c %c\n",  qTask.bufferQUEUETASK[i].timeTASK, qTask.bufferQUEUETASK[i].pickUpTASK, qTask.bufferQUEUETASK[i].dropOffTASK, qTask.bufferQUEUETASK[i].itemTASK);
+                        }
+                        
+                    }
+
+                    fprintf(fptr,"%f %f\n", time.currentTime, time.incTime);
+                    fprintf(fptr,"%c %d %d\n", CHAR(nobita), LOC_X(nobita), LOC_Y(nobita));
+                    fprintf(fptr,"%li\n", money);
+                    fprintf(fptr, "%i\n", listInventory.Neff);
+                    for(i =0; i < listInventory.Neff;i++)
+                    {
+                        fprintf(fptr,"%i %li\n", listInventory.contents[i].idGADGET,listInventory.contents[i].priceGADGET);
+                    }
+                    fprintf(fptr, "%i\n", lengthLINKEDLIST(LinkedToDoList));
+                   
+                    p = FIRST(LinkedToDoList);
+                    while(p!= NULL)
+                    {
+                        if(ITEMTASK(p) == 'P')
+                        {
+                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                        }
+                        else
+                        {
+                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p));
+                        }
+                        p = NEXT(p);
+                    }
+                    fprintf(fptr, "%i\n", b.currentCAPACITYSTACK);
+                    fprintf(fptr, "%i\n", lengthLINKEDLIST(inProgressList));
+                    p = FIRST(inProgressList);
+                    while(p!= NULL)
+                    {
+                        if(ITEMTASK(p) == 'P')
+                        {
+                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                        }
+                        else
+                        {
+                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p));
+                        }
+                        p = NEXT(p);
+                    }
+                    fprintf(fptr,"%i\n", moveFreq);
+                    fprintf(fptr, "%i\n", successfulDropOff);
+
+
+
+
+                    fclose(fptr);     
+                }
+                else if (IsEmptyQUEUETASK(qTask) && isEmptyLINKEDLIST(LinkedToDoList) && isEmptyLINKEDLIST(inProgressList) && LOC_X(nobita) == i_headquarters && LOC_Y(nobita) == j_headquarters)
+                {
+                    printf("Game Selesai !\n");
+                    printf("Waktu yang dilampaui : %i\n", time);
+
+                    break;
+                }
+                else
+                {
+                    printf("command tidak valid ! kembali ke menu awal\n");
+                }
+            }
+
         }
         else if (isKataEqual(kataInput, kataExit))
         {
