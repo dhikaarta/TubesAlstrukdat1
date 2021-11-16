@@ -17,7 +17,11 @@ void updateTimeToDoList(QueueTASK *qTask, TIME *t, List *LinkedToDoList)
     {
         ElTypeTASK val;
         DequeueQUEUETASK(qTask, &val);
-        insertLastLINKEDLIST(LinkedToDoList, val);
+        if (val.itemTASK == 'V'){
+            insertFirstLINKEDLIST(LinkedToDoList, val);
+        } else {
+            insertLastLINKEDLIST(LinkedToDoList, val);
+        }
     }
 }
 
