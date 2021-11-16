@@ -177,6 +177,8 @@ int main()
                         if (lokasiDipilih != 0)
                         {
                             updateTimeToDoList(&qTask, &time, &LinkedToDoList);
+                            updateProgressList(&inProgressList, time);
+                            UpdatePerishableInBag(&b, time);
                             // time.incTime = 1;
                             if (time.incTime == 0.5)
                             {

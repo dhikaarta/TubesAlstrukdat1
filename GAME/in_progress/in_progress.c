@@ -19,7 +19,12 @@ void displayInProgress(List in_progress)
         {
             printf("%d.", i+1);
             processItemType(INFO(p));
-            printf("(Tujuan: %c)\n", INFO(p).dropOffTASK);
+            printf("(Tujuan: %c", INFO(p).dropOffTASK);
+            if (INFO(p).itemTASK == 'P')
+            {
+                printf(", sisa waktu: %.1f", INFO(p).timeExpTASK);
+            }
+            printf(")\n");
             i++;
             p = NEXT(p);
         }
@@ -38,5 +43,25 @@ void processItemType(ElTypeTASK task){
     else 
     { /* Perishable */
         printf(" Perishable Item ");
+    }
+}
+
+void updateProgressList(List *in_progress, TIME time){
+    /* KAMUS LOKAL */
+    Address p;
+    int i;
+    ElTypeTASK deltask;
+    /* ALGORITMA */
+    p = FIRST(*in_progress);
+    i = 0;
+    while (p != NULL){
+        if (ITEMTASK(p) == 'P'){
+            TIMEEXPTASK(p) -= time.incTime;
+            if (TIMEEXPTASK(p) <= 0) {
+                deleteAtLINKEDLIST(in_progress, i, &deltask);
+            }
+        }
+        i++;
+        p = NEXT(p);
     }
 }
