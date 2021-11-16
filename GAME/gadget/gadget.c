@@ -19,7 +19,7 @@ void KainPembungkusWaktu(Stack *b) {
 }
 
 void SenterPembesar(Stack *b) {
-  int newCap = CURRENT_CAP_STACK(*b) * 2;
+  int newCap = CURRENT_CAP_STACK(*b);
   UpdateBAGsize(b, newCap);
 }
 
