@@ -320,7 +320,7 @@ void displayToDoList(List l)
             }
             if (ITEMTASK(p) == 'V')
             {
-                printf("(VIP Item)");
+                printf("(VIP Item, Harus Segera Dilayani)");
             }
             printf("\n");
             i++;
