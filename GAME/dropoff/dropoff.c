@@ -28,6 +28,17 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
             printf("Ability Speed Boost telah aktif\n");
             (*t).incTime = 0.5;
         }
+
+        // MENDAPATKAN ABILITY INCREASE CAPACITY
+        if (taskdone.itemTASK == 'P') {
+            increaseCapacity(bag);
+        }
+
+        // MENDAPATKAN ABILITY RETURN TO SENDER
+        extern int rtsCounter;
+        if (taskdone.itemTASK == 'V') {
+            rtsCounter += 1;
+        }
         
         int i; 
         i = indexOfLINKEDLIST(*in_progress, taskdone);

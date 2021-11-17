@@ -32,6 +32,7 @@ long money;
 FILE *fptr;
 
 int moveFreq = 0;
+int rtsCounter = 0;
 
 Word getInput()
 {
@@ -177,16 +178,15 @@ int main()
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
-                            updateTimeToDoList(&qTask, &time, &LinkedToDoList);
-                            updateProgressList(&inProgressList, time);
-                            UpdatePerishableInBag(&b, time);
-                            // time.incTime = 1;
                             if (time.incTime == 0.5)
                             {
                                 moveFreq++;
                                 speedBoost(&time, &moveFreq, b);
                             }
-                            else if (time.incTime == 0)
+                            updateTimeToDoList(&qTask, &time, &LinkedToDoList);
+                            updateProgressList(&inProgressList, time);
+                            UpdatePerishableInBag(&b, time);
+                            if (time.incTime == 0)
                             {
                                 time.incTime = 1;
                             }
