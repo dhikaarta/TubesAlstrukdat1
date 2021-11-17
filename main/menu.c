@@ -24,6 +24,7 @@ Word kataBuy = {"BUY", 3};
 Word kataInventory = {"INVENTORY", 9};
 Word kataHelp = {"HELP", 4};
 Word kataSaveGame = {"SAVE_GAME", 9};
+Word kataReturn = {"RETURN", 6};
 
 LOCATION nobita;
 LOCATION pickUp;
@@ -257,6 +258,10 @@ int main()
                     {
                         printf("Anda hanya bisa membeli gadget di Headquarters!!\n");
                     }
+                }
+                else if (isKataEqual(kataInput, kataReturn))
+                {
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
