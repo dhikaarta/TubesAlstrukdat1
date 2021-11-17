@@ -10,7 +10,9 @@ void processMoneyDropOff(ElTypeTASK task, long *money){
         *money += 200;
     } else if (task.itemTASK == 'H' || task.itemTASK == 'P'){
         *money += 400;
-    } 
+    } else if (task.itemTASK == 'V'){
+        *money += 600;
+    }
 }
 
 

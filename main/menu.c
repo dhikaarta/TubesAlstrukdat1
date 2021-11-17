@@ -58,10 +58,29 @@ int main()
 {
     boolean flag = true;
     int N, M, i_headquarters, j_headquarters, L, P;
+    //membaca file dri ascii art
+        FILE *fptrascii;
 
+        char c;
+        // Open file
+        fptrascii = fopen("ascii1.txt", "r");
+        if (fptrascii == NULL)
+        {
+            printf("Cannot open file \n");
+            exit(0);
+        }
+
+        // Read contents from file
+        c = fgetc(fptrascii);
+        while (c != EOF)
+        {
+            printf ("%c", c);
+            c = fgetc(fptrascii);
+        }
+
+        fclose(fptrascii);
     while (flag)
     {
-
         //printf("this is start\n");
         Word kataInput = getInput();
 
@@ -351,6 +370,27 @@ int main()
             printf("Game Selesai !\n");
             printf("Waktu yang dilampaui : %f sekon\n", floor(time.currentTime));
             printf("Pesanan yang berhasil diantar : %i", successfulDropOff);
+            //membaca file dri ascii art
+                FILE *fptrascii2;
+
+                char c;
+                // Open file
+                fptrascii2 = fopen("ascii2.txt", "r");
+                if (fptrascii2 == NULL)
+                {
+                    printf("Cannot open file \n");
+                    exit(0);
+                }
+
+                // Read contents from file
+                c = fgetc(fptrascii2);
+                while (c != EOF)
+                {
+                    printf ("%c", c);
+                    c = fgetc(fptrascii2);
+                }
+
+                fclose(fptrascii2);
             flag = false;
         }
         //Kode load game
@@ -687,6 +727,27 @@ int main()
             printf("Game Selesai !\n");
             printf("Waktu yang dilampaui : %f sekon\n", floor(time.currentTime));
             printf("Pesanan yang berhasil diantar : %i", successfulDropOff);
+            //membaca file dri ascii art
+                FILE *fptrascii2;
+
+                char c;
+                // Open file
+                fptrascii2 = fopen("ascii2.txt", "r");
+                if (fptrascii2 == NULL)
+                {
+                    printf("Cannot open file \n");
+                    exit(0);
+                }
+
+                // Read contents from file
+                c = fgetc(fptrascii2);
+                while (c != EOF)
+                {
+                    printf ("%c", c);
+                    c = fgetc(fptrascii2);
+                }
+
+                fclose(fptrascii2);
             flag = false;
 
         }

@@ -40,9 +40,12 @@ void processItemType(ElTypeTASK task){
     {
         printf(" Heavy Item ");
     } 
-    else 
+    else if (task.itemTASK == 'P')
     { /* Perishable */
         printf(" Perishable Item ");
+    }
+    else {
+        printf(" VIP Item (Pesanan Shizuka) ");
     }
 }
 
