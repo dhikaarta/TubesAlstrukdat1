@@ -34,7 +34,6 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
         if (taskdone.itemTASK == 'H') {
             printf("Ability Speed Boost telah aktif\n");
             (*t).incTime = 0.5;
-            printf("testing purposes 1\n");
         }
 
         // MENDAPATKAN ABILITY INCREASE CAPACITY
@@ -49,23 +48,13 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
         }
         
         int i; 
-        printf("testing purposes 2\n");
         i = indexOfLINKEDLIST(*in_progress, taskdone);
-        printf("%i\n", i);
-        printf("testing purposes 3\n");
         deleteAtLINKEDLIST(in_progress, i, &taskdone);
-        printf("testing purposes 4\n");
         long oldmoney = *money;
-        printf("testing purposes 5\n");
         processMoneyDropOff(taskdone, money);
-        printf("testing purposes 6\n");
         printf("Pesanan");
-        printf("testing purposes 7\n");
         processItemType(taskdone);
-        printf("testing purposes 8\n");
         printf("berhasil diantarkan\n");
-        printf("testing purposes 9\n");
         printf("Uang yang didapatkan: %lu Yen\n", *money - oldmoney);
-        printf("testing purposes 10\n");
     }
 }
