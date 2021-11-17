@@ -356,7 +356,7 @@ int main()
                     }
                     fprintf(fptr,"%i", moveFreq);
                     fprintf(fptr, "%i", successfulDropOff);
-
+                    fprintf(fptr,"%i\n",  rtsCounter );
 
 
 
@@ -485,6 +485,7 @@ int main()
             Stack b; CreateBAG(&b);
             int bagSize;
             bagSize = atoi(currentWordfile.contents);
+            UpdateBAGsize(&b, bagSize-3);
             List inProgressList;
             int inProgressLength;
             CreateLINKEDLIST(&inProgressList);
@@ -516,19 +517,20 @@ int main()
             int successfulDropOff;
             successfulDropOff = atoi(currentWordfile.contents);
             ListGADGET listGadgetStore = initialGadgetStore();
-            while (!IsEmptyQUEUETASK(qTask) || !isEmptyLINKEDLIST(LinkedToDoList) || !isEmptyLINKEDLIST(inProgressList) || LOC_X(nobita) != i_headquarters || LOC_Y(nobita) != j_headquarters)
+            advWORDfile();
+            rtsCounter = atoi(currentWordfile.contents);
+           while (!IsEmptyQUEUETASK(qTask) || !isEmptyLINKEDLIST(LinkedToDoList) || !isEmptyLINKEDLIST(inProgressList) || LOC_X(nobita) != i_headquarters || LOC_Y(nobita) != j_headquarters)
             {
                 printf("\nMobita berada di posisi ");
                 TulisLOCATION(nobita);
                 printf("\n");
                 displayCurrentTimeAndMoney(time, money);
                 printf("\nENTER COMMAND : ");
-                printf("\n");
                 kataInput = getInput();
-
+                printf("\n");
+            
                 if (isKataEqual(kataInput, kataMove))
                 {
-                    printf("itu masuk sini \n");
                     int i;
                     // INISIASI LOKASI YANG AKAN DIPILIH
                     int lokasiDipilih;
@@ -559,14 +561,15 @@ int main()
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
                         if (lokasiDipilih != 0)
                         {
-                            updateTimeToDoList(&qTask, &time, &LinkedToDoList);
-                            // time.incTime = 1;
                             if (time.incTime == 0.5)
                             {
                                 moveFreq++;
                                 speedBoost(&time, &moveFreq, b);
                             }
-                            else if (time.incTime == 0)
+                            updateTimeToDoList(&qTask, &time, &LinkedToDoList);
+                            updateProgressList(&inProgressList, time);
+                            UpdatePerishableInBag(&b, time);
+                            if (time.incTime == 0)
                             {
                                 time.incTime = 1;
                             }
@@ -575,15 +578,14 @@ int main()
                             TulisLOCATION(nobita);
                             printf("!");
                             printf("\n");
-                            printf("%i\n", lokasiDipilih);
+                            printf("Waktu: %.f\n", floor(time.currentTime));
                         }
                         else
                         {
                             nobita = nobita;
                         }
-
                     } while (lokasiDipilih != 0);
-                    printf("tes\n");
+                    
                 }
                 else if (isKataEqual(kataInput, kataPickUp))
                 {
@@ -619,6 +621,10 @@ int main()
                     {
                         printf("Anda hanya bisa membeli gadget di Headquarters!!\n");
                     }
+                }
+                else if (isKataEqual(kataInput, kataReturn))
+                {
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
@@ -711,9 +717,9 @@ int main()
                         }
                         p = NEXT(p);
                     }
-                    fprintf(fptr,"%i\n", moveFreq);
-                    fprintf(fptr, "%i\n", successfulDropOff);
-
+                    fprintf(fptr,"%i", moveFreq);
+                    fprintf(fptr, "%i", successfulDropOff);
+                    fprintf(fptr,"%i\n",  rtsCounter );
 
 
 
@@ -754,7 +760,6 @@ int main()
 
                 fclose(fptrascii2);
             flag = false;
-
         }
         else if (isKataEqual(kataInput, kataExit))
         {
