@@ -261,7 +261,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter);
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
@@ -624,7 +624,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter);
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {

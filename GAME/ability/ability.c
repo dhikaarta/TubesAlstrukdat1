@@ -26,7 +26,7 @@ void increaseCapacity(Stack *b) {
   UpdateBAGsize(b, 1);
 }
 
-void returnToSender(Stack *b, List *l, int *rtsCounter) {
+void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t) {
   if (*rtsCounter > 0) {
     ElTypeTASK x;
     if (TOP_STACK(*b).itemTASK != 'V') {
@@ -38,6 +38,10 @@ void returnToSender(Stack *b, List *l, int *rtsCounter) {
         PopBAG(b, &x);
         x.timeExpTASK = x.initTimeExpTASK;
         insertLastLINKEDLIST(l,x);
+      }
+      // JIKA RETURN HEAVY ITEM, INCTIME - 1
+      if (TOP_STACK(*b).itemTASK == 'H') {
+        (*t).incTime -= 1;
       }
     }
    *rtsCounter -= 1;
