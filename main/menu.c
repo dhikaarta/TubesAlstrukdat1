@@ -354,9 +354,9 @@ int main()
                         }
                         p = NEXT(p);
                     }
-                    fprintf(fptr,"%i", moveFreq);
-                    fprintf(fptr, "%i", successfulDropOff);
-                    fprintf(fptr,"%i\n",  rtsCounter );
+                    fprintf(fptr,"%i\n", moveFreq);
+                    fprintf(fptr, "%i\n", successfulDropOff);
+                    fprintf(fptr,"%i\n",  rtsCounter);
 
 
 
@@ -717,8 +717,8 @@ int main()
                         }
                         p = NEXT(p);
                     }
-                    fprintf(fptr,"%i", moveFreq);
-                    fprintf(fptr, "%i", successfulDropOff);
+                    fprintf(fptr,"%i\n", moveFreq);
+                    fprintf(fptr, "%i\n", successfulDropOff);
                     fprintf(fptr,"%i\n",  rtsCounter );
 
 
