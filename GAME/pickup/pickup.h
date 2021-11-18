@@ -6,7 +6,8 @@
 #include "../../ADT Stack/bag.h"
 #include "../../ADT Linked List/list_linked.h"
 #include "../ability/ability.h"
-
+#include "../in_progress/in_progress.h"
+#include "../ability/ability.h"
 void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo, TIME *t);
 /* Prosedur mengambil pesanan pada currentloc, update in_progress list dan update bag*/
 /* I.S. bebas */

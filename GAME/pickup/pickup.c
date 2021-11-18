@@ -2,12 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "pickup.h"
-#include "../../ADT Stack/bag.h"
-#include "../../ADT Linked List/list_linked.h"
-#include "../../ADT Linked List/node.h"
-#include "../../ADT point/location.h"
-#include "../in_progress/in_progress.h"
-#include "../ability/ability.h"
+
 void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo, TIME *t){
     /* KAMUS LOKAL */ 
     Address p; 
