@@ -210,6 +210,12 @@ int main()
                             if (time.incTime == 0)
                             {
                                 time.incTime = 1;
+                                int i;
+                                for (i = IDX_TOP_STACK(b); i >= 0; i--) {
+                                    if (b.buffer[i].itemTASK == 'H') {
+                                    time.incTime += 1;
+                                    }
+                                }
                             }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                             //updateisi todolist
