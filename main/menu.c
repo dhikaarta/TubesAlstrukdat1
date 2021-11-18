@@ -194,10 +194,14 @@ int main()
                         kataInput = getInput();
                         lokasiDipilih = atoi(kataInput.contents);
 
-                        printf("\nNobita sekarang berada di titik ");
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
-                        if (lokasiDipilih != 0)
+                        if(lokasiDipilih > nPossibleMoves)
                         {
+                            printf("Tidak ada inputan tersebut ! kembali ke menu utama\n");
+                        }
+                        else if (lokasiDipilih != 0)
+                        {
+                            printf("\nMobita sekarang berada di titik ");
                             if (time.incTime == 0.5)
                             {
                                 moveFreq++;
@@ -557,10 +561,14 @@ int main()
                         kataInput = getInput();
                         lokasiDipilih = atoi(kataInput.contents);
 
-                        printf("\nNobita sekarang berada di titik ");
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
+                        if(lokasiDipilih > nPossibleMoves)
+                        {
+                            printf("Tidak ada inputan tersebut ! kembali ke menu utama\n");
+                        }
                         if (lokasiDipilih != 0)
                         {
+                            printf("\nNobita sekarang berada di titik ");
                             if (time.incTime == 0.5)
                             {
                                 moveFreq++;

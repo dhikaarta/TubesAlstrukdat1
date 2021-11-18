@@ -33,13 +33,14 @@ void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t) {
     if (TOP_STACK(*b).itemTASK != 'V') {
       // Item di atas tas dikembalikan ke To Do List di urutan terakhir
       PopBAG(b, &x);
+      x.timeExpTASK = x.initTimeExpTASK;
       insertLastLINKEDLIST(l, x);
       // Time limit yang terdapat pada pesanan dengan Perishable Item akan di-reset sebelum dikembalikan
-      if (TOP_STACK(*b).itemTASK == 'P') {
-        PopBAG(b, &x);
+      /*if (TOP_STACK(*b).itemTASK == 'P') {
         x.timeExpTASK = x.initTimeExpTASK;
+        PopBAG(b, &x);
         insertLastLINKEDLIST(l,x);
-      }
+      }*/
       // JIKA RETURN HEAVY ITEM, INCTIME - 1
       if (TOP_STACK(*b).itemTASK == 'H') {
         (*t).incTime -= 1;

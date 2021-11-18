@@ -32,7 +32,6 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
         // MENGAKTIFKAN SPEED BOOST JIKA BERHASIL MENGANTARKAN HEAVY ITEM
         extern int moveFreq;
         if (taskdone.itemTASK == 'H') {
-            printf("Ability Speed Boost telah aktif\n");
             (*t).incTime = 0.5;
         }
 
@@ -56,5 +55,14 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
         processItemType(taskdone);
         printf("berhasil diantarkan\n");
         printf("Uang yang didapatkan: %lu Yen\n", *money - oldmoney);
+        if (taskdone.itemTASK == 'H') {
+            printf("Ability Speed Boost diaktifkan !\n");
+        }
+        else if (taskdone.itemTASK == 'P') {
+            printf("Kapasitas Tas anda bertambah 1 !\n");
+        }
+        else if (taskdone.itemTASK == 'V') {
+            printf("Mobita mendapatkan ability Return to Sender !\n");
+        }
     }
 }
