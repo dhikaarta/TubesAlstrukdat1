@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../GAME/map/map.c"
-#include "../ADT list statis/listtask.h"
+#include "../ADT List Statis/listtask.h"
 #include "../GAME/pcolor/pcolor.c"
 #include "../GAME/help/help.c"
 #include "../GAME/gadget-inventory/gadgetInventory.h"
