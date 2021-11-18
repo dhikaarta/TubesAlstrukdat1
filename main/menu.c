@@ -533,7 +533,7 @@ int main()
             advWORDfile();
             rtsCounter = atoi(currentWordfile.contents);
             advWORDfile();
-            strcpy((char*) senterPengecilAktif, currentWordfile.contents);
+            
            while (!IsEmptyQUEUETASK(qTask) || !isEmptyLINKEDLIST(LinkedToDoList) || !isEmptyLINKEDLIST(inProgressList) || LOC_X(nobita) != i_headquarters || LOC_Y(nobita) != j_headquarters)
             {
                 printf("\nMobita berada di posisi ");
@@ -728,11 +728,11 @@ int main()
                     {
                         if(ITEMTASK(p) == 'P')
                         {
-                            fprintf(fptr,"%d %c %c %c %f %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                            fprintf(fptr,"%d %c %c %c %f %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p),INITTIMEEXPTASK(p));
                         }
                         else
                         {
-                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p),INITTIMEEXPTASK(p));
+                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p));
                         }
                         p = NEXT(p);
                     }

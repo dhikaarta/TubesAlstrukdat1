@@ -288,7 +288,7 @@ void displayLINKEDLIST(List l)
             printf("   Item Task = %c\n", ITEMTASK(p));
             if (ITEMTASK(p) == 'P')
             {
-                printf("   Expired Time = %d\n", TIMEEXPTASK(p));
+                printf("   Expired Time = %f\n", TIMEEXPTASK(p));
             }
             i++;
             p = NEXT(p);

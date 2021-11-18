@@ -52,7 +52,7 @@ void ReadQUEUETASK(QueueTASK *qt, int nTask)
         scanf("%d %c %c %c", &(task.timeTASK), &(task.pickUpTASK), &(task.dropOffTASK), &(task.itemTASK));
         if (task.itemTASK == 'P')
         {
-            scanf(" %d", &(task.timeExpTASK));
+            scanf(" %f", &(task.timeExpTASK));
         }
         EnqueueQUEUETASK(qt, task);
     }
@@ -150,7 +150,7 @@ void displayQUEUETASK(QueueTASK qt)
             printf("   Item Task = %c\n", task.itemTASK);
             if (task.itemTASK == 'P')
             {
-                printf("   Expired Time = %d\n", task.timeExpTASK);
+                printf("   Expired Time = %f\n", task.timeExpTASK);
             }
         }
     }

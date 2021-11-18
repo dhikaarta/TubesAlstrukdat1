@@ -84,7 +84,7 @@ void displayLISTTASK(ListTASK l)
             printf("   Item Task = %c\n", l.contents[i].itemTASK);
             if (l.contents[i].itemTASK == 'P')
             {
-                printf("   Expired Time = %d\n", l.contents[i].timeExpTASK);
+                printf("   Expired Time = %f\n", l.contents[i].timeExpTASK);
             }
         }
     }
