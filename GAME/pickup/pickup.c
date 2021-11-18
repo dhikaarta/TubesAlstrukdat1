@@ -79,7 +79,11 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo,
                 
                 // MENDISAKTIFKAN SPEED BOOST
                 extern int moveFreq;
-                if ((*t).incTime == 0.5) {
+                if (newtask.itemTASK == 'H') {
+                    (*t).incTime += 1;
+                }
+
+                if ((*t).incTime == 0.5 && newtask.itemTASK == 'H') {
                     printf("Ability Speed Boost telah hilang\n");
                     (*t).currentTime = floor((*t).currentTime);
                     (*t).incTime = 1;

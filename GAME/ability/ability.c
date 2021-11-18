@@ -16,6 +16,7 @@ void speedBoost(TIME *t, int *moveFreq, Stack b) {
     if (*moveFreq <= 10) {
       (*t).incTime = 0.5;
     } else {
+      printf("Anda telah bergerak sebanyak 10 kali ! Ability Speed Boost hangus!\n");
       (*t).incTime = 1;
       *moveFreq = 0;
     }
@@ -43,8 +44,18 @@ void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t) {
       if (TOP_STACK(*b).itemTASK == 'H') {
         (*t).incTime -= 1;
       }
+      printf("ITEM BERHASIL DIKEMBALIKAN");
+      *rtsCounter -= 1;
     }
-   *rtsCounter -= 1;
+      else 
+      { 
+      printf("Anda tidak bisa melakukan return pada VIP item !\n");
+      }
   }
+  else
+  {
+    printf("Mobita tidak memiliki ability Return to Sender\n");
+  }
+  
 
 }
