@@ -136,7 +136,7 @@ int main()
             qTask = CopyListToQueueTASK(lTask);
 
             // Untuk inisialisasi GADGET dan INVENTORY
-            money = 20000;
+            money = 500;
             ListGADGET listGadgetStore = initialGadgetStore();
             ListGADGET listInventory;
             CreateLISTGADGET(&listInventory);
