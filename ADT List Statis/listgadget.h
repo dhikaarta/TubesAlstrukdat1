@@ -10,7 +10,7 @@
 #include "../boolean.h"
 
 /*  Kamus Umum */
-#define CAPACITY_LISTGAGDET 5
+#define CAPACITY_LISTGAGDET 6
 /* Kapasitas penyimpanan */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/

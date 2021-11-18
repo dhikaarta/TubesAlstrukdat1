@@ -91,6 +91,10 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
             {
                 printf("Mesin Waktu berhasil dibeli\n");
             }
+            else if (id == 5)
+            {
+                printf("Senter Pengecil berhasil dibeli\n");
+            }
             printf("Uang anda sekarang: %ld Yen\n\n", *money);
         }
     }
