@@ -12,7 +12,7 @@ void CreateLISTTASK(ListTASK *l)
     (*l).Neff = 0;
 }
 
-void ReadLISTTASK(ListTASK *l)
+void cdReadLISTTASK(ListTASK *l)
 {
     int nTask;
     int i;
