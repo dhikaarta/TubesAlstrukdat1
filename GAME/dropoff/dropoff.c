@@ -22,6 +22,8 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
         PopBAG(bag, &taskdone);
         *successfulDroppedOff += 1;
 
+        extern int moveFreq;
+        extern int rtsCounter;
         extern boolean senterPengecilAktif;
 
         // INCTIME - 1 JIKA BERHASIL DROP OFF HEAVY ITEM
@@ -29,23 +31,6 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
             (*t).incTime -= 1;
         } else if (taskdone.itemTASK == 'H' && senterPengecilAktif == true) {
             senterPengecilAktif = false;
-        }
-
-        // MENGAKTIFKAN SPEED BOOST JIKA BERHASIL MENGANTARKAN HEAVY ITEM
-        extern int moveFreq;
-        if (taskdone.itemTASK == 'H') {
-            (*t).incTime = 0.5;
-        }
-
-        // MENDAPATKAN ABILITY INCREASE CAPACITY
-        if (taskdone.itemTASK == 'P') {
-            increaseCapacity(bag);
-        }
-
-        // MENDAPATKAN ABILITY RETURN TO SENDER
-        extern int rtsCounter;
-        if (taskdone.itemTASK == 'V') {
-            rtsCounter += 1;
         }
         
         int i; 
@@ -58,12 +43,15 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
         printf("berhasil diantarkan\n");
         printf("Uang yang didapatkan: %lu Yen\n", *money - oldmoney);
         if (taskdone.itemTASK == 'H') {
+            (*t).incTime = 0.5;
             printf("Ability Speed Boost diaktifkan !\n");
         }
         else if (taskdone.itemTASK == 'P') {
+            increaseCapacity(bag);
             printf("Kapasitas Tas anda bertambah 1 !\n");
         }
         else if (taskdone.itemTASK == 'V') {
+            rtsCounter += 1;
             printf("Mobita mendapatkan ability Return to Sender !\n");
         }
     }
