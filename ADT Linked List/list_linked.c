@@ -180,15 +180,18 @@ void insertAtLINKEDLIST(List *l, ElTypeTASK task, int idx)
     else
     {
         p = newNode(task);
-        ctr = 0;
-        loc = *l;
-        while (ctr < idx - 1)
-        {
-            ctr += 1;
-            loc = NEXT(loc);
-        } /*ctr = idx-1 */
-        NEXT(p) = NEXT(loc);
-        NEXT(loc) = p;
+        if (p != NULL){
+            ctr = 0;
+            loc = *l;
+            while (ctr < idx - 1)
+            {
+                ctr += 1;
+                loc = NEXT(loc);
+            } /*ctr = idx-1 */
+            NEXT(p) = NEXT(loc);
+            NEXT(loc) = p;
+        }
+        
     }
 }
 /*** PENGHAPUSAN PESANAN ***/

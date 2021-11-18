@@ -23,16 +23,8 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo,
             i = 0;
             /* Handle untuk VIP Item */
             if (ITEMTASK(p) == 'V'){
-                while (ITEMTASK(p) == 'V' && !found){
-                    if (INFO(p).pickUpTASK == currentloc.A){
-                        found = true;
-                    } else {
-                        p = NEXT(p);
-                        i++;
-                    }
-                }
-                if (!found){
-                    printf("Silahkan pick up item VIP terlebih dahulu. Shizuka menunggumu!\n");
+                if (INFO(p).pickUpTASK != currentloc.A){
+                    printf("Silahkan pick up VIP Item paling atas terlebih dahulu. Shizuka menunggumu!\n");
                 } else {
                     viptask = INFO(p);
                     insertFirstLINKEDLIST(in_progress, viptask);
