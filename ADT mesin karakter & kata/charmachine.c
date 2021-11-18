@@ -29,6 +29,13 @@ void start() {
 void startfile(char fileName[])
 {
    tapefile = fopen(fileName, "r");
+   if(tapefile == NULL)
+   {
+      printf("ERROR ! FILE YANG DIMASUKKAN TIDAK DAPAT DITEMUKAN, MOHON CEK LAGI NAMA FILE DAN JANGAN LUPA DIAKHIRI DENGAN .txt\n");
+      printf("TERMINASI PROGRAM !\n");
+      exit(0);
+      
+   }
    advFile();
 }
 

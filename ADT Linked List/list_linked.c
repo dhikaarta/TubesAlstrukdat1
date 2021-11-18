@@ -68,9 +68,18 @@ int indexOfLINKEDLIST(List l, ElTypeTASK task)
     found = false;
     while ((p != NULL) && !found)
     {
-        if (TIMETASK(l) == task.timeTASK && PICKUPTASK(l) == task.pickUpTASK && DROPOFFTASK(l) == task.dropOffTASK && ITEMTASK(l) == task.itemTASK && TIMEEXPTASK(l) == task.timeExpTASK)
+         if (TIMETASK(l) == task.timeTASK && PICKUPTASK(l) == task.pickUpTASK && DROPOFFTASK(l) == task.dropOffTASK && ITEMTASK(l) == task.itemTASK)
         {
             found = true;
+            if(task.itemTASK == 'P')
+            {
+                if(task.timeExpTASK != TIMEEXPTASK(l))
+                {
+                    found = false;
+                    p = NEXT(p);
+                }
+                
+            }
         }
         else
         {
