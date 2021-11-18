@@ -100,7 +100,7 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
     }
 }
 
-void useInventory(ListGADGET *listInventory, Stack *b,TIME *t)
+void useInventory(ListGADGET *listInventory, Stack *b,TIME *t, List *l)
 {
     printf("\nGadget mana yang ingin digunakan? (Ketik 0 jika ingin kembali)\n");
     int idInventory, idGadget;
@@ -132,7 +132,7 @@ void useInventory(ListGADGET *listInventory, Stack *b,TIME *t)
         deleteLISTGADGET(listInventory, idInventory);
         if (idGadget == 1)
         {
-            KainPembungkusWaktu(b);
+            KainPembungkusWaktu(b, l);
             printf("Kain Pembungkus Waktu berhasil digunakan!!\n\n");
             /* Fungsi aktivasi Kain Pembungkus Waktu */
         }
@@ -156,8 +156,13 @@ void useInventory(ListGADGET *listInventory, Stack *b,TIME *t)
         }
         else if (idGadget == 5)
         {
-            senterPengecil(*b, t, &senterPengecilAktif);
-            printf("Senter Pengecil berhasil digunakan!!\n\n");
+            if (TOP_STACK(*b).itemTASK == 'H') {
+                senterPengecil(*b, t, &senterPengecilAktif);
+                printf("Senter Pengecil berhasil digunakan!!\n\n");
+            } else {
+                printf("Item teratas tas bukan Heavy Item!\n\n");
+                insertLastLISTGADGET(listInventory, 5, 800);
+            }
         }
     }
 }

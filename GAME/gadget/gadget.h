@@ -4,9 +4,10 @@
 #include "../../ADT Stack/stack.h"
 #include "../../ADT Stack/bag.h"
 #include "../time-to-do-list/timeToDoList.h"
+#include "../../ADT Linked List/list_linked.h"
 
 /* Waktu dari perishable item teratas dalam tas kembali ke durasi semula */
-void KainPembungkusWaktu(Stack *b);
+void KainPembungkusWaktu(Stack *b, List *l);
 
 /* Memperbesar kapasitas tas menjadi dua kali lipat, tidak melebihi batas maksimum
 kapasitas tas */
