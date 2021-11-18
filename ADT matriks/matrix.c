@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matrix.h"
-#include "../ADT Point/Location.h"
-#include "../ADT Point/Location.c"
+#include "../ADT Point/location.h"
+#include "../ADT Point/location.c"
 
 void CreateMATRIX(int nRow, int nCol, Matrix *m)
 {
