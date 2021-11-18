@@ -276,7 +276,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
-                    useInventory(&listInventory, &b, &time);
+                    useInventory(&listInventory, &b, &time, &inProgressList);
                 }
                 else if (isKataEqual(kataInput, kataHelp))
                 {
@@ -647,7 +647,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
-                    useInventory(&listInventory, &b, &time);
+                    useInventory(&listInventory, &b, &time, &inProgressList);
                 }
                 else if (isKataEqual(kataInput, kataHelp))
                 {

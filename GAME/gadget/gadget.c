@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "gadget.h"
 
-void KainPembungkusWaktu(Stack *b) {
+void KainPembungkusWaktu(Stack *b, List *l) {
   int i, idx;
   boolean found = false;
   for (i = IDX_TOP_STACK(*b); i >= 0; i--) {
@@ -15,6 +15,14 @@ void KainPembungkusWaktu(Stack *b) {
   if (found == true) {
     // Mengembalikan time perishable item ke waktu semula
     (*b).buffer[idx].timeExpTASK = (*b).buffer[idx].initTimeExpTASK;
+    Address p = FIRST(*l);
+    while(p != NULL) {
+      if (ITEMTASK(p) == 'P') {
+        TIMEEXPTASK(p) = INITTIMEEXPTASK(p);
+        break;
+      }
+      p = NEXT(p);
+    }
   }
 }
 

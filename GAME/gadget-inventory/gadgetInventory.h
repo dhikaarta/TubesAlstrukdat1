@@ -21,7 +21,7 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
    F.S. listInventory dapat bertambah satu elemen atau tidak
         Jumlah money akan berkurang sesuai dengan harga gadget yang dibeli*/
 
-void useInventory(ListGADGET *listInventory, Stack *b,TIME *t);
+void useInventory(ListGADGET *listInventory, Stack *b,TIME *t, List *l);
 /* Proses: Menampilkan inventory user dari listInventory
            Meminta pengguna memasukkan id Inventory yang ingin digunakan sesuai
            ketentuan (id Inventory harus berisi gadget)
