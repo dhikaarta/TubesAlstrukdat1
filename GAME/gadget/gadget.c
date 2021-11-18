@@ -36,8 +36,9 @@ void MesinWaktu(TIME *t) {
   }
 }
 
-void senterPengecil(Stack b, TIME *t) {
+void senterPengecil(Stack b, TIME *t, boolean *senterPengecilAktif) {
   if (TOP_STACK(b).itemTASK == 'H') {
+    *senterPengecilAktif = true;
     (*t).incTime -= 1;
   }
 }

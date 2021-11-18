@@ -40,20 +40,6 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo,
                 insertFirstLINKEDLIST(in_progress, viptask);
                 PushBAG(bag, viptask);
                 deleteAtLINKEDLIST(todo, i, &newtask);
-
-                // JIKA PICK UP HEAVY ITEM, INCTIME + 1
-                if (newtask.itemTASK == 'H') {
-                    (*t).incTime += 1;
-                }
-
-                // MENDISAKTIFKAN SPEED BOOST JIKA PICK UP HEAVY ITEM
-                extern int moveFreq;
-                if ((*t).incTime == 0.5 && newtask.itemTASK == 'H') {
-                    printf("Ability Speed Boost telah hilang\n");
-                    (*t).currentTime = floor((*t).currentTime);
-                    (*t).incTime = 1;
-                    moveFreq = 0;
-                }
                 printf("Pesanan berupa");
                 processItemType(newtask);
                 printf("berhasil diambil!\n");
@@ -77,12 +63,14 @@ void pickUpAtloc(LOCATION currentloc, Stack *bag, List *in_progress, List *todo,
                 PushBAG(bag, newtask); /* Insert item(task) to bag */
                 deleteAtLINKEDLIST(todo, i, &newtask); /* Detele todo list*/
                 
-                // MENDISAKTIFKAN SPEED BOOST
                 extern int moveFreq;
+
+                // JIKA PICK UP HEAVY ITEM, INCTIME + 1
                 if (newtask.itemTASK == 'H') {
                     (*t).incTime += 1;
                 }
 
+                // MENDISAKTIFKAN SPEED BOOST
                 if ((*t).incTime == 0.5 && newtask.itemTASK == 'H') {
                     printf("Ability Speed Boost telah hilang\n");
                     (*t).currentTime = floor((*t).currentTime);

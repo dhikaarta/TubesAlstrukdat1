@@ -34,6 +34,7 @@ FILE *fptr;
 
 int moveFreq = 0;
 int rtsCounter = 0;
+boolean senterPengecilAktif = false;
 
 Word getInput()
 {
@@ -213,6 +214,12 @@ int main()
                             if (time.incTime == 0)
                             {
                                 time.incTime = 1;
+                                int i;
+                                for (i = IDX_TOP_STACK(b); i >= 0; i--) {
+                                    if (b.buffer[i].itemTASK == 'H') {
+                                    time.incTime += 1;
+                                    }
+                                }
                             }
                             nobita = arrayPosMove[lokasiDipilih - 1];
                             //updateisi todolist
@@ -265,7 +272,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time);
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time, &senterPengecilAktif);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
@@ -632,7 +639,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time);
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time, &senterPengecilAktif);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
