@@ -24,9 +24,13 @@ void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *mone
         PopBAG(bag, &taskdone);
         *successfulDroppedOff += 1;
 
+        extern boolean senterPengecilAktif;
+
         // INCTIME - 1 JIKA BERHASIL DROP OFF HEAVY ITEM
-        if (taskdone.itemTASK == 'H') {
+        if (taskdone.itemTASK == 'H' && senterPengecilAktif == false) {
             (*t).incTime -= 1;
+        } else if (taskdone.itemTASK == 'H' && senterPengecilAktif == true) {
+            senterPengecilAktif = false;
         }
 
         // MENGAKTIFKAN SPEED BOOST JIKA BERHASIL MENGANTARKAN HEAVY ITEM

@@ -34,6 +34,7 @@ FILE *fptr;
 
 int moveFreq = 0;
 int rtsCounter = 0;
+boolean senterPengecilAktif = false;
 
 Word getInput()
 {
@@ -261,7 +262,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time);
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time, &senterPengecilAktif);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
@@ -624,7 +625,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time);
+                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time, &senterPengecilAktif);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {

@@ -27,22 +27,26 @@ void increaseCapacity(Stack *b) {
   UpdateBAGsize(b, 1);
 }
 
-void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t) {
+void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t, boolean *senterPengecilAktif) {
   if (*rtsCounter > 0) {
     ElTypeTASK x;
     if (TOP_STACK(*b).itemTASK != 'V') {
       // Item di atas tas dikembalikan ke To Do List di urutan terakhir
       PopBAG(b, &x);
       insertLastLINKEDLIST(l, x);
+      updateProgressList(l,*t);
       // Time limit yang terdapat pada pesanan dengan Perishable Item akan di-reset sebelum dikembalikan
       if (TOP_STACK(*b).itemTASK == 'P') {
         PopBAG(b, &x);
         x.timeExpTASK = x.initTimeExpTASK;
         insertLastLINKEDLIST(l,x);
+        updateProgressList(l,*t);
       }
       // JIKA RETURN HEAVY ITEM, INCTIME - 1
-      if (TOP_STACK(*b).itemTASK == 'H') {
+      if (TOP_STACK(*b).itemTASK == 'H' && *senterPengecilAktif == false) {
         (*t).incTime -= 1;
+      } else if (TOP_STACK(*b).itemTASK == 'H' && *senterPengecilAktif == true) {
+        *senterPengecilAktif = false;
       }
       printf("ITEM BERHASIL DIKEMBALIKAN");
       *rtsCounter -= 1;
