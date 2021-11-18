@@ -14,16 +14,15 @@ Program ini adalah program untuk bermain permainan CLI tentang pengantaran baran
 
 ## How to run 
 
-1. Masuk ke folder main
-2. Apabila menggunakan windows, buka Windows Powershell lalu compile code c dan run .exe yang dihasilkan dengan command : " gcc menu.c "../GAME/gadget-inventory/gadgetInventory.c" "../ADT List Statis/listgadget.c" "../GAME/time-to-do-list/timeToDoList.c" "../GAME/in_progress/in_progress.c" "../ADT list statis/listtask.c"  "../ADT Stack/stack.c" "../ADT Stack/bag.c" "../GAME/gadget/gadget.c" "../GAME/pickup/pickup.c" "../GAME/dropoff/dropoff.c" "../GAME/ability/ability.c" "../ADT Queue/queuetask.c" -o goMobita ;  ./goMobita"
+1. Masuk ke directory folder main pada program
+2. Apabila menggunakan windows, gunakan Windows Powershell lalu compile code c dan run .exe yang dihasilkan dengan command : " gcc menu.c "../GAME/gadget-inventory/gadgetInventory.c" "../ADT List Statis/listgadget.c" "../GAME/time-to-do-list/timeToDoList.c" "../GAME/in_progress/in_progress.c" "../ADT list statis/listtask.c"  "../ADT Stack/stack.c" "../ADT Stack/bag.c" "../GAME/gadget/gadget.c" "../GAME/pickup/pickup.c" "../GAME/dropoff/dropoff.c" "../GAME/ability/ability.c" "../ADT Queue/queuetask.c" -o goMobita ;  ./goMobita" , command ini akan langsung otomatis menjalankan .exe yang dihasilkan
 
-3. Untuk bermain di linux, masukkan command : " gcc menu.c "../GAME/gadget-inventory/gadgetInventory.c" "../ADT List Statis/listgadget.c" "../GAME/time-to-do-list/timeToDoList.c" "../GAME/in_progress/in_progress.c" "../ADT list statis/listtask.c"  "../ADT Stack/stack.c" "../ADT Stack/bag.c" "../GAME/gadget/gadget.c" "../GAME/pickup/pickup.c" "../GAME/dropoff/dropoff.c" "../GAME/ability/ability.c" "../ADT Queue/queuetask.c" -o goMobita ;  ./goMobita"
+3. Untuk bermain di linux, masukkan command : gcc menu.c "../GAME/gadget-inventory/gadgetInventory.c" "../ADT List Statis/listgadget.c" "../GAME/time-to-do-list/timeToDoList.c" "../GAME/in_progress/in_progress.c" "../ADT List Statis/listtask.c"  "../ADT Stack/stack.c" "../ADT Stack/bag.c" "../GAME/gadget/gadget.c" "../GAME/pickup/pickup.c" "../GAME/dropoff/dropoff.c" "../GAME/ability/ability.c" "../ADT Queue/queuetask.c" -o goMobita -lm && ./goMobita, command ini akan langsung otomatis menjalankan .exe yang dihasilkan
+
 4. Selamat memainkan permainan !
 
 
 ## Pembagian Tugas
-
-Pembagian Tugas 
 
 - Andhika Arta Aryanto 
 
