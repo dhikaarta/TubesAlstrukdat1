@@ -18,7 +18,7 @@ void processMoneyDropOff(ElTypeTASK task, long *money){
 
 void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *money, int *successfulDroppedOff, TIME *t){
     if (TOP_STACK(*bag).dropOffTASK != currentloc.A){
-        printf("Tidak ada pesanan untuk di drop off!");
+        printf("Tidak ada pesanan untuk di drop off pada lokasi %c!", currentloc.A);
     } else {
         ElTypeTASK taskdone; 
         PopBAG(bag, &taskdone);
