@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+extern boolean senterPengecilAktif;
+
 Word dapetInput()
 {
     startWORD();
@@ -32,6 +34,7 @@ ListGADGET initialGadgetStore()
     insertLastLISTGADGET(&listGadgetStore, 2, 1200);
     insertLastLISTGADGET(&listGadgetStore, 3, 1500);
     insertLastLISTGADGET(&listGadgetStore, 4, 3000);
+    insertLastLISTGADGET(&listGadgetStore, 5, 800);
     return listGadgetStore;
 }
 
@@ -52,9 +55,9 @@ void gadgetStore(ListGADGET listGadgetStore, ListGADGET *listInventory, long *mo
         Word kataInput = dapetInput();
         id = atoi(kataInput.contents);
 
-        while ((id < 0 || id > 4 || *money < listGadgetStore.contents[id - 1].priceGADGET) && id != 0)
+        while ((id < 0 || id > 5 || *money < listGadgetStore.contents[id - 1].priceGADGET) && id != 0)
         {
-            if (id < 0 || id > 4)
+            if (id < 0 || id > 5)
             {
                 printf("Input yang dimasukkan masih salah, coba lagi !!\n\n");
             }
@@ -137,7 +140,7 @@ void useInventory(ListGADGET *listInventory, Stack *b,TIME *t)
         }
         else if (idGadget == 3)
         {
-            MesinWaktu(t);
+            PintuKemanaSaja(t);
             printf("Pintu Kemana Saja berhasil digunakan!!\n\n");
             /* Fungsi aktivasi Pintu Kemana Saja */
         }
@@ -146,6 +149,11 @@ void useInventory(ListGADGET *listInventory, Stack *b,TIME *t)
             MesinWaktu(t);
             printf("Mesin Waktu berhasil digunakan!!\n\n");
             /* Fungsi aktivasi Mesin Waktu */
+        }
+        else if (idGadget == 5)
+        {
+            senterPengecil(*b, t, &senterPengecilAktif);
+            printf("Senter Pengecil berhasil digunakan!!\n\n");
         }
     }
 }

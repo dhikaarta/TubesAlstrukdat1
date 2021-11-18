@@ -57,6 +57,10 @@ void displayLISTINVENTORY(ListGADGET l)
         {
             printf("%d. Mesin Waktu\n", i + 1);
         }
+        else if (id == 5)
+        {
+            printf("%d. Senter Pengecil\n", i + 1);
+        }
     }
 }
 void displayLISTGADGETSTORE(ListGADGET l)
@@ -80,6 +84,10 @@ void displayLISTGADGETSTORE(ListGADGET l)
         else if (id == 4)
         {
             printf("%d. Mesin Waktu  (3000 Yen)\n", i + 1);
+        }
+        else if (id == 5)
+        {
+            printf("%d. Senter Pengecil  (800 Yen)\n", i + 1);
         }
     }
 }
