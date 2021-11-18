@@ -5,16 +5,15 @@
 int main()
 {
     Stack s;
-    ElType val;
+    ElTypeTASK val;
     CreateSTACK(&s);
     printf("Stack kosong: %d\n", IsEmptySTACK(s));
     printf("Stack penuh: %d\n", IsFullSTACK(s));
-
-    PushSTACK(&s, 2);
-    PushSTACK(&s, 3);
-    PushSTACK(&s, 4);
-    PushSTACK(&s, 1);
-    PushSTACK(&s, 9);
+    val.timeTASK = 1;
+    val.itemTASK = 'N'; 
+    val.pickUpTASK = 'A';
+    val.dropOffTASK = 'B';
+    PushSTACK(&s, val);
 
     printf("Isi stack : ");
     while (!IsEmptySTACK(s))

@@ -10,6 +10,10 @@
 
 
 int main(){
+    List todo;
+    Stack bag;
+    CreateLINKEDLIST(&todo);
+    CreateBAG(&bag);
     // INSIASI TEMPAT-TEMPAT
     LOCATION* tempat ;
     int N, M, x_hq, y_hq, nTempat;
@@ -65,7 +69,7 @@ int main(){
         for (i=0;i<nPossibleMoves;i++){
             printf("%d. %c (%d,%d)\n", i+1, CHAR(arrayPosMove[i]), LOC_X(arrayPosMove[i]), LOC_Y(arrayPosMove[i]));
         }
-        displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves);
+        displayMAPColor(MAP,nobita, arrayPosMove, nPossibleMoves, todo, bag);
         printf("\nPosisi yang dipilih? (ketik 0 jika ingin kembali) ");
         scanf("%d", &lokasiDipilih);
         nobita = arrayPosMove[lokasiDipilih-1];

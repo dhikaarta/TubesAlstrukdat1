@@ -4,6 +4,11 @@
 
 int main()
 {
+    TIME t;
+    Stack b;
+    List inprogress;
+    CreateBAG(&b);
+    CreateLINKEDLIST(inprogress);
     // DI MAIN
     long money = 0;
     ListGADGET listGadgetStore = initialGadgetStore();
@@ -14,5 +19,5 @@ int main()
     gadgetStore(listGadgetStore, &listInventory, &money);
 
     // IF command Inventory
-    useInventory(&listInventory);
+    useInventory(&listInventory, &b, &t, &inprogress);
 }

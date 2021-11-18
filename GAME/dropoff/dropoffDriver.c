@@ -8,6 +8,9 @@ int main() {
     List in_progress; 
     List todo; 
     ElTypeTASK task1, task2;
+    TIME t;
+    t.currentTime = 1;
+    t.incTime = 1;
     int successfulDropOff; 
     successfulDropOff = 0;
     task1.timeTASK = 1;
@@ -31,11 +34,11 @@ int main() {
     insertFirstLINKEDLIST(&todo, task1);
     insertFirstLINKEDLIST(&todo, task2);
     displayLINKEDLIST(todo);
-    pickUpAtloc(A, &bag, &in_progress, &todo);
-    pickUpAtloc(B, &bag, &in_progress, &todo);
+    pickUpAtloc(A, &bag, &in_progress, &todo, &t);
+    pickUpAtloc(B, &bag, &in_progress, &todo, &t);
     displayInProgress(in_progress);
-    dropOffAtloc(G, &bag, &in_progress, &money, &successfulDropOff);
-    dropOffAtloc(B, &bag, &in_progress, &money, &successfulDropOff);
+    dropOffAtloc(G, &bag, &in_progress, &money, &successfulDropOff, &t);
+    dropOffAtloc(B, &bag, &in_progress, &money, &successfulDropOff, &t);
     displayInProgress(in_progress);
     printf("\n");
     displayLINKEDLIST(in_progress);
