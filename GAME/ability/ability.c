@@ -27,22 +27,22 @@ void increaseCapacity(Stack *b) {
   UpdateBAGsize(b, 1);
 }
 
-void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t, boolean *senterPengecilAktif) {
+void returnToSender(Stack *b, List *l, List *inProgress, int *rtsCounter, TIME *t, boolean *senterPengecilAktif) {
   if (*rtsCounter > 0) {
-    ElTypeTASK x;
+    ElTypeTASK x,deleted;
     if (TOP_STACK(*b).itemTASK != 'V') {
       // Item di atas tas dikembalikan ke To Do List di urutan terakhir
       PopBAG(b, &x);
       x.timeExpTASK = x.initTimeExpTASK;
       insertLastLINKEDLIST(l, x);
-      updateProgressList(l,*t);
+      deleteFirstLINKEDLIST(inProgress, &deleted);
+
       // Time limit yang terdapat pada pesanan dengan Perishable Item akan di-reset sebelum dikembalikan
       /*if (TOP_STACK(*b).itemTASK == 'P') {
         x.timeExpTASK = x.initTimeExpTASK;
         PopBAG(b, &x);
         insertLastLINKEDLIST(l,x);
       }*/
-        updateProgressList(l,*t);
       }
       else 
       { 
@@ -64,5 +64,3 @@ void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t, boolean *senter
     
   }
   
-
-}

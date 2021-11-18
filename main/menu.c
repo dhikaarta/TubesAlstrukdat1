@@ -272,7 +272,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time, &senterPengecilAktif);
+                    returnToSender(&b, &LinkedToDoList,&inProgressList, &rtsCounter, &time, &senterPengecilAktif);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
@@ -342,7 +342,7 @@ int main()
                     {
                         if(ITEMTASK(p) == 'P')
                         {
-                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                            fprintf(fptr,"%d %c %c %c %f %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p),INITTIMEEXPTASK(p));
                         }
                         else
                         {
@@ -357,7 +357,7 @@ int main()
                     {
                         if(ITEMTASK(p) == 'P')
                         {
-                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                            fprintf(fptr,"%d %c %c %c %f %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p), INITTIMEEXPTASK(p));
                         }
                         else
                         {
@@ -368,6 +368,7 @@ int main()
                     fprintf(fptr,"%i\n", moveFreq);
                     fprintf(fptr, "%i\n", successfulDropOff);
                     fprintf(fptr,"%i\n",  rtsCounter);
+                    fprintf(fptr, "%c\n", senterPengecilAktif);
 
 
 
@@ -518,6 +519,7 @@ int main()
                 {
                     
                     task.timeExpTASK = TIMEEXPTASK(p);
+                    task.initTimeExpTASK = INITTIMEEXPTASK(p);
                 }
                 PushBAG(&b, task);
                 p = NEXT(p);
@@ -530,6 +532,8 @@ int main()
             ListGADGET listGadgetStore = initialGadgetStore();
             advWORDfile();
             rtsCounter = atoi(currentWordfile.contents);
+            advWORDfile();
+            strcpy((char*) senterPengecilAktif, currentWordfile.contents);
            while (!IsEmptyQUEUETASK(qTask) || !isEmptyLINKEDLIST(LinkedToDoList) || !isEmptyLINKEDLIST(inProgressList) || LOC_X(nobita) != i_headquarters || LOC_Y(nobita) != j_headquarters)
             {
                 printf("\nMobita berada di posisi ");
@@ -639,7 +643,7 @@ int main()
                 }
                 else if (isKataEqual(kataInput, kataReturn))
                 {
-                    returnToSender(&b, &LinkedToDoList, &rtsCounter, &time, &senterPengecilAktif);
+                    returnToSender(&b, &LinkedToDoList, &inProgressList,&rtsCounter, &time, &senterPengecilAktif);
                 }
                 else if (isKataEqual(kataInput, kataInventory))
                 {
@@ -709,7 +713,7 @@ int main()
                     {
                         if(ITEMTASK(p) == 'P')
                         {
-                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                            fprintf(fptr,"%d %c %c %c %f %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p),INITTIMEEXPTASK(p));
                         }
                         else
                         {
@@ -724,17 +728,18 @@ int main()
                     {
                         if(ITEMTASK(p) == 'P')
                         {
-                            fprintf(fptr,"%d %c %c %c %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
+                            fprintf(fptr,"%d %c %c %c %f %f\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p), TIMEEXPTASK(p));
                         }
                         else
                         {
-                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p));
+                            fprintf(fptr,"%d %c %c %c\n", TIMETASK(p),PICKUPTASK(p),DROPOFFTASK(p), ITEMTASK(p),INITTIMEEXPTASK(p));
                         }
                         p = NEXT(p);
                     }
                     fprintf(fptr,"%i\n", moveFreq);
                     fprintf(fptr, "%i\n", successfulDropOff);
                     fprintf(fptr,"%i\n",  rtsCounter );
+                    fprintf(fptr, "%c\n", senterPengecilAktif);
 
 
 

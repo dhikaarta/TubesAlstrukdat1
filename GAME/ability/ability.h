@@ -19,6 +19,6 @@ void increaseCapacity(Stack *b);
   - Efek: Time limit yang terdapat pada pesanan dengan Perishable Item akan di-reset sebelum dikembalikan
   - Ability ini tidak dapat digunakan untuk pesanan VIP item
 */
-void returnToSender(Stack *b, List *l, int *rtsCounter, TIME *t, boolean *senterPengecilAktif);
+void returnToSender(Stack *b, List *l, List *inProgress, int *rtsCounter, TIME *t, boolean *senterPengecilAktif);
 
 #endif

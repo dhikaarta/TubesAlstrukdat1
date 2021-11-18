@@ -112,6 +112,8 @@ void ReadLINKEDLISTTASKfile(List *l)
     {
         advWORDfile();
         task.timeExpTASK = atoi(currentWordfile.contents);
+        advWORDfile();
+        task.initTimeExpTASK = atoi(currentWordfile.contents);
     }
     insertLastLINKEDLIST(l, task);
 }

@@ -23,6 +23,6 @@ void PintuKemanaSaja(TIME *t);
 void MesinWaktu(TIME *t);
 
 /* Menghilangkan efek dari satu heavy item jika terdapat pada tumpukan teratas tas. Efek ini akan berlangsung sampai melakukan drop off / return pertama kali setelah penggunaan gadget ini */
-void senterPengecil(Stack b, TIME *t) ;
+void senterPengecil(Stack b, TIME *t, boolean *senterPengecilAktif) ;
 
 #endif

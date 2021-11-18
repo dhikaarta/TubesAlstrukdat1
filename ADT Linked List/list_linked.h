@@ -16,6 +16,7 @@ typedef Address List;
 #define DROPOFFTASK(l) INFO(l).dropOffTASK
 #define ITEMTASK(l) INFO(l).itemTASK
 #define TIMEEXPTASK(l) INFO(l).timeExpTASK
+#define INITTIMEEXPTASK(l) INFO(l).initTimeExpTASK
 
 /* Definisi List : */
 /* List kosong : FIRST(l) = NULL */
