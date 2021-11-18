@@ -196,9 +196,9 @@ int main()
                         lokasiDipilih = atoi(kataInput.contents);
 
                         // JIKA TIDAK TERJADI PERPINDAHAN MAKA MENGGUNAKAN LOKASI SEBELUMNYA
-                        if(lokasiDipilih > nPossibleMoves)
+                        if(lokasiDipilih > nPossibleMoves || lokasiDipilih < 0)
                         {
-                            printf("Tidak ada inputan tersebut ! kembali ke menu utama\n");
+                            printf("Tidak ada inputan tersebut ! Silahkan masukkan input yang benar: \n");
                         }
                         else if (lokasiDipilih != 0)
                         {
