@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dropoff.h"
-#include "../pickup/pickup.h"
-#include "../ability/ability.h"
-#include "../in_progress/in_progress.h"
+
 
 void processMoneyDropOff(ElTypeTASK task, long *money){
     if (task.itemTASK == 'N'){
@@ -18,7 +16,7 @@ void processMoneyDropOff(ElTypeTASK task, long *money){
 
 void dropOffAtloc(LOCATION currentloc, Stack *bag, List *in_progress, long *money, int *successfulDroppedOff, TIME *t){
     if (TOP_STACK(*bag).dropOffTASK != currentloc.A){
-        printf("Tidak ada pesanan untuk di drop off!");
+        printf("Tidak ada pesanan untuk di drop off pada lokasi %c!", currentloc.A);
     } else {
         ElTypeTASK taskdone; 
         PopBAG(bag, &taskdone);

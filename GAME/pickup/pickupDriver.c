@@ -9,6 +9,7 @@ int main() {
     List in_progress; 
     List todo; 
     CreateBAG(&bag);
+    TIME time;
     A = MakeLOCATION('A', 0, 0);
     B = MakeLOCATION('B', 4, 1);
     C = MakeLOCATION('C', 2, 4);
@@ -41,8 +42,8 @@ int main() {
     insertFirstLINKEDLIST(&todo, t4);
     displayLINKEDLIST(in_progress);
     displayLINKEDLIST(todo);
-    pickUpAtloc(B, &bag, &in_progress, &todo);
-    pickUpAtloc(C, &bag, &in_progress, &todo);
+    pickUpAtloc(B, &bag, &in_progress, &todo, &time);
+    pickUpAtloc(C, &bag, &in_progress, &todo, &time);
     PopBAG(&bag, &test);
     displayLINKEDLIST(in_progress);
     displayLINKEDLIST(todo);
